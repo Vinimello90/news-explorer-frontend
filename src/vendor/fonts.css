@@ -1,0 +1,48 @@
+@font-face {
+  src: url("./fonts/SourceSans3-Regular.woff") format("woff"),
+    url("./fonts/SourceSans3-Regular.woff") format("woff2");
+  font-family: "Source Sans 3", sans-serif;
+  font-weight: 400;
+}
+
+@font-face {
+  src: url("./fonts/inter-400-regular.woff") format("woff"),
+    url("./fonts/inter-400-regular.woff2") format("woff2");
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+}
+
+@font-face {
+  src: url("./fonts/roboto-400-regular.woff") format("woff"),
+    url("./fonts/roboto-400-regular.woff2") format("woff2");
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+@font-face {
+  src: url("./fonts/roboto-500.woff") format("woff"),
+    url("./fonts/roboto-500.woff2") format("woff2");
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+}
+
+@font-face {
+  src: url("./fonts/roboto-900.woff") format("woff"),
+    url("./fonts/roboto-900.woff2") format("woff2");
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+}
+
+@font-face {
+  src: url("./fonts/roboto-slab-400-regular.woff") format("woff"),
+    url("./fonts/roboto-slab-400-regular.woff2") format("woff2");
+  font-family: "Roboto Slab", serif;
+  font-weight: 400;
+}
+
+@font-face {
+  src: url("./fonts/roboto-slab-700.woff") format("woff"),
+    url("./fonts/roboto-slab-700.woff2") format("woff2");
+  font-family: "Roboto Slab", serif;
+  font-weight: 700;
+}
