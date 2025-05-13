@@ -1,5 +1,10 @@
 .header {
-  background: url("../../images/georgia-de-lotz--UsJoNxLaNo-unsplash.png")
+  position: relative;
+  background: url("../../images/georgia-de-lotz--UsJoNxLaNo-unsplash.jpg")
     no-repeat center / cover;
+}
+
+.header__container {
   min-height: 576px;
+  backdrop-filter: brightness(0.5);
 }
