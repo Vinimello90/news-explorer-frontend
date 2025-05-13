@@ -1,3 +1,5 @@
+import "./Navigation.css";
+
 export function Navigation() {
   return (
     <nav className="navigation">
