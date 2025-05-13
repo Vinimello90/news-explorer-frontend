@@ -6,5 +6,5 @@
 
 .header__container {
   min-height: 576px;
-  backdrop-filter: brightness(0.5);
+  backdrop-filter: brightness(0.6);
 }
