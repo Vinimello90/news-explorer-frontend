@@ -1,3 +1,5 @@
+import "./SearchForm.css";
+
 export function SearchForm() {
   return (
     <section className="search">
@@ -9,7 +11,11 @@ export function SearchForm() {
       <form name="search" className="search__form">
         <fieldset className="search__fieldset">
           <label className="search__form-field">
-            <input type="text" className="search__input" />
+            <input
+              type="text"
+              className="search__input"
+              placeholder="Yellowstone"
+            />
           </label>
           <button type="submit" className="search__form-button">
             Procurar
