@@ -14,17 +14,24 @@ export function NavBar({ onCloseMenu, isMenuOpen = false, mobile = false }) {
     onCloseMenu();
   }
   return (
-    <ul className={menuClassName}>
-      <li className="navigation__menu-item">
-        <NavLink onClick={handleClick} to="/" className={navLinkClassName}>
-          Início
-        </NavLink>
-      </li>
-      <li className="navigation__menu-item">
-        <button type="button" className="navigation__button-signin">
-          Entrar
-        </button>
-      </li>
-    </ul>
+    <nav className={menuClassName}>
+      <ul className="navigation__menu-list">
+        <li className="navigation__menu-item">
+          <NavLink onClick={handleClick} to="/" className={navLinkClassName}>
+            Início
+          </NavLink>
+        </li>
+        <li className="navigation__menu-item">
+          <button
+            type="button"
+            className={`navigation__button-signin${
+              mobile ? " navigation__button-signin_mb" : ""
+            }`}
+          >
+            Entrar
+          </button>
+        </li>
+      </ul>
+    </nav>
   );
 }

@@ -32,7 +32,7 @@ export function Navigation() {
 
   return (
     <>
-      <nav
+      <div
         onClick={handleClickOutside}
         className={`navigation${isMenuOpen ? " navigation_mb_overlay" : ""}`}
       >
@@ -65,7 +65,7 @@ export function Navigation() {
         {width <= 544 && (
           <NavBar onCloseMenu={CloseMenu} isMenuOpen={isMenuOpen} mobile />
         )}
-      </nav>
+      </div>
     </>
   );
 }
