@@ -4,7 +4,13 @@
     no-repeat center / cover;
 }
 
-.header__container {
-  /* min-height: 576px; */
+.header::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  height: 100%;
+  width: 100%;
   backdrop-filter: brightness(0.6);
+  z-index: 0;
 }

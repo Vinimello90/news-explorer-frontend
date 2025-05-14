@@ -1,5 +1,7 @@
 .navigation {
+  position: relative;
   box-shadow: 0px -1px 0px 0px #ffffff33 inset;
+  z-index: 99;
 }
 
 .navigation__container {
@@ -125,7 +127,6 @@
     position: relative;
     padding: 16px 16px;
     box-shadow: 0px -1px 0px 0px #ffffff33 inset;
-    z-index: 1;
   }
 
   .navigation__container_mb_open {
