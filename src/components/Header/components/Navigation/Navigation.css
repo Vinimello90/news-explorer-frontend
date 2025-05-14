@@ -110,15 +110,14 @@
 
   .navigation__overlay {
     position: fixed;
+    top: 0;
     background-color: transparent;
     min-height: 100vh;
     width: 100%;
-    visibility: hidden;
     transition: background-color linear 0.3s;
   }
 
   .navigation__overlay_active {
-    visibility: visible;
     background-color: rgba(0, 0, 0, 0.5);
   }
 
