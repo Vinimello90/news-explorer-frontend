@@ -1,0 +1,78 @@
+.about {
+  display: flex;
+  justify-content: center;
+  gap: 56px;
+  padding: 80px 40px;
+}
+
+.about__author-photo {
+  width: 32.223vw;
+  height: 32.223vw;
+  max-width: 464px;
+  max-height: 464px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.about__title {
+  font-family: "Roboto Slab", serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.15;
+  margin: 51px 0 24px;
+}
+
+.about__description {
+  max-width: 590px;
+  margin: 0px;
+}
+
+.about__description:last-of-type {
+  margin: 24px 0 0;
+}
+
+@media screen and (max-width: 1024px) {
+  .about {
+    gap: 32px;
+    padding: 61px 40px;
+  }
+
+  .about__title {
+    font-size: 30px;
+    line-height: 1.33;
+    margin: 0 0 16px;
+  }
+
+  .about__description {
+    width: 55.21vw;
+  }
+
+  .about__author-photo {
+    width: 30.22vw;
+    height: 30.22vw;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .about {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 32px 16px 128px;
+  }
+
+  .about__author-photo {
+    max-width: 370px;
+    max-height: 370px;
+    width: 85vw;
+    height: 85vw;
+  }
+
+  .about__description {
+    width: 100%;
+  }
+
+  .about__description:last-of-type {
+    margin: 24.68px 0 0;
+  }
+}

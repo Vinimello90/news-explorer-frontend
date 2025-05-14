@@ -1,5 +1,7 @@
 .navigation {
+  position: relative;
   box-shadow: 0px -1px 0px 0px #ffffff33 inset;
+  z-index: 99;
 }
 
 .navigation__container {
@@ -110,15 +112,14 @@
 
   .navigation__overlay {
     position: fixed;
+    top: 0;
     background-color: transparent;
     min-height: 100vh;
     width: 100%;
-    visibility: hidden;
     transition: background-color linear 0.3s;
   }
 
   .navigation__overlay_active {
-    visibility: visible;
     background-color: rgba(0, 0, 0, 0.5);
   }
 
@@ -126,7 +127,6 @@
     position: relative;
     padding: 16px 16px;
     box-shadow: 0px -1px 0px 0px #ffffff33 inset;
-    z-index: 1;
   }
 
   .navigation__container_mb_open {
