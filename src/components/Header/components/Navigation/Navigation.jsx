@@ -1,35 +1,71 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Navigation.css";
+import { useEffect, useState } from "react";
+import { NavBar } from "./components/NavBar";
 
 export function Navigation() {
+  const [width, setWidth] = useState(window.innerWidth);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    function handleResize() {
+      setWidth(window.innerWidth);
+    }
+    window.addEventListener("resize", handleResize);
+
+    return () => window.addEventListener("resize", handleResize);
+  }, []);
+
+  function CloseMenu() {
+    setIsMenuOpen(false);
+  }
+
+  function handleClickOutside(evt) {
+    if (evt.target.classList.contains("navigation_mb_overlay")) {
+      CloseMenu();
+    }
+  }
+
+  function handleClick() {
+    CloseMenu(false);
+  }
+
   return (
-    <nav className="navigation">
-      <div className="navigation__container">
-        <h1 className="navigation__logo">
-          <Link to="/" class="navigation__link">
-            NewsExplorer
-          </Link>
-        </h1>
-        <ul className="navigation__menu">
-          <li className="navigation__menu-item">
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive
-                  ? "navigation__link navigation__link_active"
-                  : "navigation__link"
-              }
+    <>
+      <nav
+        onClick={handleClickOutside}
+        className={`navigation${isMenuOpen ? " navigation_mb_overlay" : ""}`}
+      >
+        <div
+          className={`navigation__container${
+            isMenuOpen ? " navigation__container_mb_open" : ""
+          }`}
+        >
+          <h1 className="navigation__logo">
+            <Link onClick={handleClick} to="/" className="navigation__link">
+              NewsExplorer
+            </Link>
+          </h1>
+
+          {width <= 544 && (
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              type="button"
+              className={`navigation__burger-menu${
+                isMenuOpen ? " navigation__burger-menu_open" : ""
+              }`}
             >
-              Início
-            </NavLink>
-          </li>
-          <li className="navigation__menu-item">
-            <button type="button" className="navigation__button">
-              Entrar
+              <div className="navigation__burger-menu-line"></div>
+              <div className="navigation__burger-menu-line"></div>
             </button>
-          </li>
-        </ul>
-      </div>
-    </nav>
+          )}
+
+          {width > 544 && <NavBar />}
+        </div>
+        {width <= 544 && (
+          <NavBar onCloseMenu={CloseMenu} isMenuOpen={isMenuOpen} mobile />
+        )}
+      </nav>
+    </>
   );
 }

@@ -57,7 +57,7 @@
   pointer-events: none;
 }
 
-.navigation__button {
+.navigation__button-signin {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,7 +73,7 @@
   transition: opacity linear 0.3s;
 }
 
-.navigation__button:hover {
+.navigation__button-signin:hover {
   opacity: 0.6;
 }
 
@@ -90,8 +90,93 @@
     bottom: -22px;
   }
 
-  .navigation__button {
+  .navigation__button-signin {
     width: 152px;
     height: 40px;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .navigation {
+    box-shadow: none;
+  }
+
+  .navigation_mb_overlay {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    min-height: 100vh;
+    width: 100%;
+    transition: background-color linear 0.3s;
+  }
+
+  .navigation__container {
+    position: relative;
+    box-shadow: 0px -1px 0px 0px #ffffff33 inset;
+    z-index: 1;
+  }
+
+  .navigation__container_mb_open {
+    background-color: #1a1b22;
+  }
+
+  .navigation__burger-menu {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 24px 0;
+    cursor: pointer;
+  }
+
+  .navigation__burger-menu-line {
+    width: 16px;
+    height: 2px;
+    background-color: #fff;
+    transition: transform ease-in-out 0.3s;
+  }
+
+  .navigation__burger-menu-line:last-of-type {
+    margin-top: 4px;
+  }
+
+  .navigation__burger-menu_open .navigation__burger-menu-line:first-of-type {
+    transform: rotate(45deg) translateY(2px) translateX(2px);
+  }
+
+  .navigation__burger-menu_open .navigation__burger-menu-line:last-of-type {
+    transform: rotate(-45deg) translateY(-2px) translateX(2px);
+  }
+
+  .navigation__menu_mb {
+    position: absolute;
+    flex-direction: column;
+    background-color: #1a1b22;
+    padding: 0;
+    transform: translateY(-130%);
+    visibility: hidden;
+    height: fit-content;
+    width: 100%;
+    opacity: 0;
+    transition: all ease-in-out 0.3s;
+  }
+
+  .navigation__menu_mb_open {
+    padding: 40px 0 25px;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .navigation__menu-item {
+    font-size: 18px;
+  }
+
+  .navigation__link_active::after {
+    display: none;
+  }
+
+  .navigation__button-signin_mb {
+    width: 288px;
+    height: 55.61px;
+    justify-self: center;
   }
 }
