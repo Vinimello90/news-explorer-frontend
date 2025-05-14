@@ -65,3 +65,31 @@
   background-color: #2f71e5;
   box-shadow: 0px 5px 15px 0px #0e1a3933;
 }
+
+@media screen and (max-width: 1024px) {
+  .search {
+    align-items: start;
+    padding: 38px 0 48px;
+  }
+  .search__title {
+    font-size: 36px;
+    line-height: 1.113;
+    margin: 0;
+    max-width: 425px;
+  }
+
+  .search__description {
+    width: 452px;
+    margin: 16px 0 48px;
+  }
+
+  .search__input {
+    max-width: 452px;
+    height: 56px;
+  }
+
+  .search__form-button {
+    max-width: 160px;
+    height: 56px;
+  }
+}
