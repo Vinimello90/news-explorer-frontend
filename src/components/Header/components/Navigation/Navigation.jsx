@@ -32,14 +32,15 @@ export function Navigation() {
 
   return (
     <>
-      <div onClick={handleClickOutside} className="navigation">
-        <div
-          onClick={handleClickOutside}
-          className={`navigation__overlay${
-            isMenuOpen ? " navigation__overlay_active" : ""
-          }`}
-        ></div>
-
+      <div className="navigation">
+        {width <= 544 && (
+          <div
+            onClick={handleClickOutside}
+            className={`navigation__overlay${
+              isMenuOpen ? " navigation__overlay_active" : ""
+            }`}
+          ></div>
+        )}
         <div
           className={`navigation__container${
             isMenuOpen ? " navigation__container_mb_open" : ""
