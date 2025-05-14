@@ -16,26 +16,31 @@ export function Navigation() {
     return () => window.addEventListener("resize", handleResize);
   }, []);
 
-  function CloseMenu() {
+  function closeMenu() {
     setIsMenuOpen(false);
   }
 
   function handleClickOutside(evt) {
-    if (evt.target.classList.contains("navigation_mb_overlay")) {
-      CloseMenu();
+    if (evt.target.classList.contains("navigation__overlay")) {
+      closeMenu();
     }
   }
 
   function handleClick() {
-    CloseMenu(false);
+    closeMenu(false);
   }
 
   return (
     <>
-      <div
-        onClick={handleClickOutside}
-        className={`navigation${isMenuOpen ? " navigation_mb_overlay" : ""}`}
-      >
+      <div className="navigation">
+        {width <= 544 && (
+          <div
+            onClick={handleClickOutside}
+            className={`navigation__overlay${
+              isMenuOpen ? " navigation__overlay_active" : ""
+            }`}
+          ></div>
+        )}
         <div
           className={`navigation__container${
             isMenuOpen ? " navigation__container_mb_open" : ""
@@ -63,7 +68,7 @@ export function Navigation() {
           {width > 544 && <NavBar />}
         </div>
         {width <= 544 && (
-          <NavBar onCloseMenu={CloseMenu} isMenuOpen={isMenuOpen} mobile />
+          <NavBar onCloseMenu={closeMenu} isMenuOpen={isMenuOpen} mobile />
         )}
       </div>
     </>

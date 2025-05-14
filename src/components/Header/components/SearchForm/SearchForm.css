@@ -1,0 +1,123 @@
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 80px 0;
+}
+
+.search__title {
+  font-family: "Roboto Slab", serif;
+  font-weight: 400;
+  font-size: 60px;
+  color: #fff;
+  max-width: 662px;
+  line-height: 1.0678;
+  margin: 0 0 0 52px;
+}
+
+.search__description {
+  text-wrap: wrap;
+  max-width: 608px;
+  margin: 32px 0 64px;
+  color: #fff;
+}
+
+.search__form {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.search__fieldset {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  border: none;
+  z-index: -1;
+}
+
+.search__input {
+  width: 608px;
+  height: 64px;
+  padding: 24px 17px;
+  border: 1px solid #d1d2d6;
+  border-radius: 100px;
+  box-sizing: border-box;
+}
+
+.search__input::placeholder {
+  color: #b6bcbf;
+}
+
+.search__form-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 168px;
+  height: 64px;
+  border: solid 1px #2f71e5;
+  border-radius: 100px;
+  padding: 0;
+  margin: 0;
+  font-weight: 500;
+  box-sizing: border-box;
+  color: #fff;
+  background-color: #2f71e5;
+  box-shadow: 0px 5px 15px 0px #0e1a3933;
+}
+
+@media screen and (max-width: 1024px) {
+  .search {
+    align-items: start;
+    padding: 38px 0 48px;
+  }
+  .search__title {
+    font-size: 36px;
+    line-height: 1.113;
+    margin: 0;
+    max-width: 425px;
+  }
+
+  .search__description {
+    max-width: 452px;
+    margin: 16px 0 48px;
+  }
+
+  .search__input {
+    max-width: 452px;
+    height: 56px;
+  }
+
+  .search__form-button {
+    max-width: 160px;
+    height: 56px;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .search {
+    padding: 30px 16px 32px;
+  }
+
+  .search__description {
+    margin: 11.56px 0 86.46px;
+  }
+
+  .search__fieldset {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .search__input {
+    width: 288px;
+  }
+
+  .search__form-button {
+    max-width: 288px;
+    width: 288px;
+    position: relative;
+  }
+}
