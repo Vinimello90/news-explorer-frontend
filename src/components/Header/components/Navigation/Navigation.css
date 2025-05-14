@@ -104,6 +104,10 @@
     box-shadow: none;
   }
 
+  .navigation__logo {
+    font-size: 16px;
+  }
+
   .navigation__overlay {
     position: fixed;
     background-color: transparent;
@@ -137,8 +141,8 @@
     background-color: transparent;
     border: none;
     padding: 0;
-    height: 26px;
-    width: 26px;
+    height: 24px;
+    width: 24px;
     cursor: pointer;
   }
 
