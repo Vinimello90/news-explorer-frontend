@@ -11,7 +11,8 @@
   margin: 0;
 }
 
-.footer__column {
+.footer__columns {
+  display: flex;
   margin-left: auto;
 }
 
