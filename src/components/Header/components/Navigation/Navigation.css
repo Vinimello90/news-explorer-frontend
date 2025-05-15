@@ -1,7 +1,6 @@
 .navigation {
   position: relative;
   box-shadow: 0px -1px 0px 0px #ffffff33 inset;
-  z-index: 99;
 }
 
 .navigation__container {
@@ -11,6 +10,7 @@
   align-items: center;
   max-width: 1156px;
   padding: 0 40px;
+  z-index: 99;
 }
 
 .navigation__logo {
@@ -26,6 +26,7 @@
 .navigation__menu {
   height: 100%;
   padding: 19px 0 13px;
+  z-index: 98;
 }
 
 .navigation__menu-list {
@@ -118,6 +119,7 @@
     width: 100%;
     transition: background-color linear 0.3s;
     visibility: hidden;
+    z-index: 98;
   }
 
   .navigation__overlay_active {
