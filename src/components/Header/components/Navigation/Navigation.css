@@ -117,9 +117,11 @@
     min-height: 100vh;
     width: 100%;
     transition: background-color linear 0.3s;
+    visibility: hidden;
   }
 
   .navigation__overlay_active {
+    visibility: visible;
     background-color: rgba(0, 0, 0, 0.5);
   }
 
