@@ -1,4 +1,4 @@
-import teste from "../images/news-placeholder.jpg";
+import placeHolder from "../images/news-placeholder.jpg";
 
 export const news = [
   {
@@ -7,7 +7,7 @@ export const news = [
     content:
       'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta"...',
     date: "4 de novembro de 2020",
-    image: "../../../../../images/news-placeholder.jpg",
+    image: placeHolder,
     source: "Threehugger",
     _id: 1,
   },
@@ -17,7 +17,7 @@ export const news = [
     content:
       'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta"...',
     date: "4 de novembro de 2020",
-    image: "../images/news-placeholder.jpg",
+    image: placeHolder,
     source: "Threehugger",
     _id: 2,
   },
@@ -27,7 +27,7 @@ export const news = [
     content:
       'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta"...',
     date: "4 de novembro de 2020",
-    image: "../images/news-placeholder.jpg",
+    image: placeHolder,
     source: "Threehugger",
     _id: 3,
   },
@@ -37,7 +37,7 @@ export const news = [
     content:
       'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta"...',
     date: "4 de novembro de 2020",
-    image: "../images/news-placeholder.jpg",
+    image: placeHolder,
     source: "Threehugger",
     _id: 4,
   },
@@ -47,7 +47,7 @@ export const news = [
     content:
       'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta"...',
     date: "4 de novembro de 2020",
-    image: "../images/news-placeholder.jpg",
+    image: placeHolder,
     source: "Threehugger",
     _id: 5,
   },
@@ -57,7 +57,7 @@ export const news = [
     content:
       'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta"...',
     date: "4 de novembro de 2020",
-    image: "../images/news-placeholder.jpg",
+    image: placeHolder,
     source: "Threehugger",
     _id: 6,
   },
@@ -67,7 +67,7 @@ export const news = [
     content:
       'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta"...',
     date: "4 de novembro de 2020",
-    image: "../images/news-placeholder.jpg",
+    image: placeHolder,
     source: "Threehugger",
     _id: 6,
   },

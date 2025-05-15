@@ -17,7 +17,7 @@ export function NewsCardList() {
           return <NewsCard key={newsCard._id} newsCard={newsCard} />;
         })}
       </div>
-      {cardsLimit < news.length && (
+      {newsLimit < news.length && (
         <button
           onClick={handleClickButton}
           type="button"
