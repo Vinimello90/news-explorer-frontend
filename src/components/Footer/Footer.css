@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   padding: 30px 104px 26px;
+  margin-top: auto;
 }
 
 .footer__copyright {
@@ -53,7 +54,17 @@
 
 @media screen and (max-width: 1024px) {
   .footer {
-    margin-top: auto;
     padding: 21px 40px 19px;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .footer {
+    flex-direction: column-reverse;
+    padding: 20px 16px 22px;
+  }
+
+  .footer__column {
+    margin: 0;
   }
 }
