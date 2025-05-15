@@ -64,7 +64,30 @@
     padding: 20px 16px 22px;
   }
 
+  .footer__copyright {
+    font-size: 13px;
+    line-height: 1.69;
+    margin-top: 40px;
+  }
+
+  .footer__columns {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
   .footer__column {
     margin: 0;
+  }
+
+  .footer__list {
+    flex-direction: column;
+    gap: 24.16px;
+    align-items: start;
+  }
+
+  .footer__list_socials {
+    flex-direction: row;
+    gap: 24px;
   }
 }
