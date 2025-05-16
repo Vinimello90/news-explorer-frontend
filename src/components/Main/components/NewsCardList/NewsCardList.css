@@ -1,0 +1,89 @@
+.news {
+  background-color: #f5f6f7;
+  padding: 80px 40px;
+}
+
+.news__container {
+  max-width: 1236px;
+  margin: 0 auto;
+}
+
+.news__title {
+  font-family: "Roboto Slab", serif;
+  font-weight: 400;
+  font-size: 40px;
+  margin: 0;
+  padding-bottom: 64px;
+  line-height: 1.15;
+}
+
+.news__card-list {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(3, auto);
+  gap: 18px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.news__button {
+  display: block;
+  background-color: #fff;
+  border: none;
+  border-radius: 100px;
+  width: 288px;
+  height: 64px;
+  margin: 64px auto 0;
+  cursor: pointer;
+  transition: background-color linear 0.3s;
+}
+
+.news__button:hover {
+  background-color: #e8e8e8;
+}
+
+@media screen and (max-width: 1024px) {
+  .news {
+    padding: 40px;
+  }
+
+  .news__title {
+    font-size: 30px;
+    padding: 0 0 32px;
+    line-height: 1.1338;
+  }
+
+  .news__card-list {
+    gap: 8px;
+  }
+
+  .news__button {
+    margin: 32px auto 0;
+    width: 240px;
+    height: 56px;
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .news {
+    padding: 32px 16px 24px;
+  }
+
+  .news__title {
+    padding: 0 0 58px;
+    text-align: center;
+  }
+
+  .news__card-list {
+    grid-template-columns: auto;
+    gap: 10px;
+  }
+
+  .news__button {
+    margin: 16px auto 0;
+    width: 288px;
+    height: 56px;
+  }
+}
