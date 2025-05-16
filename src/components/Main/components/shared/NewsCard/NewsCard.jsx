@@ -1,9 +1,9 @@
-import "../../../../../images/news-placeholder.jpg";
+import "./NewsCard.css";
 
 export function NewsCard(props) {
   const { title, content, date, image, source } = props.newsCard;
   return (
-    <div className="card">
+    <li className="card">
       <img
         src={image}
         alt={`imagem do artigo ${title}`}
@@ -14,8 +14,8 @@ export function NewsCard(props) {
         <p className="card__date">{date}</p>
         <h3 className="card__news-title">{title}</h3>
         <p className="card__news-text">{content}</p>
-        <p className="news-source">{source}</p>
+        <p className="card__news-source">{source}</p>
       </div>
-    </div>
+    </li>
   );
 }

@@ -1,0 +1,74 @@
+.card {
+  position: relative;
+  width: 400px;
+  height: 576px;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #fff;
+  font-size: 0;
+}
+
+.card__favorite-button {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #fff url("../../../../../images/bookmark.svg") no-repeat center /
+    14px 19px;
+  border-radius: 8px;
+  padding: 0;
+  cursor: pointer;
+  transition: background-image linear 0.3s;
+}
+
+.card__favorite-button:hover {
+  background-image: url("../../../../../images/bookmark_hover.svg");
+  background-position: center;
+}
+
+.card__favorite-button:active {
+  background-image: url("../../../../../images/bookmark_active.svg");
+}
+
+.card__image {
+  width: 400px;
+  height: 272px;
+  object-fit: cover;
+}
+
+.card__content {
+  padding: 20px 24px 24px;
+}
+
+.card__date {
+  font-size: 18px;
+  font-family: "Source Sans 3", sans-serif;
+  color: #b6bcbf;
+  margin: 0;
+}
+
+.card__news-title {
+  font-family: "Roboto Slab", serif;
+  font-weight: 400;
+  margin: 12px 0 8px;
+  font-size: 26px;
+  line-height: 1.15385;
+}
+
+.card__news-text {
+  font-size: 16px;
+  margin: 0 0 18px;
+  line-height: 1.375;
+}
+
+.card__news-source {
+  font-family: "Roboto Slab", serif;
+  text-transform: uppercase;
+  line-height: 1.25;
+  font-size: 16px;
+  font-weight: 700;
+  color: #b6bcbf;
+  margin: 0;
+}

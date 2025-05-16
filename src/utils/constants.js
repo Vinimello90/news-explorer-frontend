@@ -5,7 +5,7 @@ export const news = [
     title:
       'Todo mundo precisa de um "Lugar Especial para Sentar" especial na natureza',
     content:
-      'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta"...',
+      'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta", a ideia de ter um "lugar para sentar" especial me pegou de jeito. Esse conselho, que Louv atribui ao educador da...',
     date: "4 de novembro de 2020",
     image: placeHolder,
     source: "Threehugger",
@@ -15,7 +15,7 @@ export const news = [
     title:
       'Todo mundo precisa de um "Lugar Especial para Sentar" especial na natureza',
     content:
-      'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta"...',
+      'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta", a ideia de ter um "lugar para sentar" especial me pegou de jeito. Esse conselho, que Louv atribui ao educador da...',
     date: "4 de novembro de 2020",
     image: placeHolder,
     source: "Threehugger",
@@ -25,7 +25,7 @@ export const news = [
     title:
       'Todo mundo precisa de um "Lugar Especial para Sentar" especial na natureza',
     content:
-      'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta"...',
+      'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta", a ideia de ter um "lugar para sentar" especial me pegou de jeito. Esse conselho, que Louv atribui ao educador da...',
     date: "4 de novembro de 2020",
     image: placeHolder,
     source: "Threehugger",
@@ -35,7 +35,7 @@ export const news = [
     title:
       'Todo mundo precisa de um "Lugar Especial para Sentar" especial na natureza',
     content:
-      'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta"...',
+      'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta", a ideia de ter um "lugar para sentar" especial me pegou de jeito. Esse conselho, que Louv atribui ao educador da...',
     date: "4 de novembro de 2020",
     image: placeHolder,
     source: "Threehugger",
@@ -45,7 +45,7 @@ export const news = [
     title:
       'Todo mundo precisa de um "Lugar Especial para Sentar" especial na natureza',
     content:
-      'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta"...',
+      'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta", a ideia de ter um "lugar para sentar" especial me pegou de jeito. Esse conselho, que Louv atribui ao educador da...',
     date: "4 de novembro de 2020",
     image: placeHolder,
     source: "Threehugger",
@@ -55,7 +55,7 @@ export const news = [
     title:
       'Todo mundo precisa de um "Lugar Especial para Sentar" especial na natureza',
     content:
-      'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta"...',
+      'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta", a ideia de ter um "lugar para sentar" especial me pegou de jeito. Esse conselho, que Louv atribui ao educador da...',
     date: "4 de novembro de 2020",
     image: placeHolder,
     source: "Threehugger",
@@ -65,10 +65,10 @@ export const news = [
     title:
       'Todo mundo precisa de um "Lugar Especial para Sentar" especial na natureza',
     content:
-      'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta"...',
+      'Desde que li o influente livro de Richard Louv, "O Último Filho na Floresta", a ideia de ter um "lugar para sentar" especial me pegou de jeito. Esse conselho, que Louv atribui ao educador da...',
     date: "4 de novembro de 2020",
     image: placeHolder,
     source: "Threehugger",
-    _id: 6,
+    _id: 7,
   },
 ];
