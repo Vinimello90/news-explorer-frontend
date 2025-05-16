@@ -1,9 +1,17 @@
+import { useEffect, useState } from "react";
 import "./NewsCard.css";
 
 export function NewsCard(props) {
   const { title, content, date, image, source } = props.newsCard;
+
+  const [showAnimation, setShowAnimation] = useState(false);
+
+  useEffect(() => {
+    setShowAnimation(true);
+  }, []);
+
   return (
-    <li className="card">
+    <li className={`card${showAnimation ? " card_visible" : ""} `}>
       <img
         src={image}
         alt={`imagem do artigo ${title}`}
