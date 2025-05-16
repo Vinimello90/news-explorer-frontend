@@ -132,7 +132,6 @@
 
 @media screen and (max-width: 1024px) {
   .card {
-    min-width: 224px;
     height: 420px;
   }
 
@@ -167,5 +166,43 @@
     height: 66px;
     margin: 0 0 13px;
     -webkit-line-clamp: 3;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .card {
+    min-width: 288px;
+    height: 440px;
+  }
+
+  .card__image {
+    height: 196px;
+  }
+
+  .card__favorite-button {
+    top: 16px;
+    right: 16px;
+  }
+
+  .card__favorite-button::before {
+    width: 180px;
+    height: 40px;
+    padding: 0 8px;
+  }
+
+  .card__content {
+    padding: 16px;
+  }
+
+  .card__news-title {
+    height: 48px;
+    font-size: 22px;
+    line-height: 1.09;
+    -webkit-line-clamp: 2;
+    margin: 10px 0 14px;
+  }
+
+  .card__news-text {
+    margin: 0 0 30px;
   }
 }

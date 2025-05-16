@@ -62,5 +62,28 @@
     margin: 32px auto 0;
     width: 240px;
     height: 56px;
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .news {
+    padding: 32px 16px 24px;
+  }
+
+  .news__title {
+    padding: 0 0 58px;
+    text-align: center;
+  }
+
+  .news__card-list {
+    grid-template-columns: auto;
+    gap: 10px;
+  }
+
+  .news__button {
+    margin: 16px auto 0;
+    width: 288px;
+    height: 56px;
   }
 }
