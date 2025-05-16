@@ -23,7 +23,30 @@
   transition: background-image linear 0.3s;
 }
 
-.card__favorite-button:hover {
+.card__favorite-button:after {
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  position: absolute;
+  border-radius: 10px;
+  font-size: 12px;
+  top: 0;
+  right: 45px;
+  width: 182px;
+  height: 42px;
+  background-color: #fff;
+  color: #000;
+  content: "Sign in to save articles";
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity ease-in 0.3s;
+}
+
+.card__favorite-button:hover::after {
+  opacity: 1;
+}
+
+.card__favorite-button:hover .card__favorite-button:hover {
   background-image: url("../../../../../images/bookmark_hover.svg");
   background-position: center;
 }
