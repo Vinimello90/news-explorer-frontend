@@ -46,7 +46,7 @@
   opacity: 1;
 }
 
-.card__favorite-button:hover .card__favorite-button:hover {
+.card__favorite-button:hover {
   background-image: url("../../../../../images/bookmark_hover.svg");
   background-position: center;
 }
