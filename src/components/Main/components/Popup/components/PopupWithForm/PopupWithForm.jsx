@@ -4,16 +4,26 @@ export function PopupWithForm({ signIn }) {
       <fieldset className="popup__fieldset">
         <label className="popup__field">
           E-mail
-          <input type="email" name="email" className="popup__input" />
-          <span className="popup__form-error">ronaldo</span>
+          <input
+            type="email"
+            name="email"
+            className="popup__input"
+            placeholder="Insira e-mail"
+          />
+          <span className="popup__form-error">E-mail inválido</span>
         </label>
         <label className="popup__field">
-          Password
-          <input type="password" name="password" className="popup__input" />
-          <span className="popup__form-error">ronaldo</span>
+          Senha
+          <input
+            type="password"
+            name="password"
+            className="popup__input"
+            placeholder="Insira a senha"
+          />
+          <span className="popup__form-error">Senha inválida</span>
         </label>
         <span className="popup__form-error popup__form-error_submit">
-          ronaldo
+          Usuário ou senha inválido, tente novamente
         </span>
         <button type="submit" className="popup__button popup__button_submit">
           Entrar

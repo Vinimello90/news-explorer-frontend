@@ -79,6 +79,10 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 
+.popup__input::placeholder {
+  color: #00000033;
+}
+
 .popup__form-error {
   font-size: 12px;
   line-height: 1.1678;
