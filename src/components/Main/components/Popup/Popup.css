@@ -135,3 +135,31 @@
 .popup__button_goto:hover {
   color: #4388ff;
 }
+
+@media screen and (max-width: 544px) {
+  .popup__container {
+    align-self: flex-end;
+    height: calc(100vh - 56px);
+    width: 100vw;
+    border-radius: 16px 16px 0 0;
+    padding: 5vw;
+  }
+
+  .popup__close_button {
+    right: 16px;
+  }
+
+  .popup__title {
+    margin: 0 0 17px;
+  }
+
+  .popup__field {
+    margin: 0 0 13px;
+  }
+
+  .popup__button_submit {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+}
