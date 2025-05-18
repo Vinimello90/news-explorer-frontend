@@ -3,18 +3,21 @@ import "./Navigation.css";
 import { useEffect, useState } from "react";
 import { NavBar } from "./components/NavBar";
 
-export function Navigation() {
+export function Navigation({ isPopupOpen, onOpenPopup }) {
   const [width, setWidth] = useState(window.innerWidth);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     function handleResize() {
+      if (isMenuOpen && width > 544) {
+        setIsMenuOpen(false);
+        return;
+      }
       setWidth(window.innerWidth);
     }
     window.addEventListener("resize", handleResize);
-
     return () => window.addEventListener("resize", handleResize);
-  }, []);
+  }, [isMenuOpen, width]);
 
   function closeMenu() {
     setIsMenuOpen(false);
@@ -32,7 +35,11 @@ export function Navigation() {
 
   return (
     <>
-      <div className="navigation">
+      <div
+        className={`navigation ${
+          isPopupOpen && width <= 544 ? " navigation_hidden" : ""
+        }`}
+      >
         {width <= 544 && (
           <div
             onClick={handleClickOutside}
@@ -65,10 +72,17 @@ export function Navigation() {
             </button>
           )}
 
-          {width > 544 && <NavBar />}
+          {width > 544 && (
+            <NavBar onCloseMenu={closeMenu} onOpenPopup={onOpenPopup} />
+          )}
         </div>
         {width <= 544 && (
-          <NavBar onCloseMenu={closeMenu} isMenuOpen={isMenuOpen} mobile />
+          <NavBar
+            onOpenPopup={onOpenPopup}
+            onCloseMenu={closeMenu}
+            isMenuOpen={isMenuOpen}
+            mobile
+          />
         )}
       </div>
     </>

@@ -1,19 +1,13 @@
-import { useState } from "react";
 import { About } from "./components/About/About";
 import { NewsCardList } from "./components/NewsCardList/NewsCardList";
-import { PopupWithForm } from "./components/Popup/components/PopupWithForm/PopupWithForm";
-import { Popup } from "./components/Popup/Popup";
+import { PopupWithForm } from "./components/Popup/PopupWithForm";
 
-export function Main() {
-  const [popup, setPopup] = useState({
-    title: "Entrar",
-    children: <PopupWithForm signIn />,
-  });
+export function Main({ onClosePopup, isPopupOpen }) {
   return (
     <main className="main">
       <NewsCardList />
       <About />
-      <Popup popup={popup} />
+      {isPopupOpen && <PopupWithForm onClosePopup={onClosePopup} />}
     </main>
   );
 }
