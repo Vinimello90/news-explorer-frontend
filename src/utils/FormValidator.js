@@ -58,7 +58,6 @@ export default class FormValidator {
           fieldset.querySelectorAll(this._classObj.inputSelector)
         );
         const hasInvalidInput = this._hasInvalidInput(inputList);
-        console.log(hasInvalidInput);
         this._toggleButtonState(hasInvalidInput);
       });
     });
