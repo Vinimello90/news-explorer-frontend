@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import "./NewsCard.css";
+import { Link } from "react-router-dom";
+import imageUnavailable from "../../../../../images/no-image.jpg";
 
-export function NewsCard(props) {
-  const { title, content, date, image, source } = props.newsCard;
+export function NewsCard({ article }) {
+  const { urlToImage, title, description, url, publishedAt, source } = article;
 
   const [showAnimation, setShowAnimation] = useState(false);
 
@@ -12,18 +14,31 @@ export function NewsCard(props) {
 
   return (
     <li className={`card${showAnimation ? " card_visible" : ""} `}>
-      <img
-        src={image}
-        alt={`imagem do artigo ${title}`}
-        className="card__image"
-      />
       <button type="button" className="card__favorite-button"></button>
-      <div className="card__content">
-        <p className="card__date">{date}</p>
-        <h3 className="card__news-title">{title}</h3>
-        <p className="card__news-text">{content}</p>
-        <p className="card__news-source">{source}</p>
-      </div>
+      <Link className="card__link" to={url} target="_blank">
+        <img
+          src={urlToImage}
+          alt={`imagem do artigo ${title ? title : "Notícia relacionada"}`}
+          className="card__image"
+          onError={(evt) => {
+            evt.target.src = { imageUnavailable };
+          }}
+        />
+        <div className="card__content">
+          <p className="card__date">
+            {new Date(publishedAt).toLocaleDateString("pt-BR", {
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
+          </p>
+          <h3 className="card__news-title">
+            {title ? title : "Notícia relacionada"}
+          </h3>
+          <p className="card__news-text">{description}</p>
+          <p className="card__news-source">{source.name}</p>
+        </div>
+      </Link>
     </li>
   );
 }

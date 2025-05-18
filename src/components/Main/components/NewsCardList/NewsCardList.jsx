@@ -1,9 +1,8 @@
 import "./NewsCardList.css";
-import { useState } from "react";
-import { news } from "../../../../utils/constants";
 import { NewsCard } from "../shared/NewsCard/NewsCard";
+import { useState } from "react";
 
-export function NewsCardList() {
+export function NewsCardList({ articles }) {
   const [newsLimit, setCardsLimit] = useState(3);
 
   function handleClickButton() {
@@ -15,11 +14,11 @@ export function NewsCardList() {
       <div className="news__container">
         <h2 className="news__title">Procurar resultados</h2>
         <ul className="news__card-list">
-          {news.slice(0, newsLimit).map((newsCard) => {
-            return <NewsCard key={newsCard._id} newsCard={newsCard} />;
+          {articles.slice(0, newsLimit).map((article) => {
+            return <NewsCard key={article.url} article={article} />;
           })}
         </ul>
-        {newsLimit < news.length && (
+        {newsLimit < articles.length && (
           <button
             onClick={handleClickButton}
             type="button"
