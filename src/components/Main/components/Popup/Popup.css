@@ -36,11 +36,6 @@
   cursor: default;
 }
 
-.popup__button:disabled:hover {
-  background-color: #d1d2d6;
-  color: #b6bcbf;
-}
-
 .popup__close_button {
   position: absolute;
   height: 40px;
@@ -51,10 +46,6 @@
   background-color: transparent;
   background: url("../../../../images/close.svg") no-repeat center;
   transition: opacity linear 0.3s;
-}
-
-.popup__close_button:hover {
-  opacity: 0.8;
 }
 
 .popup__title {
@@ -89,10 +80,35 @@
   border: none;
   padding: 9px 0 10px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
 }
 
 .popup__input::placeholder {
   color: #00000033;
+}
+
+.popup__input:focus {
+  outline: none;
+  border-color: #2f71e5;
+}
+
+.popup__input:-webkit-autofill,
+.popup__input:-webkit-autofill:hover,
+.popup__input:-webkit-autofill:focus,
+.popup__input:-webkit-autofill:active {
+  color: #000;
+  border-color: #cccccc;
+  -webkit-text-fill-color: #000;
+  box-shadow: 0 0 0 30px #ffffff inset;
+  caret-color: #000;
+}
+
+.popup__input:-webkit-autofill:focus {
+  border-color: #2f71e5;
+}
+
+.popup__input_error {
+  border-bottom: 1px solid red;
 }
 
 .popup__form-error {
@@ -139,8 +155,8 @@
   transition: background-color linear 0.3s;
 }
 
-.popup__button_submit:hover {
-  background-color: #347eff;
+.popup__button_submit {
+  -webkit-tap-highlight-color: transparent;
 }
 
 .popup__signup-text {
@@ -159,8 +175,8 @@
   transition: color linear 0.3s;
 }
 
-.popup__button_goto:hover {
-  color: #4388ff;
+.popup__button_goto {
+  -webkit-tap-highlight-color: transparent;
 }
 
 @media screen and (max-width: 544px) {
@@ -192,5 +208,34 @@
     width: 100%;
     max-width: 320px;
     margin: 0 auto;
+  }
+}
+
+@media (hover: hover) {
+  .popup__button_submit:hover {
+    background-color: #347eff;
+  }
+
+  .popup__button_goto:hover {
+    color: #4388ff;
+  }
+
+  .popup__button_submit:active {
+    background-color: #2a65cc;
+  }
+
+  .popup__button:disabled:hover {
+    background-color: #d1d2d6;
+    color: #b6bcbf;
+  }
+
+  .popup__close_button:hover {
+    opacity: 0.8;
+  }
+}
+
+@media (pointer: coarse) {
+  .popup__button_submit:active {
+    background-color: #2a65cc;
   }
 }

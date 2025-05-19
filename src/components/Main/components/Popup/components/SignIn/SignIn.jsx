@@ -33,9 +33,12 @@ export function SignIn({ formValidator, buttonDisabled, errorMsg, onSubmit }) {
             type="email"
             name="email"
             id="email"
-            className="popup__input"
+            className={`popup__input${
+              errorMsg?.email ? " popup__input_error" : ""
+            }`}
             placeholder="Insira e-mail"
             value={inputValues?.email}
+            spellCheck={false}
             required
           />
           <span
@@ -53,9 +56,12 @@ export function SignIn({ formValidator, buttonDisabled, errorMsg, onSubmit }) {
             type="password"
             name="password"
             id="password"
-            className="popup__input"
+            className={`popup__input${
+              errorMsg?.password ? " popup__input_error" : ""
+            }`}
             placeholder="Insira a senha"
             value={inputValues?.password}
+            spellCheck={false}
             required
           />
           <span

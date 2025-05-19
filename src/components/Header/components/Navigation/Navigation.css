@@ -50,10 +50,6 @@
   transition: opacity linear 0.3s;
 }
 
-.navigation__link:hover {
-  opacity: 0.6;
-}
-
 .navigation__link_active::after {
   position: absolute;
   content: "";
@@ -82,10 +78,6 @@
   transition: opacity linear 0.3s;
 }
 
-.navigation__button-signin:hover {
-  opacity: 0.6;
-}
-
 @media screen and (max-width: 1024px) {
   .navigation__menu {
     padding: 14px 0 12px;
@@ -99,9 +91,17 @@
     bottom: -22px;
   }
 
+  .navigation__link {
+    -webkit-tap-highlight-color: transparent;
+  }
+
   .navigation__button-signin {
     width: 152px;
     height: 40px;
+  }
+
+  .navigation__button-signin {
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
@@ -211,5 +211,25 @@
     width: 100%;
     height: 55.61px;
     justify-self: center;
+  }
+}
+
+@media (hover: hover) {
+  .navigation__link:hover {
+    opacity: 0.6;
+  }
+
+  .navigation__button-signin:hover {
+    opacity: 0.6;
+  }
+}
+
+@media (pointer: coarse) {
+  .navigation__link:hover {
+    opacity: 1;
+  }
+
+  .navigation__button-signin:hover {
+    opacity: 1;
   }
 }
