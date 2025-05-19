@@ -151,6 +151,7 @@
     height: 24px;
     width: 24px;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .navigation__burger-menu-line {
