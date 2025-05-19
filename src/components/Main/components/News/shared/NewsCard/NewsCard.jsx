@@ -17,7 +17,7 @@ export function NewsCard({ article }) {
       <button type="button" className="card__favorite-button"></button>
       <Link className="card__link" to={url} target="_blank">
         <img
-          src={urlToImage}
+          src={urlToImage ? urlToImage : imageUnavailable}
           alt={`imagem do artigo ${title ? title : "Notícia relacionada"}`}
           className="card__image"
           onError={(evt) => {

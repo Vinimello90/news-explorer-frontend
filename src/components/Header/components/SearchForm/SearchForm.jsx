@@ -34,8 +34,9 @@ export function SearchForm({ onSearchRequest }) {
               onChange={handleInputChange}
               type="text"
               className="search__input"
-              placeholder="Yellowstone"
+              placeholder="Inserir tema"
               value={inputValue}
+              spellCheck={false}
               required
             />
           </label>
