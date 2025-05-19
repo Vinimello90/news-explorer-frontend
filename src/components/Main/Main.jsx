@@ -1,6 +1,6 @@
 import { About } from "./components/About/About";
 import { News } from "./components/News/News";
-import { PopupWithForm } from "./components/Popup/PopupWithForm";
+import { PopupWithForm } from "./components/PopupWithForm/PopupWithForm";
 
 export function Main(props) {
   const { isSearching, showResults, newsData, onClosePopup, isPopupOpen } =

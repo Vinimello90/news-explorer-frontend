@@ -36,10 +36,14 @@ export function SignUp(props) {
             type="email"
             name="email"
             id="email"
-            className="popup__input"
+            className={`popup__input${
+              errorMsg?.email ? " popup__input_error" : ""
+            }`}
             placeholder="Insira e-mail"
-            value={inputValues?.email}
+            value={inputValues.email}
+            spellCheck={false}
             required
+            autoComplete="new-email"
           />
           <span
             className={`popup__form-error popup__form-error_input${
@@ -56,9 +60,13 @@ export function SignUp(props) {
             type="password"
             name="password"
             id="password"
-            className="popup__input"
+            className={`popup__input${
+              errorMsg?.password ? " popup__input_error" : ""
+            }`}
             placeholder="Insira a senha"
-            value={inputValues?.password}
+            value={inputValues.password}
+            spellCheck={false}
+            autoComplete="new-password"
             required
           />
           <span
@@ -76,10 +84,14 @@ export function SignUp(props) {
             type="text"
             name="username"
             id="username"
-            className="popup__input"
+            className={`popup__input${
+              errorMsg?.username ? " popup__input_error" : ""
+            }`}
             placeholder="Insira um nome de usário"
             minLength={2}
-            value={inputValues?.username}
+            value={inputValues.username}
+            spellCheck={false}
+            autoComplete="new-username"
             required
           />
           <span

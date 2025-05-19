@@ -42,7 +42,7 @@
   width: 608px;
   height: 64px;
   padding: 21px 25px;
-  border: 1px solid #d1d2d6;
+  border: #fff solid 2px;
   border-radius: 100px;
   box-sizing: border-box;
   font-size: 16px;
@@ -52,14 +52,19 @@
   color: #b6bcbf;
 }
 
+.search__input:focus {
+  outline-style: none;
+  border: solid 2px #2f71e5;
+}
+
 .search__input:-webkit-autofill,
 .search__input:-webkit-autofill:hover,
 .search__input:-webkit-autofill:focus,
 .search__input:-webkit-autofill:active {
-  color: #000000;
-  -webkit-text-fill-color: #000000;
+  color: #000;
+  -webkit-text-fill-color: #000;
   box-shadow: 0 0 0 30px #ffffff inset;
-  caret-color: #fff;
+  caret-color: #000;
 }
 
 .search__form-button {
@@ -69,19 +74,15 @@
   width: 168px;
   height: 64px;
   border: solid 1px #2f71e5;
+  background-color: #2f71e5;
   border-radius: 100px;
   padding: 0;
   margin: 0;
   font-weight: 500;
   box-sizing: border-box;
   color: #fff;
-  background-color: #2f71e5;
   box-shadow: 0px 5px 15px 0px #0e1a3933;
-}
-
-.search__form-button:active {
-  border: solid 1px #2a65cc;
-  background-color: #2a65cc;
+  transition: background-color linear 0.3s, border linear 0.3s;
 }
 
 @media screen and (max-width: 1024px) {
@@ -151,5 +152,18 @@
   .search__form-button:hover {
     border: solid 1px #347eff;
     background-color: #347eff;
+    cursor: pointer;
+  }
+
+  .search__form-button:active {
+    border: solid 1px #2a65cc;
+    background-color: #2a65cc;
+  }
+}
+
+@media (pointer: coarse) {
+  .search__form-button:active {
+    border: solid 1px #2a65cc;
+    background-color: #2a65cc;
   }
 }

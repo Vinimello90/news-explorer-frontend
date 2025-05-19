@@ -1,4 +1,4 @@
-import "./Popup.css";
+import "./PopupWithForm.css";
 import { useEffect, useState } from "react";
 import { SignIn } from "./components/SignIn/SignIn";
 import { SignUp } from "./components/SignUp/SignUp";
