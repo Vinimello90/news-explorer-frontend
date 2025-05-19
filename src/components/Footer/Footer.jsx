@@ -12,7 +12,14 @@ export function Footer() {
         <div className="footer__column">
           <ul className="footer__list">
             <li className="footer__item-list">
-              <a href="#header" className="footer__link">
+              <a
+                onClick={(evt) => {
+                  evt.preventDefault();
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+                href="#"
+                className="footer__link"
+              >
                 Início
               </a>
             </li>

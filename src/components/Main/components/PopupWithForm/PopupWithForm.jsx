@@ -43,7 +43,7 @@ export function PopupWithForm({ onClosePopup }) {
     }
     window.addEventListener("keydown", handleEsc);
     return () => window.removeEventListener("keydown", handleEsc);
-  }, []);
+  }, [onClosePopup]);
 
   function handleClickOutside(evt) {
     if (evt.target.classList.contains("popup")) {

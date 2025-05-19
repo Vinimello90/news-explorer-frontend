@@ -1,7 +1,7 @@
 import "./NewsCardList.css";
 import { NewsCard } from "../shared/NewsCard/NewsCard";
 import notFound from "../../../../../images/not-found_v1.svg";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export function NewsCardList({ newsData }) {
   const [newsLimit, setCardsLimit] = useState(3);
