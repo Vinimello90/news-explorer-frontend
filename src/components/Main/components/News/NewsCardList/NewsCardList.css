@@ -33,6 +33,26 @@
   background-color: #e8e8e8;
 }
 
+.news__not-found-image {
+  display: block;
+  margin: 0 auto;
+}
+
+.news__not-found-title {
+  font-family: "Roboto Slab", serif;
+  margin: 31.5px 0 0;
+  font-size: 26px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.news__not-found-content {
+  max-width: 356px;
+  margin: 16px auto 0;
+  color: #b6bcbf;
+  text-align: center;
+}
+
 @media screen and (max-width: 1024px) {
   .news__title {
     font-size: 30px;
