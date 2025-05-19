@@ -80,7 +80,7 @@ export function Navigation({ isPopupOpen, onOpenPopup }) {
             onOpenPopup={onOpenPopup}
             onCloseMenu={closeMenu}
             isMenuOpen={isMenuOpen}
-            mobile
+            isMobile={isMobile}
           />
         )}
       </div>

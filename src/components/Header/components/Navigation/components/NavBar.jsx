@@ -5,7 +5,7 @@ export function NavBar(props) {
     onOpenPopup,
     onCloseMenu,
     isMenuOpen = false,
-    mobile = false,
+    isMobile = false,
   } = props;
 
   function handleCloseMenu() {
@@ -14,7 +14,7 @@ export function NavBar(props) {
 
   function handleOpenPopup() {
     onOpenPopup();
-    if (mobile) {
+    if (isMobile) {
       handleCloseMenu();
     }
   }
@@ -22,7 +22,7 @@ export function NavBar(props) {
   return (
     <nav
       className={
-        mobile
+        isMobile
           ? `navigation__menu navigation__menu_mb${
               isMenuOpen ? " navigation__menu_mb_open" : ""
             }`
@@ -48,7 +48,7 @@ export function NavBar(props) {
             onClick={handleOpenPopup}
             type="button"
             className={`navigation__button-signin${
-              mobile ? " navigation__button-signin_mb" : ""
+              isMobile ? " navigation__button-signin_mb" : ""
             }`}
           >
             Entrar
