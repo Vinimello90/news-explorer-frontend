@@ -26,7 +26,7 @@ function App() {
       const { articles } = await getNews(keyword);
       setNewsData({ articles, keyword });
     } catch (err) {
-      setNewsData({ err, keyword });
+      console.log(err);
     } finally {
       setIsSearching(false);
     }

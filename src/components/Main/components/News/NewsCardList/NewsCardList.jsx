@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export function NewsCardList({ newsData }) {
   const [newsLimit, setCardsLimit] = useState(3);
-  const { articles, keyword, err = false } = newsData;
+  const { articles, keyword } = newsData;
 
   function handleClickButton() {
     setCardsLimit(newsLimit + 3);
@@ -33,13 +33,13 @@ export function NewsCardList({ newsData }) {
     );
   }
 
-  if (err) {
+  if (articles?.length === 0) {
     return (
       <>
         <img className="news__not-found-image" src={notFound} alt="" />
-        <h2 className="news__not-found-title">Ocorreu um erro</h2>
+        <h2 className="news__not-found-title">Nada Encontrado</h2>
         <p className="news__not-found-content">
-          Desculpe, tente novamente mais tarde.
+          Desculpe, mas nada corresponde aos seus termos de pesquisa.
         </p>
       </>
     );
@@ -48,9 +48,9 @@ export function NewsCardList({ newsData }) {
   return (
     <>
       <img className="news__not-found-image" src={notFound} alt="" />
-      <h2 className="news__not-found-title">Nada Encontrado</h2>
+      <h2 className="news__not-found-title">Ocorreu um erro</h2>
       <p className="news__not-found-content">
-        Desculpe, mas nada corresponde aos seus termos de pesquisa.
+        Desculpe, tente novamente mais tarde.
       </p>
     </>
   );
