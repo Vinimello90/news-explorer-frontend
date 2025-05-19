@@ -4,20 +4,19 @@ import { useEffect, useState } from "react";
 import { NavBar } from "./components/NavBar";
 
 export function Navigation({ isPopupOpen, onOpenPopup }) {
-  const [width, setWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState(window.innerWidth <= 544);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     function handleResize() {
-      if (isMenuOpen && width > 544) {
+      setWidth(window.innerWidth <= 544);
+      if (isMenuOpen && window.innerWidth > 544) {
         setIsMenuOpen(false);
-        return;
       }
-      setWidth(window.innerWidth);
     }
     window.addEventListener("resize", handleResize);
-    return () => window.addEventListener("resize", handleResize);
-  }, [isMenuOpen, width]);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isMenuOpen]);
 
   function closeMenu() {
     setIsMenuOpen(false);
@@ -37,10 +36,10 @@ export function Navigation({ isPopupOpen, onOpenPopup }) {
     <>
       <div
         className={`navigation ${
-          isPopupOpen && width <= 544 ? " navigation_hidden" : ""
+          isPopupOpen && width ? " navigation_hidden" : ""
         }`}
       >
-        {width <= 544 && (
+        {width && (
           <div
             onClick={handleClickOutside}
             className={`navigation__overlay${
@@ -59,7 +58,7 @@ export function Navigation({ isPopupOpen, onOpenPopup }) {
             </Link>
           </h1>
 
-          {width <= 544 && (
+          {width && (
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               type="button"
@@ -72,11 +71,11 @@ export function Navigation({ isPopupOpen, onOpenPopup }) {
             </button>
           )}
 
-          {width > 544 && (
+          {!width && (
             <NavBar onCloseMenu={closeMenu} onOpenPopup={onOpenPopup} />
           )}
         </div>
-        {width <= 544 && (
+        {width && (
           <NavBar
             onOpenPopup={onOpenPopup}
             onCloseMenu={closeMenu}

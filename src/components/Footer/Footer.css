@@ -41,12 +41,12 @@
   transition: opacity linear 0.3s;
 }
 
-.footer__link_social {
-  font-size: 0;
+.footer__link {
+  -webkit-tap-highlight-color: transparent;
 }
 
-.footer__link:hover {
-  opacity: 0.6;
+.footer__link_social {
+  font-size: 0;
 }
 
 .footer__icon {
@@ -90,5 +90,11 @@
   .footer__list_socials {
     flex-direction: row;
     gap: 24px;
+  }
+}
+
+@media (hover: hover) {
+  .footer__link:hover {
+    opacity: 0.6;
   }
 }
