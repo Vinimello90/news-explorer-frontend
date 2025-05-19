@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { NavBar } from "./components/NavBar";
 
 export function Navigation({ isPopupOpen, onOpenPopup }) {
-  const [width, setWidth] = useState(window.innerWidth <= 544);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 544);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     function handleResize() {
-      setWidth(window.innerWidth <= 544);
+      setIsMobile(window.innerWidth <= 544);
       if (isMenuOpen && window.innerWidth > 544) {
         setIsMenuOpen(false);
       }
@@ -36,10 +36,10 @@ export function Navigation({ isPopupOpen, onOpenPopup }) {
     <>
       <div
         className={`navigation ${
-          isPopupOpen && width ? " navigation_hidden" : ""
+          isPopupOpen && isMobile ? " navigation_hidden" : ""
         }`}
       >
-        {width && (
+        {isMobile && (
           <div
             onClick={handleClickOutside}
             className={`navigation__overlay${
@@ -58,7 +58,7 @@ export function Navigation({ isPopupOpen, onOpenPopup }) {
             </Link>
           </h1>
 
-          {width && (
+          {isMobile && (
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               type="button"
@@ -71,11 +71,11 @@ export function Navigation({ isPopupOpen, onOpenPopup }) {
             </button>
           )}
 
-          {!width && (
+          {!isMobile && (
             <NavBar onCloseMenu={closeMenu} onOpenPopup={onOpenPopup} />
           )}
         </div>
-        {width && (
+        {isMobile && (
           <NavBar
             onOpenPopup={onOpenPopup}
             onCloseMenu={closeMenu}
