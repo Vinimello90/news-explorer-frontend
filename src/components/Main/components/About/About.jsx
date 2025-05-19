@@ -1,4 +1,4 @@
-import photo from "../../../../images/placeholder.jpg";
+import photo from "../../../../images/profile.jpg";
 import "./About.css";
 
 export function About() {
@@ -8,13 +8,17 @@ export function About() {
       <div className="about__content">
         <h2 className="about__title">Sobre o autor</h2>
         <p className="about__description">
-          Esse bloco descreve o autor do projeto. Aqui você deve indicar seu
-          nome, o que você faz e quais tecnologias de desenvolvedor você
-          conhece.
+          Sou Vinicius Barretto Mello, tenho 34 anos e venho de uma trajetória
+          como designer gráfico. Atualmente, estou focado em desenvolvimento
+          fullstack, atuando com HTML, CSS, metodologia BEM, JavaScript, POO,
+          React e consumo de APIs REST no frontend; e com Node.js, Express,
+          MongoDB, Mongoose e desenvolvimento de APIs RESTful no backend. Também
+          utilizo Git e GitHub para controle de versão.
         </p>
         <p className="about__description">
-          Você também pode falar sobre sua experiência com o Practicum, o que
-          aprendeu lá e como pode ajudar clientes em potencial.
+          Durante minha jornada na TripleTen, este projeto foi essencial para
+          consolidar meus conhecimentos e aprofundar meu entendimento sobre
+          estrutura de código e experiência do usuário.
         </p>
       </div>
     </section>
