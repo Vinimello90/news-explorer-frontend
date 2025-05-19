@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { Preloader } from "../Preloader/Preloader";
 import { NewsCardList } from "./NewsCardList/NewsCardList";
 
-export function News({ isSearching, articles }) {
+export function News({ isSearching, newsData }) {
   const searchRef = useRef();
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export function News({ isSearching, articles }) {
     <section ref={searchRef} className="news">
       <div className="news__container">
         {isSearching && <Preloader />}
-        {!isSearching && <NewsCardList articles={articles} />}
+        {!isSearching && <NewsCardList newsData={newsData} />}
       </div>
     </section>
   );

@@ -6,7 +6,7 @@ import { useState } from "react";
 import { getNews } from "../../utils/Api";
 
 function App() {
-  const [articles, setArticles] = useState("");
+  const [newsData, setNewsData] = useState("");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [showResults, setShowResults] = useState(false);
@@ -24,7 +24,7 @@ function App() {
       setIsSearching(true);
       setShowResults(true);
       const { articles } = await getNews(keyword);
-      setArticles(articles);
+      setNewsData({ articles, keyword });
     } catch (err) {
       console.log(err);
     } finally {
@@ -42,7 +42,7 @@ function App() {
       <Main
         isSearching={isSearching}
         showResults={showResults}
-        articles={articles}
+        newsData={newsData}
         isPopupOpen={isPopupOpen}
         onClosePopup={closePopup}
       />
