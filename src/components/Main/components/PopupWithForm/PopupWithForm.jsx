@@ -36,7 +36,20 @@ export function PopupWithForm({ onClosePopup }) {
 
   useEffect(() => {
     setIsOpen(true);
+    function handleEsc(evt) {
+      if (evt.key === "Escape") {
+        onClosePopup();
+      }
+    }
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
   }, []);
+
+  function handleClickOutside(evt) {
+    if (evt.target.classList.contains("popup")) {
+      onClosePopup();
+    }
+  }
 
   function handleClosePopup() {
     onClosePopup();
@@ -52,7 +65,10 @@ export function PopupWithForm({ onClosePopup }) {
   }
 
   return (
-    <div className={`popup${isOpen ? " popup_show" : ""}`}>
+    <div
+      onClick={handleClickOutside}
+      className={`popup${isOpen ? " popup_show" : ""}`}
+    >
       <div className="popup__container">
         <button
           onClick={handleClosePopup}
