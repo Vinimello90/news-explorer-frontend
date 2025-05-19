@@ -3,7 +3,7 @@ import { Header } from "../Header/Header";
 import { Main } from "../Main/Main";
 import { Footer } from "../Footer/Footer";
 import { useState } from "react";
-import { getNews } from "../../utils/Api";
+import { getNews } from "../../utils/ThirdPartyApi";
 
 function App() {
   const [newsData, setNewsData] = useState("");
@@ -26,7 +26,7 @@ function App() {
       const { articles } = await getNews(keyword);
       setNewsData({ articles, keyword });
     } catch (err) {
-      console.log(err);
+      setNewsData({ err, keyword });
     } finally {
       setIsSearching(false);
     }
