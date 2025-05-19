@@ -6,8 +6,10 @@ import { useState } from "react";
 import { getNews } from "../../utils/Api";
 
 function App() {
-  const [articles, setArticles] = useState("");
+  const [newsData, setNewsData] = useState("");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+  const [showResults, setShowResults] = useState(false);
 
   function openPopup() {
     setIsPopupOpen(true);
@@ -19,11 +21,14 @@ function App() {
 
   async function SearchRequest(keyword) {
     try {
+      setIsSearching(true);
+      setShowResults(true);
       const { articles } = await getNews(keyword);
-      setArticles(articles);
-      console.log(articles);
+      setNewsData({ articles, keyword });
     } catch (err) {
       console.log(err);
+    } finally {
+      setIsSearching(false);
     }
   }
 
@@ -35,7 +40,9 @@ function App() {
         onOpenPopup={openPopup}
       />
       <Main
-        articles={articles}
+        isSearching={isSearching}
+        showResults={showResults}
+        newsData={newsData}
         isPopupOpen={isPopupOpen}
         onClosePopup={closePopup}
       />

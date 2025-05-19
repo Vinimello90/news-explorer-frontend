@@ -1,5 +1,5 @@
-import { useState } from "react";
 import "./SearchForm.css";
+import { useState } from "react";
 
 export function SearchForm({ onSearchRequest }) {
   const [inputValue, setInputValue] = useState("");
@@ -11,6 +11,7 @@ export function SearchForm({ onSearchRequest }) {
   function handleSearchSubmit(evt) {
     evt.preventDefault();
     onSearchRequest(inputValue);
+    setInputValue("");
   }
 
   return (
@@ -28,11 +29,14 @@ export function SearchForm({ onSearchRequest }) {
         <fieldset className="search__fieldset">
           <label className="search__form-field">
             <input
+              name="search"
+              id="search"
               onChange={handleInputChange}
               type="text"
               className="search__input"
               placeholder="Yellowstone"
               value={inputValue}
+              required
             />
           </label>
           <button type="submit" className="search__form-button">

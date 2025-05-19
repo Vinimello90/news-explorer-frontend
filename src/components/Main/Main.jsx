@@ -1,11 +1,14 @@
 import { About } from "./components/About/About";
-import { NewsCardList } from "./components/NewsCardList/NewsCardList";
+import { News } from "./components/News/News";
 import { PopupWithForm } from "./components/Popup/PopupWithForm";
 
-export function Main({ articles, onClosePopup, isPopupOpen }) {
+export function Main(props) {
+  const { isSearching, showResults, newsData, onClosePopup, isPopupOpen } =
+    props;
+
   return (
     <main className="main">
-      {articles && <NewsCardList articles={articles} />}
+      {showResults && <News isSearching={isSearching} newsData={newsData} />}
       <About />
       {isPopupOpen && <PopupWithForm onClosePopup={onClosePopup} />}
     </main>

@@ -1,18 +1,20 @@
 import "./NewsCardList.css";
 import { NewsCard } from "../shared/NewsCard/NewsCard";
-import { useState } from "react";
+import notFound from "../../../../../images/not-found_v1.svg";
+import { useEffect, useState } from "react";
 
-export function NewsCardList({ articles }) {
+export function NewsCardList({ newsData }) {
   const [newsLimit, setCardsLimit] = useState(3);
+  const { articles, keyword } = newsData;
 
   function handleClickButton() {
     setCardsLimit(newsLimit + 3);
   }
 
-  return (
-    <section className="news">
-      <div className="news__container">
-        <h2 className="news__title">Procurar resultados</h2>
+  if (articles.length > 0) {
+    return (
+      <>
+        <h2 className="news__title">{`Procurar "${keyword}" resultados`}</h2>
         <ul className="news__card-list">
           {articles.slice(0, newsLimit).map((article) => {
             return <NewsCard key={article.url} article={article} />;
@@ -27,7 +29,17 @@ export function NewsCardList({ articles }) {
             Mostrar mais
           </button>
         )}
-      </div>
-    </section>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <img className="news__not-found-image" src={notFound} alt="" />
+      <h2 className="news__not-found-title">Nada Encontrado</h2>
+      <p className="news__not-found-content">
+        Desculpe, mas nada corresponde aos seus termos de pesquisa.
+      </p>
+    </>
   );
 }
