@@ -68,6 +68,16 @@
   box-shadow: 0px 5px 15px 0px #0e1a3933;
 }
 
+.search__form-button:hover {
+  border: solid 1px #347eff;
+  background-color: #347eff;
+}
+
+.search__form-button:active {
+  border: solid 1px #2a65cc;
+  background-color: #2a65cc;
+}
+
 @media screen and (max-width: 1024px) {
   .search {
     align-items: start;
