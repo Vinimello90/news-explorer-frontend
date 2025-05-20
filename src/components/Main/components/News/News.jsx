@@ -3,11 +3,11 @@ import { useEffect, useRef } from "react";
 import { Preloader } from "../Preloader/Preloader";
 import { NewsCardList } from "./NewsCardList/NewsCardList";
 
-export function News({ isSearching, newsData }) {
+export function News({ isLocalData, isSearching, newsData }) {
   const searchRef = useRef();
 
   useEffect(() => {
-    if (newsData.articles?.length > 0) {
+    if (newsData.articles?.length > 0 && !isLocalData) {
       searchRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [newsData]);

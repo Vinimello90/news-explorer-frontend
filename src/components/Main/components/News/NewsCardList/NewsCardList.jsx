@@ -1,7 +1,7 @@
 import "./NewsCardList.css";
 import { NewsCard } from "../shared/NewsCard/NewsCard";
 import notFound from "../../../../../images/not-found_v1.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function NewsCardList({ newsData }) {
   const [newsLimit, setCardsLimit] = useState(3);
@@ -50,7 +50,9 @@ export function NewsCardList({ newsData }) {
       <img className="news__not-found-image" src={notFound} alt="" />
       <h2 className="news__not-found-title">Ocorreu um erro</h2>
       <p className="news__not-found-content">
-        Desculpe, tente novamente mais tarde.
+        Desculpe, algo deu errado durante a solicitação. Pode haver um problema
+        de conexão ou o servidor pode estar inativo. Por favor, tente novamente
+        mais tarde.
       </p>
     </>
   );
