@@ -39,17 +39,17 @@ export function Navigation({ isPopupOpen, onOpenPopup }) {
           isPopupOpen && isMobile ? " navigation_hidden" : ""
         }`}
       >
-        {isMobile && (
+        {isMobile && ( // Renderiza o overlay se estiver em tela menor
           <div
             onClick={handleClickOutside}
             className={`navigation__overlay${
-              isMenuOpen ? " navigation__overlay_active" : ""
+              isMenuOpen ? " navigation__overlay_active" : "" //ativa o overlay se  o menu de hambúrguer estiver aberto
             }`}
           ></div>
         )}
         <div
           className={`navigation__container${
-            isMenuOpen ? " navigation__container_mb_open" : ""
+            isMenuOpen ? " navigation__container_mb_open" : "" // Se for apertado o botão do menu de hambúrguer, adiciona a classe para abrir o menu
           }`}
         >
           <h1 className="navigation__logo">
@@ -58,12 +58,12 @@ export function Navigation({ isPopupOpen, onOpenPopup }) {
             </Link>
           </h1>
 
-          {isMobile && (
+          {isMobile && ( // renderiza o menu de hambúrguer em tela menor
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               type="button"
               className={`navigation__burger-menu${
-                isMenuOpen ? " navigation__burger-menu_open" : ""
+                isMenuOpen ? " navigation__burger-menu_open" : "" // adiciona a classe para mudar o icone se aberto
               }`}
             >
               <div className="navigation__burger-menu-line"></div>
@@ -72,10 +72,10 @@ export function Navigation({ isPopupOpen, onOpenPopup }) {
           )}
 
           {!isMobile && (
-            <NavBar onCloseMenu={closeMenu} onOpenPopup={onOpenPopup} />
+            <NavBar onCloseMenu={closeMenu} onOpenPopup={onOpenPopup} /> // barra de navegação de telas maiores
           )}
         </div>
-        {isMobile && (
+        {isMobile && ( // barra de navegação do menu de hambúrguer
           <NavBar
             onOpenPopup={onOpenPopup}
             onCloseMenu={closeMenu}

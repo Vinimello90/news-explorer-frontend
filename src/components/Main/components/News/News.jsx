@@ -7,6 +7,7 @@ export function News({ isLocalData, isSearching, newsData }) {
   const searchRef = useRef();
 
   useEffect(() => {
+    // Faz o scroll automático ao renderizar os cards somente se os dados não vierem do localStorage
     if (newsData.articles?.length > 0 && !isLocalData) {
       searchRef.current.scrollIntoView({ behavior: "smooth" });
     }

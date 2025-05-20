@@ -4,11 +4,11 @@ import notFound from "../../../../../images/not-found_v1.svg";
 import { useState } from "react";
 
 export function NewsCardList({ newsData }) {
-  const [newsLimit, setCardsLimit] = useState(3);
+  const [cardsLimit, setCardsLimit] = useState(3);
   const { articles, keyword } = newsData;
 
   function handleClickButton() {
-    setCardsLimit(newsLimit + 3);
+    setCardsLimit(cardsLimit + 3);
   }
 
   if (articles?.length > 0) {
@@ -16,11 +16,11 @@ export function NewsCardList({ newsData }) {
       <>
         <h2 className="news__title">{`Resultados encontrados para "${keyword}"`}</h2>
         <ul className="news__card-list">
-          {articles.slice(0, newsLimit).map((article) => {
+          {articles.slice(0, cardsLimit).map((article) => {
             return <NewsCard key={article.url} article={article} />;
           })}
         </ul>
-        {newsLimit < articles.length && (
+        {cardsLimit < articles.length && (
           <button
             onClick={handleClickButton}
             type="button"

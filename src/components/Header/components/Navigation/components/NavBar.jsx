@@ -22,7 +22,7 @@ export function NavBar(props) {
   return (
     <nav
       className={
-        isMobile
+        isMobile // Adiciona os estilos para tela menor e ativer o efeito ao abrir o menu de hambúrguer
           ? `navigation__menu navigation__menu_mb${
               isMenuOpen ? " navigation__menu_mb_open" : ""
             }`

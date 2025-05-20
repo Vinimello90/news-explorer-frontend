@@ -12,7 +12,7 @@ function App() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [showResults, setShowResults] = useState(false);
-  const [isLocalData, setIsLocalData] = useState(false);
+  const [isLocalData, setIsLocalData] = useState(false); // Desativa o scroll automatico para a seção news ao renderizar os cards.
 
   useEffect(() => {
     const latestResults = JSON.parse(getNewsStorage());
