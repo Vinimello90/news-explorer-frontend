@@ -13,11 +13,6 @@
   transition: box-shadow ease 0.3s, opacity ease 0.3s, transform ease 0.3s;
 }
 
-.card:hover {
-  transform: scale(1.005);
-  box-shadow: 0px 0px 5px 2px #0000003a;
-}
-
 .card_visible {
   opacity: 1;
   transform: translatey(0);
@@ -55,10 +50,6 @@
   transition: opacity ease-in 0.3s;
 }
 
-.card__favorite-button:hover::before {
-  opacity: 1;
-}
-
 .card__favorite-button::after {
   position: absolute;
   top: 0;
@@ -70,10 +61,6 @@
     14px 19px;
   opacity: 0.4;
   transition: opacity ease-in 0.3s;
-}
-
-.card__favorite-button:hover::after {
-  opacity: 1;
 }
 
 .card__favorite-button_active::after {
@@ -221,5 +208,20 @@
 
   .card__news-text {
     margin: 0 0 30px;
+  }
+}
+
+@media (hover: hover) {
+  .card:hover {
+    transform: scale(1.005);
+    box-shadow: 0px 0px 5px 2px #0000003a;
+  }
+
+  .card__favorite-button:hover::before {
+    opacity: 1;
+  }
+
+  .card__favorite-button:hover::after {
+    opacity: 1;
   }
 }
