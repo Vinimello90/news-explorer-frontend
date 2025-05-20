@@ -4,6 +4,7 @@ import { Main } from "../Main/Main";
 import { Footer } from "../Footer/Footer";
 import { useState } from "react";
 import { getNews } from "../../utils/thirdPartyApi";
+import { PopupWithForm } from "../Main/components/PopupWithForm/PopupWithForm";
 
 function App() {
   const [newsData, setNewsData] = useState("");
@@ -39,12 +40,11 @@ function App() {
         isPopupOpen={isPopupOpen}
         onOpenPopup={openPopup}
       />
+      {isPopupOpen && <PopupWithForm onClosePopup={closePopup} />}
       <Main
         isSearching={isSearching}
         showResults={showResults}
         newsData={newsData}
-        isPopupOpen={isPopupOpen}
-        onClosePopup={closePopup}
       />
       <Footer />
     </div>
