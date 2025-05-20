@@ -1,8 +1,8 @@
 # NewsExplorer
 
-O projeto **NewsExplorer** é um aplicativo web onde o usuário possa pesquisar noticias de qualquer tema e salvar os artigo de interesse em sua conta. Seu layout é responsivo, adaptando-se a diferentes tamanhos de tela por meio de **unidades de medida relativas** e **media queries**, ajustando o design conforme os pontos de interrupção, garantindo que o layout seja consistente e não quebre. Foi desenvolvido utilizando **React**, com a estrutura separada em componentes **JSX (JavaScript XML)**, utilizando uma API teceiro para as noticias.
+O projeto **NewsExplorer** foi um aplicativo web que desenvolvi para permitir que usuários pesquisassem notícias sobre qualquer tema e salvassem os artigos de interesse em suas contas. Criei um layout responsivo que se adaptava a diferentes tamanhos de tela por meio de **unidades de medida relativas** e **media queries**, ajustando o design conforme os pontos de interrupção para garantir uma aparência consistente. Desenvolvi o projeto utilizando **React**, estruturando-o em componentes **JSX (JavaScript XML)**, com uma **API** de terceiros fornecendo as notícias.
 
-<img src="./src/images/screenshot_fullpage.png" alt="Captura de tela do projeto NewsExplorer" />
+<p align='center'><img src="./src/images/screenshot_fullpage.png" alt="Captura de tela do projeto NewsExplorer" width='45%' /></p>
 
 **Veja o projeto em funcionamento clicando [aqui]().**
 
@@ -24,86 +24,81 @@ O projeto **NewsExplorer** é um aplicativo web onde o usuário possa pesquisar 
 
 ### HTML Semântico
 
-O **HTML semântico** foi aplicado para tornar o código mais legível e acessível, melhorando a compreensão e a estruturação do conteúdo.
+Utilizei **HTML semântico** para tornar o código mais legível e acessível, facilitando a compreensão e a estruturação do conteúdo.
 
 ### Metodologia BEM
 
-A **metodologia BEM** foi adotada para melhorar a manutenção e a escalabilidade do código, tornando a estrutura de classes mais clara e intuitiva.
+Adotei a **metodologia BEM** para facilitar a manutenção e escalabilidade do código, tornando a estrutura de classes mais clara.
 
 ### Flexbox
 
-O `flexbox` foi utilizado em conjunto com **unidades de medida relativas** para organizar o layout e otimizar a responsividade da página, garantindo uma boa experiência em diferentes dispositivos.
+Apliquei `flexbox` em conjunto com **unidades de medida relativas** para organizar o layout e otimizar a responsividade, proporcionando uma boa experiência em diversos dispositivos.
 
 ### Grid e Text-overflow
 
-A propriedade `grid` foi usada para estruturar os cartões de noticias na seção news, criando um layout bem distribuído. A propriedade `text-overflow: ellipsis` foi aplicada juntoamente com `overflow: hidden`, ` line-clamp` e `white-space: nowrap` para truncar titulos e descrições que ultrapassam o limite do layout.
+Usei `grid` para estruturar os cartões de notícias e apliquei `text-overflow: ellipsis`, `overflow: hidden`, `line-clamp` e `white-space: nowrap` para truncar títulos e descrições que ultrapassavam o espaço disponível.
 
 - Seção "News"
 
-  <img src="./src/images/" alt="Captura de tela da seção News" />
+  <img src="./src/images/screenshot_news.png" alt="Captura de tela da seção News" />
 
 ### Pseudo-classes
 
-As **pseudo-classes** `:hover` e `:active` foram aplicadas para melhorar a interatividade do site. A primeira altera o estilo dos elementos quando o cursor passa sobre eles, enquanto a segunda é ativada quando o elemento é clicado.
+Implementei as **pseudo-classes** `:hover` e `:active` para melhorar a interatividade, alterando o estilo dos elementos em diferentes estados de interação.
 
 <p align="center">
-<img src="./src/images/" alt="Captura de tela mostrando pseudo-classes">
+<img src="./src/images/screenshot_pseudo.jpg" alt="Captura de tela mostrando pseudo-classes">
 </p>
 
 ### Media Queries
 
-As **media queries** foram configuradas para garantir que o layout se ajuste corretamente em diferentes resoluções de tela. Foram definidos os seguintes pontos de interrupção:
+Configurei **media queries** para ajustar o layout em diferentes resoluções de tela, definindo pontos de interrupção específicos:
 
 - 320-768px (540px)
 - 768-1280px (1024px)
 - 1280px ou superior
 
-  <img src="./src/images/" alt="Captura de tela de diferentes resoluções de tela" />
+<p align='center'><img src="./src/images/screenshot_screensizes.png" alt="Captura de tela do menu hamburguer fechado" width='100%'/>
 
-- Foi adicionado um botão hamburguer na barra de navegação para as telas menores.
+Incluí um botão hamburguer na barra de navegação para telas menores.
 
-<img src="./src/images/" alt="Captura de tela de diferentes resoluções de tela" width='49%'/> <img src="./src/images/screen-size.png" alt="Captura de tela de diferentes resoluções de tela" width='49%'/>
+<p align='center'><img src="./src/images/screenshot_burger_menu_closed.png" alt="Captura de tela do menu hamburguer fechado" width='30%'/> <img src="./src/images/screenshot_burger_menu_open.png" alt="Captura de tela do menu hamburguer aberto" width='30%'/></p>
 
 ### React JS
 
-No **React**, o código foi estruturado usando o formato **JSX** e separado em componentes que são montados e renderizados na página.
+Utilizei **React** com **JSX**, separando o código em componentes para melhor organização e reaproveitamento.
 
-- **Popup para login e cadastro** - O evento `onClick()` foi aplicado no botão para manipular o estado das popups, utilizando a função `useState()`. Assim, ao clicar para abrir uma popup, o componente é montado e renderizado na página. Com o `useEffect()`, adiciona-se um ouvinte de evento `keydown` para fechar as popups ao pressionar a tecla "esc". Quando a popup é fechada, o ouvinte é removido com o método `removeEventListener()`.
+- **Popup para login e cadastro** – Implementei o `onClick()` para manipular o estado das popups com `useState()`. Usei `useEffect()` para adicionar um ouvinte de evento `keydown` e permitir fechar a popup com a tecla "esc", e o removi com `removeEventListener()` ao desmontar.
 
-  <img src="./src/images/" alt="Captura de tela de cadastro" width="49.4%"> <img src="./src/images/" alt="Captura de tela da login" width="49.4%">
-  </p>
-  <p align="center"><img src="./src/images/add-card.png" alt="Captura de tela da adição de novo cartão" width="49.4%"></p>
+  <img src="./src/images/screenshot_signup.png" alt="Captura de tela do cadastro" width="49.4%"> <img src="./src/images/screenshot_signin.png" alt="Captura de tela do login" width="49.4%">
 
-- **Validação de formulário** - Dentro do `useEffect()`, instanciou-se uma classe responsável por validar os formulários, manipulando o estado do `useState()` para melhorar a **UX** dos formulários. A classe desabilita o botão de **submit** quando o formulário contém entradas inválidas, sublinhando de vermelho o **input** inválido e exibindo uma mensagem explicativa abaixo do campo. O botão **submit** só é habilitado quando o formulário é validado corretamente.
+- **Validação de formulário** – Instanciei uma classe dentro do `useEffect()` para validar os formulários, manipulando `useState()` para aprimorar a **UX**. A classe desabilitou o botão de **submit** quando havia entradas inválidas, realçando o campo e exibindo uma mensagem. O botão só era habilitado com os dados corretos.
 
-  <img src="./src/images/form_validation.png" alt="Captura de tela da validação de formulário" />
+  <img src="./src/images/screenshot__form_invalid.png" alt="Captura de tela do formulário inválido" width="49.4%"/> <img src="./src/images/screenshot__form_valid.png" alt="Captura de tela do formulário válido" width="49.4%"/>
 
-- **Formulário de Busca** - Foi criado um formulário para buscar os artigos através de palavras chaves, e com o uso de `onChange()` e `onSubmit()` a palavra chave será armazenada e enviadas para solicitar a **API**, que serão retornada e depois enviada para fazer a solicitações dos artigos.
+- **Formulário de Busca** – Criei um formulário que, com `onChange()` e `onSubmit()`, armazenava a palavra-chave para buscar artigos via **API**, retornando uma lista de notícias relevantes.
 
-  <p align="center"><img src="./src/images/" alt="Captura de tela do formulário" width="100%"></p>
+  <p align="center"><img src="./src/images/screenshot_search.png" alt="Captura de tela do formulário" width="100%"></p>
 
-- **Preloader** - Foi utilizado um preloader, uma animação para indicar que esta sendo realizado uma busca, que é controlado por um estado do `useState()` que monta o preloader ao iniciar a solicitação e desmonta ao receber a resposta, exibindo a seção **news** com os resultados.
+- **Preloader** – Implementei uma animação de carregamento controlada por `useState()`, exibida durante a busca e substituída pelos resultados ao término.
 
-  <p align="center"><img src="./src/images/" alt="Captura de tela do preloader" width="100%"></p>
+  <p align="center"><img src="./src/images/screenshot_preloader.png" alt="Captura de tela do preloader" width="100%"></p>
 
-- **Cartões da seção news** - Utiliza-se o método `map()` para iterar sobre os cartões para montar o componente de cada um. Os dados são passados como `props` para renderizar o cartão na seção "news" da página, inclui um botão para salvar o artigo na conta e um botão ao final da seção para carregar mais artigos relacionadas, carregando de 3 em 3 os artigos relacionados.
+- **Cartões da seção news** – Usei `map()` para iterar sobre os dados e montar os cartões com `props`. Incluí botões para salvar artigos e para carregar mais notícias aos poucos (3 por vez).
 
-  <p align="center"><img src="./src/images/" alt="Captura de tela da seção news" width="100%"></p>
+  <p align="center"><img src="./src/images/screenshot_news.png" alt="Captura de tela da seção news" width="100%"></p>
 
-- **Cartões não encontrado e erro no servidor** - Foi criado a lógica para mostrar uma mensagem no lugar dos cartões caso não encontre nenhum artigo ou caso de algum erro no servidor.
+- **Cartões de erro e não encontrado** – Criei lógica para exibir mensagens alternativas caso não fossem encontrados artigos ou em caso de erro do servidor.
 
-  <p align="center"><img src="./src/images/" alt="Captura de tela da seção news com mensagem de artigo não encontrado" width="49%"> <img src="./src/images/" alt="Captura de tela da seção news com uma mensagem de erro do servidor" width="49%"></p>
+  <p align="center"><img src="./src/images/screenshot_not_found.png" alt="Captura de tela da seção news com mensagem de artigo não encontrado" width="49%"> <img src="./src/images/screenshot_server_error.png" alt="Captura de tela da seção news com uma mensagem de erro do servidor" width="49%"></p>
 
 ### API
 
-Foi criada um modulo para interagir com a **NewsAPI**, uma **API** que retorna os artigos através de palavras chaves. Foi utilizado o método `fetch()`, permitindo realizar solicitações **GET** passando a palavra chave na **URL**, e recebe de resposta uma **array** contendo os artigos em ordem de relevância.
+Desenvolvi um módulo para consumir a **NewsAPI**, que retornava artigos com base em palavras-chave. Usei o método `fetch()` para fazer requisições **GET**, recebendo um **array** com os artigos mais relevantes.
 
 ## Planos de melhoria do projeto
 
-- Desenvolver o backend com o banco de dados para persistir os dados.
-
-- Adicionar a API própria.
-
-- Registrar e autenticar o usuário.
-
-- Salvar os artigos na conta do usuário para ser exibido ao fazer o login.
+- Desenvolver o backend com banco de dados para persistência.
+- Criar uma API própria.
+- Implementar registro e autenticação de usuários.
+- Permitir salvar artigos e exibi-los após login.
