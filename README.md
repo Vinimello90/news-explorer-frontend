@@ -84,7 +84,7 @@ Utilizei **React** com **JSX**, separando o código em componentes para melhor o
 
   <p align="center"><img src="./src/images/screenshot_preloader.png" alt="Captura de tela do preloader" width="100%"></p>
 
-- **Cartões da seção news** – Usei `map()` para iterar sobre os dados e montar os cartões com `props`. Incluí botões para salvar artigos e para carregar mais notícias aos poucos (3 por vez), utilizando o método `.splice()` para encurtar a lista de acordo com o numero armazenado em um estado do `useState()` que aumenta conforme o botão é usado.
+- **Cartões da seção news** – Usei `map()` para iterar sobre os dados e montar os cartões com `props`. Incluí botões para salvar artigos e para carregar mais notícias aos poucos (3 por vez), utilizando o método `.slice()` para encurtar a lista de acordo com o numero armazenado em um estado do `useState()` que aumenta conforme o botão é usado.
 
   <p align="center"><img src="./src/images/screenshot_news.png" alt="Captura de tela da seção news" width="100%"></p>
 
