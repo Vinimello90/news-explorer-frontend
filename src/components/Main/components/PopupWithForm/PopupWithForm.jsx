@@ -6,7 +6,7 @@ import FormValidator from "../../../../utils/FormValidator";
 
 export function PopupWithForm({ onClosePopup }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [signUp, setSignUp] = useState(false);
+  const [isSignup, setIsSignup] = useState(false);
   const [errorMsg, setErrorMsg] = useState();
   const [buttonDisabled, setbuttonDisabled] = useState(true);
   const [formValidator, setFormValidator] = useState();
@@ -32,7 +32,7 @@ export function PopupWithForm({ onClosePopup }) {
     });
     setFormValidator(formValidator);
     formValidator.validateForm();
-  }, [signUp]);
+  }, [isSignup]);
 
   useEffect(() => {
     setIsOpen(true);
@@ -56,7 +56,7 @@ export function PopupWithForm({ onClosePopup }) {
   }
 
   function handleSignupClick() {
-    setSignUp(!signUp);
+    setIsSignup(!isSignup);
     setErrorMsg("");
   }
 
@@ -74,8 +74,10 @@ export function PopupWithForm({ onClosePopup }) {
           onClick={handleClosePopup}
           className="popup__button popup__close_button"
         ></button>
-        <h2 className="popup__title">{!signUp ? "Entrar" : "Inscrever-se"}</h2>
-        {!signUp && (
+        <h2 className="popup__title">
+          {!isSignup ? "Entrar" : "Inscrever-se"}
+        </h2>
+        {!isSignup && (
           <SignIn
             formValidator={formValidator}
             buttonDisabled={buttonDisabled}
@@ -83,7 +85,7 @@ export function PopupWithForm({ onClosePopup }) {
             onSubmit={handleSubmit}
           />
         )}
-        {signUp && (
+        {isSignup && (
           <SignUp
             formValidator={formValidator}
             buttonDisabled={buttonDisabled}
@@ -98,7 +100,7 @@ export function PopupWithForm({ onClosePopup }) {
             type="button"
             className="popup__button popup__button_goto"
           >
-            {signUp ? "Entrar" : "Inscrever-se"}
+            {isSignup ? "Entrar" : "Inscrever-se"}
           </button>
         </p>
       </div>
