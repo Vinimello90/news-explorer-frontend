@@ -14,7 +14,7 @@ export function NewsCardList({ newsData }) {
   if (articles?.length > 0) {
     return (
       <>
-        <h2 className="news__title">{`Procurar "${keyword}" resultados`}</h2>
+        <h2 className="news__title">{`Resultados encontrados para "${keyword}"`}</h2>
         <ul className="news__card-list">
           {articles.slice(0, newsLimit).map((article) => {
             return <NewsCard key={article.url} article={article} />;
