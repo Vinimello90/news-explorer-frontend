@@ -10,7 +10,7 @@ export function News({ isLocalData, isSearching, newsData }) {
     if (newsData.articles?.length > 0 && !isLocalData) {
       searchRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  }, [newsData]);
+  }, [newsData, isLocalData]);
 
   return (
     <section ref={searchRef} className="news">
