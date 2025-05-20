@@ -6,13 +6,21 @@ import { useEffect, useState } from "react";
 import { getNews } from "../../utils/thirdPartyApi";
 import { PopupWithForm } from "../Main/components/PopupWithForm/PopupWithForm";
 import { getNewsStorage, setNewsStorage } from "../../utils/searchStorage";
+import { CurrentUserContext } from "../../../../../Sprint_18/web_project_api_full/frontend/src/contexts/CurrentUserContext";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
+import { SavedNews } from "../Main/components/News/SavedNews";
+import { SavedNewsHeader } from "../Header/components/SavedNewsHeader/SavedNewsHeader";
 
 function App() {
   const [newsData, setNewsData] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [isLocalData, setIsLocalData] = useState(false); // Desativa o scroll automatico para a seção news ao renderizar os cards.
+  const [savedArticles, setSavedArticles] = useState();
+  const [savedKeywords, setSavedKeywords] = useState();
 
   useEffect(() => {
     const latestResults = JSON.parse(getNewsStorage());
@@ -46,22 +54,53 @@ function App() {
     }
   }
 
+  function saveArticle(articleData) {
+    setSavedArticles((prevState) => [...prevState, articleData.article]);
+    if (!savedKeywords.includes(articleData.keyword)) {
+      setSavedKeywords((prevState) => [...prevState, articleData.keyword]);
+    }
+  }
+
   return (
-    <div className="page">
-      <Header
-        onSearchRequest={SearchRequest}
-        isPopupOpen={isPopupOpen}
-        onOpenPopup={openPopup}
-      />
-      {isPopupOpen && <PopupWithForm onClosePopup={closePopup} />}
-      <Main
-        isLocalData={isLocalData}
-        isSearching={isSearching}
-        showResults={showResults}
-        newsData={newsData}
-      />
-      <Footer />
-    </div>
+    <CurrentUserContext
+      value={{
+        currentUser: "Elise",
+        isLoggedIn,
+        savedArticles,
+        savedKeywords,
+      }}
+    >
+      <div className="page">
+        <Header
+          onSearchRequest={SearchRequest}
+          isPopupOpen={isPopupOpen}
+          onOpenPopup={openPopup}
+        />
+        {isPopupOpen && <PopupWithForm onClosePopup={closePopup} />}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Main
+                isLocalData={isLocalData}
+                isSearching={isSearching}
+                showResults={showResults}
+                newsData={newsData}
+              />
+            }
+          ></Route>
+          <Route
+            path="/saved-news"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <SavedNews />
+              </ProtectedRoute>
+            }
+          ></Route>
+        </Routes>
+        <Footer />
+      </div>
+    </CurrentUserContext>
   );
 }
 

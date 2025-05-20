@@ -1,12 +1,18 @@
-import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { CurrentUserContext } from "../../../../../../../../Sprint_18/web_project_api_full/frontend/src/contexts/CurrentUserContext";
+import logoutIcon from "../../../../../images/logout.svg";
 
 export function NavBar(props) {
   const {
+    isSavedNews = false,
     onOpenPopup,
     onCloseMenu,
     isMenuOpen = false,
     isMobile = false,
   } = props;
+
+  const { isLoggedIn, currentUser } = useContext(CurrentUserContext);
 
   function handleCloseMenu() {
     onCloseMenu();
@@ -44,15 +50,44 @@ export function NavBar(props) {
           </NavLink>
         </li>
         <li className="navigation__menu-item">
-          <button
-            onClick={handleOpenPopup}
-            type="button"
-            className={`navigation__button-signin${
-              isMobile ? " navigation__button-signin_mb" : ""
-            }`}
+          <NavLink
+            onClick={handleCloseMenu}
+            to="/saved-news"
+            className={({ isActive }) =>
+              isActive
+                ? `navigation__link navigation__link_active${
+                    isSavedNews ? " navigation__link_active_saved-news" : ""
+                  }`
+                : "navigation__link"
+            }
           >
-            Entrar
-          </button>
+            Artigos salvos
+          </NavLink>
+        </li>
+        <li className="navigation__menu-item">
+          {!isLoggedIn && (
+            <button
+              onClick={handleOpenPopup}
+              type="button"
+              className={`navigation__button navigation__button_signin${
+                isMobile ? " navigation__button_signin_mb" : ""
+              }`}
+            >
+              Entrar
+            </button>
+          )}
+          {isLoggedIn && (
+            <button
+              onClick={handleOpenPopup}
+              type="button"
+              className={`navigation__button navigation__button_logout${
+                isMobile ? " navigation__button_logout_mb" : ""
+              }`}
+            >
+              {`${currentUser}`}
+              <img className="navigation_logout-icon" src={logoutIcon} alt="" />
+            </button>
+          )}
         </li>
       </ul>
     </nav>

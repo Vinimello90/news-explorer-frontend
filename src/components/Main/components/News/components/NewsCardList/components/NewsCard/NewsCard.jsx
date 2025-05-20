@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./NewsCard.css";
 import { Link } from "react-router-dom";
-import imageUnavailable from "../../../../../../images/no-image.jpg";
+import imageUnavailable from "../../../../../../../../images/no-image.jpg";
 
 export function NewsCard({ article }) {
   const { urlToImage, title, description, url, publishedAt, source } = article;

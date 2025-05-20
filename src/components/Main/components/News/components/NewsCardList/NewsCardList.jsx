@@ -1,6 +1,6 @@
 import "./NewsCardList.css";
-import { NewsCard } from "../shared/NewsCard/NewsCard";
-import notFound from "../../../../../images/not-found_v1.svg";
+import { NewsCard } from "./components/NewsCard/NewsCard";
+import notFound from "../../../../../../images/not-found_v1.svg";
 import { useState } from "react";
 
 export function NewsCardList({ newsData }) {

@@ -2,6 +2,12 @@
   position: relative;
   background: url("../../images/georgia-de-lotz--UsJoNxLaNo-unsplash.jpg")
     no-repeat center / cover;
+  color: #fff;
+}
+
+.header_saved-news {
+  background: #fff;
+  color: #1a1b22;
 }
 
 .header::after {
@@ -13,4 +19,8 @@
   width: 100%;
   backdrop-filter: brightness(0.6);
   z-index: 0;
+}
+
+.header_saved-news::after {
+  backdrop-filter: brightness(1);
 }

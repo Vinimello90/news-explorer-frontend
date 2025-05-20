@@ -1,0 +1,20 @@
+.saved-news-header {
+  padding: 40px 104px 56px;
+}
+
+.saved-news-header__text {
+  font-size: 18px;
+  color: #1a1b2280;
+}
+
+.saved-news-header__title {
+  font-family: "Roboto Slab", serif;
+  font-size: 40px;
+  font-weight: 400;
+  max-width: 530px;
+  color: #1a1b22;
+}
+
+.saved-news-header__keywords {
+  color: #1a1b22;
+}

@@ -1,7 +1,7 @@
 import "./News.css";
 import { useEffect, useRef } from "react";
 import { Preloader } from "../Preloader/Preloader";
-import { NewsCardList } from "./NewsCardList/NewsCardList";
+import { NewsCardList } from "./components/NewsCardList/NewsCardList";
 
 export function News({ isLocalData, isSearching, newsData }) {
   const searchRef = useRef();
