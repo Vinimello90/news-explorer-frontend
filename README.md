@@ -76,7 +76,7 @@ Utilizei **React** com **JSX**, separando o código em componentes para melhor o
 
   <img src="./src/images/screenshot__form_invalid.png" alt="Captura de tela do formulário inválido" width="49.4%"/> <img src="./src/images/screenshot__form_valid.png" alt="Captura de tela do formulário válido" width="49.4%"/>
 
-- **Formulário de Busca** – Criei um formulário que, com `onChange()` e `onSubmit()`, armazenava a palavra-chave para buscar artigos via **API**, retornando uma lista de notícias relevantes.
+- **Formulário de Busca** – Criei um formulário que, com `onChange()` e `onSubmit()`, armazena a palavra-chave para buscar artigos via **API**, retornando uma lista de notícias relevantes, que é armazeado em um estado para ser renderizado e armazenado no **localStorage** para caso o usuário saia da pagina ao voltar os resultados ainda estarem lá.
 
   <p align="center"><img src="./src/images/screenshot_search.png" alt="Captura de tela do formulário" width="100%"></p>
 
@@ -94,7 +94,7 @@ Utilizei **React** com **JSX**, separando o código em componentes para melhor o
 
 ### API
 
-Desenvolvi um módulo para consumir a **NewsAPI**, que retornava artigos com base em palavras-chave. Usei o método `fetch()` para fazer requisições **GET**, recebendo um **array** com os artigos mais relevantes.
+Desenvolvi um módulo para consumir a **NewsAPI**, que retorna artigos com base em palavras-chave. Usei o método `fetch()` para fazer requisições **GET**, recebendo um **array** com os artigos mais relevantes.
 
 ## Planos de melhoria do projeto
 
