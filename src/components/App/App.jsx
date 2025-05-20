@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
     const latestResults = JSON.parse(getNewsStorage());
-    if (latestResults) {
+    if (latestResults?.articles.length > 0) {
       setNewsData(latestResults);
       setIsLocalData(true);
       setShowResults(true);
