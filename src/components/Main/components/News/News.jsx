@@ -7,8 +7,10 @@ export function News({ isSearching, newsData }) {
   const searchRef = useRef();
 
   useEffect(() => {
-    searchRef.current.scrollIntoView({ behavior: "smooth" });
-  }, [isSearching]);
+    if (newsData.articles?.length > 0) {
+      searchRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [newsData]);
 
   return (
     <section ref={searchRef} className="news">
