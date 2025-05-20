@@ -3,7 +3,7 @@ import { Header } from "../Header/Header";
 import { Main } from "../Main/Main";
 import { Footer } from "../Footer/Footer";
 import { useState } from "react";
-import { getNews } from "../../utils/ThirdPartyApi";
+import { getNews } from "../../utils/thirdPartyApi";
 
 function App() {
   const [newsData, setNewsData] = useState("");
