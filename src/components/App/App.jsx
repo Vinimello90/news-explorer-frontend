@@ -18,8 +18,13 @@ function App() {
   const [isSearching, setIsSearching] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [isLocalData, setIsLocalData] = useState(false); // Desativa o scroll automatico para a seção news ao renderizar os cards.
-  const [savedArticles, setSavedArticles] = useState();
-  const [savedKeywords, setSavedKeywords] = useState();
+  const [savedArticles, setSavedArticles] = useState([5, 5, 5, 5, 5]);
+  const [savedKeywords, setSavedKeywords] = useState([
+    "Natureza",
+    "Yellowstone",
+    "dasdas",
+    "dsadasdas",
+  ]);
 
   useEffect(() => {
     const latestResults = JSON.parse(getNewsStorage());

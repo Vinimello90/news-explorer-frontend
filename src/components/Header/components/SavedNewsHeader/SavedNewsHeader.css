@@ -1,5 +1,7 @@
 .saved-news-header {
+  position: relative;
   padding: 40px 104px 56px;
+  z-index: 1;
 }
 
 .saved-news-header__text {
