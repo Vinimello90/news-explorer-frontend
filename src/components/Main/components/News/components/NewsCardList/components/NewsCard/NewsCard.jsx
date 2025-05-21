@@ -1,21 +1,50 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./NewsCard.css";
 import { Link } from "react-router-dom";
 import imageUnavailable from "../../../../../../../../images/no-image.jpg";
+import { CurrentUserContext } from "../../../../../../../../../../../Sprint_18/web_project_api_full/frontend/src/contexts/CurrentUserContext";
 
-export function NewsCard({ article }) {
+export function NewsCard({ isOnSavedNews, article, keyword }) {
   const { urlToImage, title, description, url, publishedAt, source } = article;
 
+  const { onRemoveArticle, isLoggedIn, onSaveArticle, userData } =
+    useContext(CurrentUserContext);
+
   const [showAnimation, setShowAnimation] = useState(false);
+  const [isCardSaved, setIsCardSaved] = useState(false);
 
   useEffect(() => {
     setShowAnimation(true);
   }, []);
 
+  useEffect(() => {
+    setIsCardSaved(userData.isSaved.includes(article.url));
+  }, [userData, article]);
+
+  function handleRemoveButton() {
+    onRemoveArticle(url);
+    setIsCardSaved(false);
+  }
+
+  function handleSaveButton() {
+    onSaveArticle({ article, keyword });
+    setIsCardSaved(true);
+  }
+
   return (
     <li className={`card${showAnimation ? " card_visible" : ""} `}>
-      <button type="button" className="card__favorite-button"></button>
+      <button
+        onClick={!isCardSaved ? handleSaveButton : handleRemoveButton}
+        type="button"
+        className={`card__favorite-button${
+          isCardSaved && !isOnSavedNews ? " card__favorite-button_saved" : ""
+        }${isOnSavedNews ? " card__favorite-button_on_saved-news" : ""}${
+          isLoggedIn && !isOnSavedNews ? " card__favorite-button_active" : ""
+        }`}
+        disabled={!isLoggedIn}
+      ></button>
       <Link className="card__link" to={url} target="_blank">
+        {isOnSavedNews && <p className="card__keyword-label">{keyword}</p>}
         <img
           src={urlToImage ? urlToImage : imageUnavailable}
           alt={`imagem do artigo ${title ? title : "Notícia relacionada"}`}

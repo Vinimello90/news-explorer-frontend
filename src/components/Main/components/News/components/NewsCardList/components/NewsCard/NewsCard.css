@@ -18,6 +18,25 @@
   transform: translatey(0);
 }
 
+.card__keyword-label {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  background: #fff;
+  color: #1a1b22;
+  font-size: 14px;
+  max-width: 105px;
+  padding: 8px 15px;
+  border-radius: 8px;
+  margin: 0;
+  line-height: 1.715;
+  font-weight: 500;
+  text-transform: capitalize;
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .card__favorite-button {
   position: absolute;
   top: 24px;
@@ -29,6 +48,7 @@
   padding: 0;
   cursor: pointer;
   background-color: #fff;
+  font-weight: 500;
 }
 
 .card__favorite-button::before {
@@ -37,17 +57,27 @@
   justify-content: center;
   position: absolute;
   border-radius: 10px;
+  padding: 0 10.84px;
   font-size: 12px;
   top: 0;
   right: 45px;
-  width: 182px;
-  height: 42px;
+  width: fit-content;
+  height: 40px;
   background-color: #fff;
   color: #1a1b22;
   content: "Faça login para salvar o artigo";
+  text-wrap: nowrap;
   opacity: 0;
   pointer-events: none;
   transition: opacity ease-in 0.3s;
+}
+
+.card__favorite-button_active::before {
+  display: none;
+}
+
+.card__favorite-button_on_saved-news:before {
+  content: "Remover dos salvos";
 }
 
 .card__favorite-button::after {
@@ -63,9 +93,14 @@
   transition: opacity ease-in 0.3s;
 }
 
-.card__favorite-button_active::after {
+.card__favorite-button_saved::after {
   background-image: url("../../../../../../../../images/bookmark_active.svg");
   opacity: 1;
+}
+
+.card__favorite-button_on_saved-news:after {
+  background-image: url("../../../../../../../../images/remove-icon.svg");
+  background-size: 18px 19px;
 }
 
 .card__link {
@@ -140,6 +175,12 @@
     height: 150px;
   }
 
+  .card__keyword {
+    top: 8px;
+    left: 8px;
+    padding: 8px 13px;
+  }
+
   .card__favorite-button {
     top: 8px;
     right: 8px;
@@ -180,6 +221,12 @@
 
   .card__image {
     height: 196px;
+  }
+
+  .card__keyword {
+    top: 16px;
+    left: 16px;
+    padding: 8px 13px;
   }
 
   .card__favorite-button {

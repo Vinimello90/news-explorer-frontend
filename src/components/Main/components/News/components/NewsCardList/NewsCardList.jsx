@@ -1,26 +1,51 @@
 import "./NewsCardList.css";
 import { NewsCard } from "./components/NewsCard/NewsCard";
 import notFound from "../../../../../../images/not-found_v1.svg";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { CurrentUserContext } from "../../../../../../../../../Sprint_18/web_project_api_full/frontend/src/contexts/CurrentUserContext";
 
 export function NewsCardList({ newsData }) {
   const [cardsLimit, setCardsLimit] = useState(3);
+
   const { articles, keyword } = newsData;
+
+  const { savedNews } = useContext(CurrentUserContext);
+
+  const location = useLocation();
+  const isOnSavedNews = location.pathname === "/saved-news";
 
   function handleClickButton() {
     setCardsLimit(cardsLimit + 3);
   }
 
-  if (articles?.length > 0) {
+  useEffect(() => {
+    if (isOnSavedNews) {
+      setCardsLimit(isOnSavedNews.length);
+    }
+  }, [isOnSavedNews]);
+
+  if (articles?.length > 0 || savedNews?.length > 0) {
     return (
       <>
-        <h2 className="news__title">{`Resultados encontrados para "${keyword}"`}</h2>
+        {!isOnSavedNews && (
+          <h2 className="news__title">{`Resultados encontrados para "${keyword}"`}</h2>
+        )}
         <ul className="news__card-list">
-          {articles.slice(0, cardsLimit).map((article) => {
-            return <NewsCard key={article.url} article={article} />;
-          })}
+          {(!isOnSavedNews ? articles : savedNews)
+            .slice(0, cardsLimit)
+            .map((news) => {
+              return (
+                <NewsCard
+                  key={!isOnSavedNews ? news.url : news.article.url}
+                  article={!isOnSavedNews ? news : news.article}
+                  keyword={!isOnSavedNews ? keyword : news.keyword}
+                  isOnSavedNews={isOnSavedNews}
+                />
+              );
+            })}
         </ul>
-        {cardsLimit < articles.length && (
+        {cardsLimit < articles?.length && (
           <button
             onClick={handleClickButton}
             type="button"
@@ -33,13 +58,17 @@ export function NewsCardList({ newsData }) {
     );
   }
 
-  if (articles?.length === 0) {
+  if (articles?.length === 0 || savedNews?.length === 0) {
     return (
       <>
         <img className="news__not-found-image" src={notFound} alt="" />
-        <h2 className="news__not-found-title">Nada Encontrado</h2>
+        <h2 className="news__not-found-title">
+          {!isOnSavedNews ? "Nada Encontrado" : "Nenhum artigo salvo"}
+        </h2>
         <p className="news__not-found-content">
-          Desculpe, mas nada corresponde aos seus termos de pesquisa.
+          {!isOnSavedNews
+            ? "Desculpe, mas nada corresponde aos seus termos de pesquisa."
+            : "Nenhum cartão salvo encontrado. Salve os artigos para serem exibidos aqui"}
         </p>
       </>
     );
