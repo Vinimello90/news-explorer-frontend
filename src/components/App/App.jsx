@@ -62,19 +62,24 @@ function App() {
       ...prev,
       isSaved: [...prev.isSaved, articleData.article.url],
     }));
-
     if (!savedKeywords.includes(articleData.keyword)) {
       setSavedKeywords((prevState) => [...prevState, articleData.keyword]);
     }
   }
 
-  function removeArticle(url) {
-    console.log(url);
-    setSavedNews((prevArticles) =>
-      prevArticles.filter(
-        (currentArticle) => currentArticle.article.url !== url
-      )
+  function removeArticle({ url, keyword }) {
+    const updatedArticles = savedNews.filter(
+      (currentArticle) => currentArticle.article.url !== url
     );
+    setSavedNews(updatedArticles);
+    const keywordExists = updatedArticles.some((article) =>
+      article.keyword.includes(keyword)
+    );
+    if (!keywordExists) {
+      setSavedKeywords((prevKeywords) =>
+        prevKeywords.filter((currentKeyword) => currentKeyword !== keyword)
+      );
+    }
     setUserData((prevUserData) => ({
       ...prevUserData,
       isSaved: prevUserData.isSaved.filter((savedURL) => savedURL !== url),

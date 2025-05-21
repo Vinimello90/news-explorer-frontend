@@ -22,7 +22,7 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
   }, [userData, article]);
 
   function handleRemoveButton() {
-    onRemoveArticle(url);
+    onRemoveArticle({ url, keyword });
     setIsCardSaved(false);
   }
 
