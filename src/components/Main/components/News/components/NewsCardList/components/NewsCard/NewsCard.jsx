@@ -14,16 +14,19 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
   const [isCardSaved, setIsCardSaved] = useState(false);
 
   useEffect(() => {
-    setIsCardSaved(userData.isSaved.includes(article.url));
     setShowAnimation(true);
   }, []);
 
-  function handleFavoriteButton() {
-    if (isCardSaved) {
-      onRemoveArticle(url);
-      setIsCardSaved(false);
-      return;
-    }
+  useEffect(() => {
+    setIsCardSaved(userData.isSaved.includes(article.url));
+  }, [isLoggedIn]);
+
+  function handleRemoveButton() {
+    onRemoveArticle(url);
+    setIsCardSaved(false);
+  }
+
+  function handleSaveButton() {
     onSaveArticle({ article, keyword });
     setIsCardSaved(true);
   }
@@ -31,16 +34,17 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
   return (
     <li className={`card${showAnimation ? " card_visible" : ""} `}>
       <button
-        onClick={handleFavoriteButton}
+        onClick={!isCardSaved ? handleSaveButton : handleRemoveButton}
         type="button"
         className={`card__favorite-button${
           isCardSaved && !isOnSavedNews ? " card__favorite-button_saved" : ""
         }${isOnSavedNews ? " card__favorite-button_on_saved-news" : ""}${
-          isLoggedIn ? " card__favorite-button_active" : ""
+          isLoggedIn && !isOnSavedNews ? " card__favorite-button_active" : ""
         }`}
         disabled={!isLoggedIn}
       ></button>
       <Link className="card__link" to={url} target="_blank">
+        {isOnSavedNews && <p className="card__keyword">{keyword}</p>}
         <img
           src={urlToImage ? urlToImage : imageUnavailable}
           alt={`imagem do artigo ${title ? title : "Notícia relacionada"}`}
