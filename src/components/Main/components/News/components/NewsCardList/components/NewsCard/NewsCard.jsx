@@ -44,7 +44,7 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
         disabled={!isLoggedIn}
       ></button>
       <Link className="card__link" to={url} target="_blank">
-        {isOnSavedNews && <p className="card__keyword">{keyword}</p>}
+        {isOnSavedNews && <p className="card__keyword-label">{keyword}</p>}
         <img
           src={urlToImage ? urlToImage : imageUnavailable}
           alt={`imagem do artigo ${title ? title : "Notícia relacionada"}`}
