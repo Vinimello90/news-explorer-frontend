@@ -49,6 +49,7 @@
   cursor: pointer;
   background-color: #fff;
   font-weight: 500;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .card__favorite-button::before {
