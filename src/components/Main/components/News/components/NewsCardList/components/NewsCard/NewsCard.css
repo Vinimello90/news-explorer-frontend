@@ -67,7 +67,7 @@
   background-color: #fff;
   color: #1a1b22;
   content: "Faça login para salvar o artigo";
-  text-wrap: nowrap;
+  width: 162px;
   opacity: 0;
   pointer-events: none;
   transition: opacity ease-in 0.3s;
@@ -79,6 +79,8 @@
 
 .card__favorite-button_on_saved-news:before {
   content: "Remover dos salvos";
+  text-wrap: nowrap;
+  width: fit-content;
 }
 
 .card__favorite-button::after {
@@ -236,7 +238,8 @@
   }
 
   .card__favorite-button::before {
-    width: 180px;
+    width: fit-content;
+    text-wrap: nowrap;
     height: 40px;
     padding: 0 8px;
   }
@@ -276,10 +279,6 @@
 
 @media (pointer: coarse) {
   .card__favorite-button:hover::before {
-    opacity: 1;
-  }
-
-  .card__favorite-button:hover::after {
     opacity: 1;
   }
 }
