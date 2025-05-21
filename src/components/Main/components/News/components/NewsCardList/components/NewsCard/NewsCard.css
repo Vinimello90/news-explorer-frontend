@@ -175,7 +175,7 @@
     height: 150px;
   }
 
-  .card__keyword {
+  .card__keyword-label {
     top: 8px;
     left: 8px;
     padding: 8px 13px;
@@ -223,7 +223,7 @@
     height: 196px;
   }
 
-  .card__keyword {
+  .card__keyword-label {
     top: 16px;
     left: 16px;
     padding: 8px 13px;
