@@ -16,7 +16,7 @@ export function SavedNewsHeader() {
       <h2 className="saved-news-header__title">{`${currentUser}, você tem ${savedArticles.length} artigos salvos`}</h2>
       <p className="saved-news-header__keywords">
         {savedKeywords.length > 0 &&
-          `${savedKeywords.slice(0, 2).join(",")} e ${
+          `Por palavras-chave: ${savedKeywords.slice(0, 2).join(",")} e ${
             savedKeywords.slice(2, savedKeywords.length).length
           } outras`}
         {savedKeywords.length === 0 &&
