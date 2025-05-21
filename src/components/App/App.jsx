@@ -68,6 +68,19 @@ function App() {
     }
   }
 
+  function removeArticle(url) {
+    console.log(url);
+    setSavedNews((prevArticles) =>
+      prevArticles.filter(
+        (currentArticle) => currentArticle.article.url !== url
+      )
+    );
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      isSaved: prevUserData.isSaved.filter((savedURL) => savedURL !== url),
+    }));
+  }
+
   function signIn() {
     setIsLoggedIn(true);
   }
@@ -85,6 +98,7 @@ function App() {
         onSignIn: signIn,
         onLogout: logout,
         onSaveArticle: saveArticle,
+        onRemoveArticle: removeArticle,
         savedNews,
         savedKeywords,
         isLoggedIn,

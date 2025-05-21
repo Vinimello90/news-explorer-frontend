@@ -7,23 +7,25 @@ import { CurrentUserContext } from "../../../../../../../../../../../Sprint_18/w
 export function NewsCard({ isOnSavedNews, article, keyword }) {
   const { urlToImage, title, description, url, publishedAt, source } = article;
 
-  const { isLoggedIn, onSaveArticle, userData } =
+  const { onRemoveArticle, isLoggedIn, onSaveArticle, userData } =
     useContext(CurrentUserContext);
 
-  const isCardSaved = userData.isSaved.includes(article.url);
-
   const [showAnimation, setShowAnimation] = useState(false);
+  const [isCardSaved, setIsCardSaved] = useState(false);
 
   useEffect(() => {
+    setIsCardSaved(userData.isSaved.includes(article.url));
     setShowAnimation(true);
   }, []);
 
   function handleFavoriteButton() {
     if (isCardSaved) {
-      onRemoveArticle({ article });
+      onRemoveArticle(url);
+      setIsCardSaved(false);
       return;
     }
     onSaveArticle({ article, keyword });
+    setIsCardSaved(true);
   }
 
   return (
