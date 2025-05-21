@@ -7,10 +7,9 @@ import { getNews } from "../../utils/thirdPartyApi";
 import { PopupWithForm } from "../Main/components/PopupWithForm/PopupWithForm";
 import { getNewsStorage, setNewsStorage } from "../../utils/searchStorage";
 import { CurrentUserContext } from "../../../../../Sprint_18/web_project_api_full/frontend/src/contexts/CurrentUserContext";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { SavedNews } from "../Main/components/News/SavedNews";
-import { SavedNewsHeader } from "../Header/components/SavedNewsHeader/SavedNewsHeader";
 
 function App() {
   const [newsData, setNewsData] = useState("");
@@ -61,13 +60,23 @@ function App() {
     }
   }
 
+  function signIn() {
+    setIsLoggedIn(true);
+  }
+
+  function logout() {
+    setIsLoggedIn(false);
+  }
+
   return (
     <CurrentUserContext
       value={{
         currentUser: "Elise",
-        isLoggedIn,
+        onSignIn: signIn,
+        onLogout: logout,
         savedArticles,
         savedKeywords,
+        isLoggedIn,
       }}
     >
       <div className="page">

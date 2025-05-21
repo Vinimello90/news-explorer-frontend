@@ -1,21 +1,29 @@
+import "./NavBar.css";
 import { useContext } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { CurrentUserContext } from "../../../../../../../../Sprint_18/web_project_api_full/frontend/src/contexts/CurrentUserContext";
-import logoutIcon from "../../../../../images/logout.svg";
+import logoutIconDark from "../../../../../images/logout_dark.svg";
+import logoutIconLight from "../../../../../images/logout_light.svg";
 
 export function NavBar(props) {
   const {
     isSavedNews = false,
     onOpenPopup,
     onCloseMenu,
-    isMenuOpen = false,
+    isMenuOpen,
     isMobile = false,
   } = props;
 
-  const { isLoggedIn, currentUser } = useContext(CurrentUserContext);
+  const { isLoggedIn, currentUser, onLogout } = useContext(CurrentUserContext);
 
   function handleCloseMenu() {
     onCloseMenu();
+  }
+
+  function handleClickOutside(evt) {
+    if (evt.target.classList.contains("navbar_mb_overlay_active")) {
+      handleCloseMenu();
+    }
   }
 
   function handleOpenPopup() {
@@ -25,69 +33,66 @@ export function NavBar(props) {
     }
   }
 
+  function handleLogout() {
+    onLogout();
+  }
+
+  const getLinkClass = (isActive) =>
+    `navbar__link${isActive ? " navbar__link_active" : ""}${
+      isMobile ? " navbar__link_mb" : ""
+    }`;
+
+  const navClass = `navbar navbar_mb${
+    isMenuOpen && isMobile ? " navbar_mb_overlay_active" : ""
+  }`;
+
+  const menuClass = `navbar__menu navbar__menu_mb${
+    isMenuOpen && isMobile ? " navbar__menu_mb_opened" : ""
+  }`;
+
+  const buttonClass = `navbar__button${
+    isLoggedIn ? " navbar__button_logout" : ""
+  }${isMobile ? " navbar__button_mb" : ""}`;
+
   return (
-    <nav
-      className={
-        isMobile // Adiciona os estilos para tela menor e ativer o efeito ao abrir o menu de hambúrguer
-          ? `navigation__menu navigation__menu_mb${
-              isMenuOpen ? " navigation__menu_mb_open" : ""
-            }`
-          : "navigation__menu"
-      }
-    >
-      <ul className="navigation__menu-list">
-        <li className="navigation__menu-item">
+    <nav onClick={handleClickOutside} className={navClass}>
+      <ul className={menuClass}>
+        <li className="navbar__menu-item">
           <NavLink
             onClick={handleCloseMenu}
             to="/"
-            className={({ isActive }) =>
-              isActive
-                ? "navigation__link navigation__link_active"
-                : "navigation__link"
-            }
+            className={({ isActive }) => getLinkClass(isActive)}
           >
             Início
           </NavLink>
         </li>
-        <li className="navigation__menu-item">
-          <NavLink
-            onClick={handleCloseMenu}
-            to="/saved-news"
-            className={({ isActive }) =>
-              isActive
-                ? `navigation__link navigation__link_active${
-                    isSavedNews ? " navigation__link_active_saved-news" : ""
-                  }`
-                : "navigation__link"
-            }
+
+        {isLoggedIn && (
+          <li className="navbar__menu-item">
+            <NavLink
+              onClick={handleCloseMenu}
+              to="/saved-news"
+              className={({ isActive }) => getLinkClass(isActive)}
+            >
+              Artigos salvos
+            </NavLink>
+          </li>
+        )}
+
+        <li className="navbar__menu-item">
+          <button
+            onClick={!isLoggedIn ? handleOpenPopup : handleLogout}
+            className={buttonClass}
           >
-            Artigos salvos
-          </NavLink>
-        </li>
-        <li className="navigation__menu-item">
-          {!isLoggedIn && (
-            <button
-              onClick={handleOpenPopup}
-              type="button"
-              className={`navigation__button navigation__button_signin${
-                isMobile ? " navigation__button_signin_mb" : ""
-              }`}
-            >
-              Entrar
-            </button>
-          )}
-          {isLoggedIn && (
-            <button
-              onClick={handleOpenPopup}
-              type="button"
-              className={`navigation__button navigation__button_logout${
-                isMobile ? " navigation__button_logout_mb" : ""
-              }`}
-            >
-              {`${currentUser}`}
-              <img className="navigation_logout-icon" src={logoutIcon} alt="" />
-            </button>
-          )}
+            {!isLoggedIn ? "Entre" : currentUser}
+            {isLoggedIn && (
+              <img
+                src={isSavedNews ? logoutIconLight : logoutIconDark}
+                alt="Sair"
+                className="navbar__logout-icon"
+              />
+            )}
+          </button>
         </li>
       </ul>
     </nav>
