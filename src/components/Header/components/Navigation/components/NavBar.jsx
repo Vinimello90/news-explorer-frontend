@@ -17,7 +17,9 @@ export function NavBar(props) {
   const { isLoggedIn, currentUser, onLogout } = useContext(CurrentUserContext);
 
   function handleCloseMenu() {
-    onCloseMenu();
+    if (isMobile) {
+      onCloseMenu();
+    }
   }
 
   function handleClickOutside(evt) {
