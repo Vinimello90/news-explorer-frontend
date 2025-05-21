@@ -23,7 +23,7 @@ export function NewsCardList({ newsData }) {
     if (isOnSavedNews) {
       setCardsLimit(isOnSavedNews.length);
     }
-  }, []);
+  }, [isOnSavedNews]);
 
   if (articles?.length > 0 || savedNews?.length > 0) {
     return (

@@ -19,7 +19,7 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
 
   useEffect(() => {
     setIsCardSaved(userData.isSaved.includes(article.url));
-  }, [isLoggedIn]);
+  }, [userData, article]);
 
   function handleRemoveButton() {
     onRemoveArticle(url);

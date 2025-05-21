@@ -18,7 +18,7 @@ export function News({
       searchRef.current.scrollIntoView({ behavior: "smooth" });
       setIsFreshSearch(false);
     }
-  }, [newsData, isLocalData]);
+  }, [newsData, isLocalData, isFreshSearch, setIsFreshSearch]);
 
   return (
     <section ref={searchRef} className="news">
