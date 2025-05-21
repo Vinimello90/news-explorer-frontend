@@ -37,17 +37,27 @@
   justify-content: center;
   position: absolute;
   border-radius: 10px;
+  padding: 0 10.84px;
   font-size: 12px;
   top: 0;
   right: 45px;
-  width: 182px;
-  height: 42px;
+  width: fit-content;
+  height: 40px;
   background-color: #fff;
   color: #1a1b22;
   content: "Faça login para salvar o artigo";
+  text-wrap: nowrap;
   opacity: 0;
   pointer-events: none;
   transition: opacity ease-in 0.3s;
+}
+
+.card__favorite-button_active::before {
+  display: none;
+}
+
+.card__favorite-button_on_saved-news:before {
+  content: "Remover dos salvos";
 }
 
 .card__favorite-button::after {
@@ -63,9 +73,14 @@
   transition: opacity ease-in 0.3s;
 }
 
-.card__favorite-button_active::after {
+.card__favorite-button_saved::after {
   background-image: url("../../../../../../../../images/bookmark_active.svg");
   opacity: 1;
+}
+
+.card__favorite-button_on_saved-news:after {
+  background-image: url("../../../../../../../../images/remove-icon.svg");
+  background-size: 18px 19px;
 }
 
 .card__link {

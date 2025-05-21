@@ -14,7 +14,7 @@ export function NavBar(props) {
     isMobile = false,
   } = props;
 
-  const { isLoggedIn, currentUser, onLogout } = useContext(CurrentUserContext);
+  const { isLoggedIn, userData, onLogout } = useContext(CurrentUserContext);
 
   function handleCloseMenu() {
     if (isMobile) {
@@ -86,7 +86,7 @@ export function NavBar(props) {
             onClick={!isLoggedIn ? handleOpenPopup : handleLogout}
             className={buttonClass}
           >
-            {!isLoggedIn ? "Entre" : currentUser}
+            {!isLoggedIn ? "Entre" : userData.name}
             {isLoggedIn && (
               <img
                 src={isSavedNews ? logoutIconLight : logoutIconDark}

@@ -1,10 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./NewsCard.css";
 import { Link } from "react-router-dom";
 import imageUnavailable from "../../../../../../../../images/no-image.jpg";
+import { CurrentUserContext } from "../../../../../../../../../../../Sprint_18/web_project_api_full/frontend/src/contexts/CurrentUserContext";
 
-export function NewsCard({ article }) {
+export function NewsCard({ isOnSavedNews, article, keyword }) {
   const { urlToImage, title, description, url, publishedAt, source } = article;
+
+  const { isLoggedIn, onSaveArticle, userData } =
+    useContext(CurrentUserContext);
+
+  const isCardSaved = userData.isSaved.includes(article.url);
 
   const [showAnimation, setShowAnimation] = useState(false);
 
@@ -12,9 +18,26 @@ export function NewsCard({ article }) {
     setShowAnimation(true);
   }, []);
 
+  function handleFavoriteButton() {
+    if (isCardSaved) {
+      onRemoveArticle({ article });
+      return;
+    }
+    onSaveArticle({ article, keyword });
+  }
+
   return (
     <li className={`card${showAnimation ? " card_visible" : ""} `}>
-      <button type="button" className="card__favorite-button"></button>
+      <button
+        onClick={handleFavoriteButton}
+        type="button"
+        className={`card__favorite-button${
+          isCardSaved && !isOnSavedNews ? " card__favorite-button_saved" : ""
+        }${isOnSavedNews ? " card__favorite-button_on_saved-news" : ""}${
+          isLoggedIn ? " card__favorite-button_active" : ""
+        }`}
+        disabled={!isLoggedIn}
+      ></button>
       <Link className="card__link" to={url} target="_blank">
         <img
           src={urlToImage ? urlToImage : imageUnavailable}

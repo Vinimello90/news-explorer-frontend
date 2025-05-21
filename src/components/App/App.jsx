@@ -18,13 +18,10 @@ function App() {
   const [isSearching, setIsSearching] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [isLocalData, setIsLocalData] = useState(false); // Desativa o scroll automatico para a seção news ao renderizar os cards.
-  const [savedArticles, setSavedArticles] = useState([5, 5, 5, 5, 5]);
-  const [savedKeywords, setSavedKeywords] = useState([
-    "Natureza",
-    "Yellowstone",
-    "dasdas",
-    "dsadasdas",
-  ]);
+  const [isFreshSearch, setIsFreshSearch] = useState(false); // Desativa o scroll automatico para a seção news ao retornar de outra rota.
+  const [savedNews, setSavedNews] = useState([]);
+  const [savedKeywords, setSavedKeywords] = useState([]);
+  const [userData, setUserData] = useState({ name: "Elise", isSaved: [] });
 
   useEffect(() => {
     const latestResults = JSON.parse(getNewsStorage());
@@ -47,6 +44,7 @@ function App() {
     try {
       setIsSearching(true);
       setShowResults(true);
+      setIsFreshSearch(true);
       const { articles } = await getNews(keyword);
       setNewsData({ articles, keyword });
       setNewsStorage({ articles, keyword });
@@ -59,7 +57,12 @@ function App() {
   }
 
   function saveArticle(articleData) {
-    setSavedArticles((prevState) => [...prevState, articleData.article]);
+    setSavedNews((prevState) => [articleData, ...prevState]);
+    setUserData((prev) => ({
+      ...prev,
+      isSaved: [...prev.isSaved, articleData.article.url],
+    }));
+
     if (!savedKeywords.includes(articleData.keyword)) {
       setSavedKeywords((prevState) => [...prevState, articleData.keyword]);
     }
@@ -71,15 +74,18 @@ function App() {
 
   function logout() {
     setIsLoggedIn(false);
+    setSavedNews([]);
+    setUserData({ name: "Elise", isSaved: [] });
   }
 
   return (
     <CurrentUserContext
       value={{
-        currentUser: "Elise",
+        userData,
         onSignIn: signIn,
         onLogout: logout,
-        savedArticles,
+        onSaveArticle: saveArticle,
+        savedNews,
         savedKeywords,
         isLoggedIn,
       }}
@@ -100,6 +106,8 @@ function App() {
                 isSearching={isSearching}
                 showResults={showResults}
                 newsData={newsData}
+                isFreshSearch={isFreshSearch}
+                setIsFreshSearch={setIsFreshSearch}
               />
             }
           ></Route>
