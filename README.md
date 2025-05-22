@@ -68,7 +68,7 @@ Incluí um botão hamburguer na barra de navegação para telas menores.
 
 Utilizei **React** com **JSX**, separando o código em componentes para melhor organização e reaproveitamento.
 
-- **Popup para login e cadastro** – Implementei o `onClick()` para manipular o estado das popups com `useState()`. Usei `useEffect()` para adicionar um ouvinte de evento `keydown` e permitir fechar a popup com a tecla "esc", e o removi com `removeEventListener()` ao desmontar.
+- **Popup para login e cadastro** – Implementei o `onClick()` para manipular o estado das popups com `useState()`. Usei `useEffect()` para adicionar um ouvinte de evento `keydown` e permitir fechar a popup com a tecla "esc", e o removi com `removeEventListener()` ao desmontar, utilizando `onChange()` e `onSubmit()` os dados são salvo temporariamente em um estado do `useState()`, permitindo fazer o login e salvar temporariamente os artigos, que serão perdidos ao atualizar a página (será possivel persistir os dados ao finalizar o backend).
 
   <img src="./src/images/screenshot_signup.png" alt="Captura de tela do cadastro" width="49.4%"> <img src="./src/images/screenshot_signin.png" alt="Captura de tela do login" width="49.4%">
 

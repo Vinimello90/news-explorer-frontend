@@ -25,40 +25,24 @@ export function NewsCardList({ newsData }) {
     }
   }, [isOnSavedNews]);
 
-  if (articles?.length > 0 || savedNews?.length > 0) {
+  if (!articles && !isOnSavedNews) {
     return (
       <>
-        {!isOnSavedNews && (
-          <h2 className="news__title">{`Resultados encontrados para "${keyword}"`}</h2>
-        )}
-        <ul className="news__card-list">
-          {(!isOnSavedNews ? articles : savedNews)
-            .slice(0, cardsLimit)
-            .map((news) => {
-              return (
-                <NewsCard
-                  key={!isOnSavedNews ? news.url : news.article.url}
-                  article={!isOnSavedNews ? news : news.article}
-                  keyword={!isOnSavedNews ? keyword : news.keyword}
-                  isOnSavedNews={isOnSavedNews}
-                />
-              );
-            })}
-        </ul>
-        {cardsLimit < articles?.length && (
-          <button
-            onClick={handleClickButton}
-            type="button"
-            className="news__button"
-          >
-            Mostrar mais
-          </button>
-        )}
+        <img className="news__not-found-image" src={notFound} alt="" />
+        <h2 className="news__not-found-title">Ocorreu um erro</h2>
+        <p className="news__not-found-content">
+          Desculpe, algo deu errado durante a solicitação. Pode haver um
+          problema de conexão ou o servidor pode estar inativo. Por favor, tente
+          novamente mais tarde.
+        </p>
       </>
     );
   }
 
-  if (articles?.length === 0 || savedNews?.length === 0) {
+  if (
+    (!isOnSavedNews && articles?.length === 0) ||
+    (isOnSavedNews && savedNews?.length === 0)
+  ) {
     return (
       <>
         <img className="news__not-found-image" src={notFound} alt="" />
@@ -76,13 +60,32 @@ export function NewsCardList({ newsData }) {
 
   return (
     <>
-      <img className="news__not-found-image" src={notFound} alt="" />
-      <h2 className="news__not-found-title">Ocorreu um erro</h2>
-      <p className="news__not-found-content">
-        Desculpe, algo deu errado durante a solicitação. Pode haver um problema
-        de conexão ou o servidor pode estar inativo. Por favor, tente novamente
-        mais tarde.
-      </p>
+      {!isOnSavedNews && (
+        <h2 className="news__title">{`Resultados encontrados para "${keyword}"`}</h2>
+      )}
+      <ul className="news__card-list">
+        {(!isOnSavedNews ? articles : savedNews)
+          .slice(0, cardsLimit)
+          .map((news) => {
+            return (
+              <NewsCard
+                key={!isOnSavedNews ? news.url : news.article.url}
+                article={!isOnSavedNews ? news : news.article}
+                keyword={!isOnSavedNews ? keyword : news.keyword}
+                isOnSavedNews={isOnSavedNews}
+              />
+            );
+          })}
+      </ul>
+      {cardsLimit < articles?.length && (
+        <button
+          onClick={handleClickButton}
+          type="button"
+          className="news__button"
+        >
+          Mostrar mais
+        </button>
+      )}
     </>
   );
 }

@@ -13,8 +13,8 @@ export function News({
   const searchRef = useRef();
 
   useEffect(() => {
-    // Faz o scroll automático ao renderizar os cards somente se os dados não vierem do localStorage
-    if (newsData.articles?.length > 0 && !isLocalData && isFreshSearch) {
+    // Faz o scroll automático ao renderizar os cards, somente se os dados não vierem do localStorage ou mudar de rota
+    if (newsData?.articles?.length > 0 && !isLocalData && isFreshSearch) {
       searchRef.current.scrollIntoView({ behavior: "smooth" });
       setIsFreshSearch(false);
     }
