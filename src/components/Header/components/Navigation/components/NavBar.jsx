@@ -86,7 +86,7 @@ export function NavBar(props) {
             onClick={!isLoggedIn ? handleOpenPopup : handleLogout}
             className={buttonClass}
           >
-            {!isLoggedIn ? "Entre" : userData.name}
+            {!isLoggedIn ? "Entre" : userData.username}
             {isLoggedIn && (
               <img
                 src={isSavedNews ? logoutIconLight : logoutIconDark}

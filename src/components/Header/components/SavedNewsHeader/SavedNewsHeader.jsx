@@ -11,9 +11,11 @@ export function SavedNewsHeader() {
     <section className="saved-news-header">
       <p className="saved-news-header__text">Artigos salvos</p>
 
-      <h2 className="saved-news-header__title">{`${userData.name}, você tem ${
-        savedNews.length
-      } ${savedNews.length === 1 ? "artigo salvo" : "artigos salvos"}`}</h2>
+      <h2 className="saved-news-header__title">{`${
+        userData.username
+      }, você tem ${savedNews.length} ${
+        savedNews.length === 1 ? "artigo salvo" : "artigos salvos"
+      }`}</h2>
 
       <p className="saved-news-header__keywords">
         {totalKeywords > 0 &&
