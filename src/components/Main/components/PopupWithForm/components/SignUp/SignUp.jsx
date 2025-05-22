@@ -64,6 +64,7 @@ export function SignUp(props) {
             placeholder="Insira a senha"
             value={inputValues.password}
             spellCheck={false}
+            minLength={8}
             autoComplete="new-password"
             required
           />
@@ -86,9 +87,10 @@ export function SignUp(props) {
               errorMsg?.username ? " popup__input_error" : ""
             }`}
             placeholder="Insira um nome de usário"
-            minLength={2}
             value={inputValues.username}
             spellCheck={false}
+            minLength={2}
+            maxLength={10}
             autoComplete="new-username"
             required
           />
