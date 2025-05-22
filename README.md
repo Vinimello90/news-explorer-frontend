@@ -2,7 +2,7 @@
 
 O projeto **NewsExplorer** foi um aplicativo web que desenvolvi para permitir que usuários pesquisassem notícias sobre qualquer tema e salvassem os artigos de interesse em suas contas. Criei um layout responsivo que se adaptava a diferentes tamanhos de tela por meio de **unidades de medida relativas** e **media queries**, ajustando o design conforme os pontos de interrupção para garantir uma aparência consistente. Desenvolvi o projeto utilizando **React**, estruturando-o em componentes **JSX (JavaScript XML)**, com uma **API** de terceiros fornecendo as notícias.
 
-**É possivel fazer o cadastro, login e salvar os artigos temporariamente, os dados só irão persistir ao finalizar o desenvolvimento o back-end. Confira o projeto em funcionamento clicando [aqui]().**
+**É possivel fazer o cadastro, login e salvar os artigos temporariamente, os dados só irão persistir ao finalizar o desenvolvimento o back-end. Confira o projeto em funcionamento clicando [aqui](https://vbmnewsexplorer.netlify.app/).**
 
 <p align='center'><img src="./src/images/screenshot_fullpage.png" alt="Captura de tela do projeto NewsExplorer" width='45%' /></p>
 
