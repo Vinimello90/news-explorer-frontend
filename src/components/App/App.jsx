@@ -24,6 +24,7 @@ function App() {
   const [userData, setUserData] = useState({
     username: "",
     password: "",
+    email: "",
     isSaved: [],
   });
 
@@ -95,10 +96,12 @@ function App() {
 
   // Lógica vai ser refatorada ao finalizar o backend
   async function handleSignIn(user) {
+    console.log(userData);
     if (user.email !== userData.email || user.password !== userData.password) {
       return Promise.reject({ message: "Nome de usuário ou senha inválida!" });
     } else {
       setIsLoggedIn(true);
+      setIsPopupOpen(false);
     }
   }
 
@@ -108,18 +111,13 @@ function App() {
       ...prevUserData,
       username: user.username,
       password: user.password,
+      email: user.email,
     }));
   }
 
   // Lógica vai ser refatorada ao finalizar o backend
   function handleLogout() {
     setIsLoggedIn(false);
-    setSavedNews([]);
-    setUserData({
-      username: "",
-      password: "",
-      isSaved: [],
-    });
   }
 
   return (

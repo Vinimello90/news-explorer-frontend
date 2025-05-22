@@ -18,8 +18,12 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
   }, []);
 
   useEffect(() => {
-    setIsCardSaved(userData.isSaved.includes(article.url));
-  }, [userData, article]);
+    if (isLoggedIn) {
+      setIsCardSaved(userData.isSaved.includes(article.url));
+      return;
+    }
+    setIsCardSaved(false); // remove o icone do bookmark ativo sem apagar os dados temporarios
+  }, [isLoggedIn, userData, article]);
 
   function handleRemoveButton() {
     onRemoveArticle({ url, keyword });
