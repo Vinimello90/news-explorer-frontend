@@ -13,7 +13,7 @@ import { SavedNews } from "../Main/components/News/SavedNews";
 
 function App() {
   const [newsData, setNewsData] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [showResults, setShowResults] = useState(false);
@@ -56,6 +56,7 @@ function App() {
     }
   }
 
+  //Lógica vai refatorada ao finalizar o backend
   function saveArticle(articleData) {
     setSavedNews((prevState) => [articleData, ...prevState]);
     setUserData((prev) => ({
@@ -67,6 +68,7 @@ function App() {
     }
   }
 
+  // Lógica vai refatorada ao finalizar o backend
   function removeArticle({ url, keyword }) {
     const updatedArticles = savedNews.filter(
       (currentArticle) => currentArticle.article.url !== url
@@ -75,6 +77,7 @@ function App() {
     const keywordExists = updatedArticles.some((article) =>
       article.keyword.includes(keyword)
     );
+    // Verifica se a palavra-chave existe ainda antes de remover
     if (!keywordExists) {
       setSavedKeywords((prevKeywords) =>
         prevKeywords.filter((currentKeyword) => currentKeyword !== keyword)
@@ -86,10 +89,17 @@ function App() {
     }));
   }
 
+  // Lógica vai refatorada ao finalizar o backend
   function signIn() {
     setIsLoggedIn(true);
   }
 
+  /// Lógica vai refatorada ao finalizar o backend
+  function signUp(user) {
+    setUserData();
+  }
+
+  // Lógica vai refatorada ao finalizar o backend
   function logout() {
     setIsLoggedIn(false);
     setSavedNews([]);

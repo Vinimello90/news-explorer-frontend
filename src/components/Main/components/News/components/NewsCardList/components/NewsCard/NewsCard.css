@@ -281,4 +281,12 @@
   .card__favorite-button:hover::before {
     opacity: 1;
   }
+
+  .card__favorite-button:active {
+    opacity: 1;
+  }
+
+  .card__favorite-button_on_saved-news:before {
+    display: none;
+  }
 }
