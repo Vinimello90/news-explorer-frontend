@@ -28,6 +28,7 @@
 .popup__button {
   border: none;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .popup__button:disabled {
@@ -175,8 +176,8 @@
   transition: color linear 0.3s;
 }
 
-.popup__button_goto {
-  -webkit-tap-highlight-color: transparent;
+.popup__button_goto-signin {
+  font-size: 18px;
 }
 
 @media screen and (max-width: 544px) {

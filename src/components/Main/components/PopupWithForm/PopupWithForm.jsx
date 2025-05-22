@@ -1,15 +1,18 @@
 import "./PopupWithForm.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SignIn } from "./components/SignIn/SignIn";
 import { SignUp } from "./components/SignUp/SignUp";
 import FormValidator from "../../../../utils/FormValidator";
+import { CurrentUserContext } from "../../../../../../../Sprint_18/web_project_api_full/frontend/src/contexts/CurrentUserContext";
 
-export function PopupWithForm({ onClosePopup }) {
+export function PopupWithForm({ onClosePopup, error }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isSignup, setIsSignup] = useState(false);
+  const [currentPopup, setCurrentPopup] = useState("signin");
   const [errorMsg, setErrorMsg] = useState();
   const [buttonDisabled, setbuttonDisabled] = useState(true);
   const [formValidator, setFormValidator] = useState();
+
+  const { onSignUp, onSignIn } = useContext(CurrentUserContext);
 
   useEffect(() => {
     const formValidator = new FormValidator({
@@ -32,7 +35,7 @@ export function PopupWithForm({ onClosePopup }) {
     });
     setFormValidator(formValidator);
     formValidator.validateForm();
-  }, [isSignup]);
+  }, [currentPopup]);
 
   useEffect(() => {
     setIsOpen(true);
@@ -55,13 +58,27 @@ export function PopupWithForm({ onClosePopup }) {
     onClosePopup();
   }
 
-  function handleSignupClick() {
-    setIsSignup(!isSignup);
+  function handleGoToSignIn() {
+    setCurrentPopup("signin");
     setErrorMsg("");
   }
 
-  function handleSubmit(user) {
-    setErrorMsg(user);
+  function handleGoToSignUp() {
+    setCurrentPopup("signup");
+    setErrorMsg("");
+  }
+
+  async function handleSignUpSubmit(user) {
+    onSignUp(user);
+    setCurrentPopup("success");
+  }
+
+  async function handleSignInSubmit(user) {
+    try {
+      await onSignIn(user);
+    } catch (err) {
+      setErrorMsg({ submit: err.message });
+    }
   }
 
   return (
@@ -75,34 +92,53 @@ export function PopupWithForm({ onClosePopup }) {
           className="popup__button popup__close_button"
         ></button>
         <h2 className="popup__title">
-          {!isSignup ? "Entrar" : "Inscrever-se"}
+          {currentPopup === "signin" && "Entrar"}
+          {currentPopup === "signup" && "Inscrever-se"}
+          {currentPopup === "success" && "Cadastro concluído com sucesso!"}
         </h2>
-        {!isSignup && (
+
+        {currentPopup === "signin" && (
           <SignIn
             formValidator={formValidator}
             buttonDisabled={buttonDisabled}
             errorMsg={errorMsg}
-            onSubmit={handleSubmit}
+            onSubmit={handleSignInSubmit}
           />
         )}
-        {isSignup && (
+
+        {currentPopup === "signup" && (
           <SignUp
             formValidator={formValidator}
             buttonDisabled={buttonDisabled}
             errorMsg={errorMsg}
-            onSubmit={handleSubmit}
+            onSubmit={handleSignUpSubmit}
           />
         )}
-        <p className="popup__signup-text">
-          ou{" "}
+
+        {currentPopup === "success" && (
           <button
-            onClick={handleSignupClick}
+            onClick={handleGoToSignIn}
             type="button"
-            className="popup__button popup__button_goto"
+            className="popup__button popup__button_goto popup__button_goto_signin"
           >
-            {isSignup ? "Entrar" : "Inscrever-se"}
+            Entrar
           </button>
-        </p>
+        )}
+
+        {currentPopup !== "success" && (
+          <p className="popup__signup-text">
+            ou{" "}
+            <button
+              onClick={
+                currentPopup === "signin" ? handleGoToSignUp : handleGoToSignIn
+              }
+              type="button"
+              className="popup__button popup__button_goto"
+            >
+              {currentPopup === "signin" ? "Inscrever-se" : "Entrar"}
+            </button>
+          </p>
+        )}
       </div>
     </div>
   );

@@ -21,9 +21,7 @@ export function SignUp(props) {
 
   function handleSubmitButton(evt) {
     evt.preventDefault();
-    onSubmit({
-      submit: "Não é possivel cadastrar, backend em desenvolvimento",
-    });
+    onSubmit(inputValues);
   }
 
   return (

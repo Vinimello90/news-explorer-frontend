@@ -13,7 +13,7 @@ import { SavedNews } from "../Main/components/News/SavedNews";
 
 function App() {
   const [newsData, setNewsData] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [showResults, setShowResults] = useState(false);
@@ -21,7 +21,12 @@ function App() {
   const [isFreshSearch, setIsFreshSearch] = useState(false); // Desativa o scroll automatico para a seção news ao retornar de outra rota.
   const [savedNews, setSavedNews] = useState([]);
   const [savedKeywords, setSavedKeywords] = useState([]);
-  const [userData, setUserData] = useState({ name: "Elise", isSaved: [] });
+  const [userData, setUserData] = useState({
+    username: "",
+    password: "",
+    email: "",
+    isSaved: [],
+  });
 
   useEffect(() => {
     const latestResults = JSON.parse(getNewsStorage());
@@ -56,7 +61,8 @@ function App() {
     }
   }
 
-  function saveArticle(articleData) {
+  //Lógica vai ser refatorada ao finalizar o backend
+  function handleSaveArticle(articleData) {
     setSavedNews((prevState) => [articleData, ...prevState]);
     setUserData((prev) => ({
       ...prev,
@@ -67,7 +73,8 @@ function App() {
     }
   }
 
-  function removeArticle({ url, keyword }) {
+  // Lógica vai ser refatorada ao finalizar o backend
+  function handleRemoveArticle({ url, keyword }) {
     const updatedArticles = savedNews.filter(
       (currentArticle) => currentArticle.article.url !== url
     );
@@ -75,6 +82,7 @@ function App() {
     const keywordExists = updatedArticles.some((article) =>
       article.keyword.includes(keyword)
     );
+    // Verifica se a palavra-chave existe ainda antes de remover
     if (!keywordExists) {
       setSavedKeywords((prevKeywords) =>
         prevKeywords.filter((currentKeyword) => currentKeyword !== keyword)
@@ -86,24 +94,41 @@ function App() {
     }));
   }
 
-  function signIn() {
-    setIsLoggedIn(true);
+  // Lógica vai ser refatorada ao finalizar o backend
+  async function handleSignIn(user) {
+    console.log(userData);
+    if (user.email !== userData.email || user.password !== userData.password) {
+      return Promise.reject({ message: "Nome de usuário ou senha inválida!" });
+    } else {
+      setIsLoggedIn(true);
+      setIsPopupOpen(false);
+    }
   }
 
-  function logout() {
+  /// Lógica vai ser refatorada ao finalizar o backend
+  function handleSignUp(user) {
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      username: user.username,
+      password: user.password,
+      email: user.email,
+    }));
+  }
+
+  // Lógica vai ser refatorada ao finalizar o backend
+  function handleLogout() {
     setIsLoggedIn(false);
-    setSavedNews([]);
-    setUserData({ name: "Elise", isSaved: [] });
   }
 
   return (
     <CurrentUserContext
       value={{
         userData,
-        onSignIn: signIn,
-        onLogout: logout,
-        onSaveArticle: saveArticle,
-        onRemoveArticle: removeArticle,
+        onSignIn: handleSignIn,
+        onSignUp: handleSignUp,
+        onLogout: handleLogout,
+        onSaveArticle: handleSaveArticle,
+        onRemoveArticle: handleRemoveArticle,
         savedNews,
         savedKeywords,
         isLoggedIn,
