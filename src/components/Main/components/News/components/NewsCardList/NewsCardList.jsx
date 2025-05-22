@@ -3,7 +3,7 @@ import { NewsCard } from "./components/NewsCard/NewsCard";
 import notFound from "../../../../../../images/not-found_v1.svg";
 import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { CurrentUserContext } from "../../../../../../../../../Sprint_18/web_project_api_full/frontend/src/contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../../../../../contexts/CurrentUserContext";
 
 export function NewsCardList({ newsData }) {
   const [cardsLimit, setCardsLimit] = useState(3);

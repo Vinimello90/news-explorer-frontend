@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { SignIn } from "./components/SignIn/SignIn";
 import { SignUp } from "./components/SignUp/SignUp";
 import FormValidator from "../../../../utils/FormValidator";
-import { CurrentUserContext } from "../../../../../../../Sprint_18/web_project_api_full/frontend/src/contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../../../contexts/CurrentUserContext";
 
 export function PopupWithForm({ onClosePopup }) {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,7 +1,7 @@
 import "./SavedNews.css";
 import { useContext } from "react";
 import { NewsCardList } from "./components/NewsCardList/NewsCardList";
-import { CurrentUserContext } from "../../../../../../../Sprint_18/web_project_api_full/frontend/src/contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../../../contexts/CurrentUserContext";
 
 export function SavedNews() {
   const { savedNews } = useContext(CurrentUserContext);

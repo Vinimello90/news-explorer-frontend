@@ -1,9 +1,9 @@
 import "./NavBar.css";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { CurrentUserContext } from "../../../../../../../../Sprint_18/web_project_api_full/frontend/src/contexts/CurrentUserContext";
 import logoutIconDark from "../../../../../images/logout_dark.svg";
 import logoutIconLight from "../../../../../images/logout_light.svg";
+import { CurrentUserContext } from "../../../../../contexts/CurrentUserContext";
 
 export function NavBar(props) {
   const {
