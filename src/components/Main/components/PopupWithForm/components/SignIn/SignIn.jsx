@@ -18,9 +18,7 @@ export function SignIn({ formValidator, buttonDisabled, errorMsg, onSubmit }) {
 
   function handleSubmitButton(evt) {
     evt.preventDefault();
-    onSubmit({
-      submit: "Não é possivel fazer o login, backend em desenvolvimento",
-    });
+    onSubmit(inputValues);
   }
 
   return (

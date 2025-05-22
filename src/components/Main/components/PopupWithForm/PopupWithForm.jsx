@@ -1,15 +1,18 @@
 import "./PopupWithForm.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SignIn } from "./components/SignIn/SignIn";
 import { SignUp } from "./components/SignUp/SignUp";
 import FormValidator from "../../../../utils/FormValidator";
+import { CurrentUserContext } from "../../../../../../../Sprint_18/web_project_api_full/frontend/src/contexts/CurrentUserContext";
 
-export function PopupWithForm({ onClosePopup }) {
+export function PopupWithForm({ onClosePopup, error }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
   const [errorMsg, setErrorMsg] = useState();
   const [buttonDisabled, setbuttonDisabled] = useState(true);
   const [formValidator, setFormValidator] = useState();
+
+  const { onSignUp, onSignIn } = useContext(CurrentUserContext);
 
   useEffect(() => {
     const formValidator = new FormValidator({
@@ -60,8 +63,16 @@ export function PopupWithForm({ onClosePopup }) {
     setErrorMsg("");
   }
 
-  function handleSubmit(user) {
-    setErrorMsg(user);
+  async function handleSignUpSubmit(user) {
+    onSignUp(user);
+  }
+
+  async function handleSignInSubmit(user) {
+    try {
+      await onSignIn(user);
+    } catch (err) {
+      setErrorMsg({ submit: err.message });
+    }
   }
 
   return (
@@ -82,7 +93,7 @@ export function PopupWithForm({ onClosePopup }) {
             formValidator={formValidator}
             buttonDisabled={buttonDisabled}
             errorMsg={errorMsg}
-            onSubmit={handleSubmit}
+            onSubmit={handleSignInSubmit}
           />
         )}
         {isSignup && (
@@ -90,7 +101,7 @@ export function PopupWithForm({ onClosePopup }) {
             formValidator={formValidator}
             buttonDisabled={buttonDisabled}
             errorMsg={errorMsg}
-            onSubmit={handleSubmit}
+            onSubmit={handleSignUpSubmit}
           />
         )}
         <p className="popup__signup-text">
