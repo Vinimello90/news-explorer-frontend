@@ -45,6 +45,7 @@ function App() {
     setIsPopupOpen(false);
   }
 
+  // garante que o scroll automatico funcione corretamente
   async function fetchNews(keyword) {
     return await getNews(keyword);
   }
