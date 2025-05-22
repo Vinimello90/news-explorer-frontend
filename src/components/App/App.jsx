@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { getNews } from "../../utils/thirdPartyApi";
 import { PopupWithForm } from "../Main/components/PopupWithForm/PopupWithForm";
 import { getNewsStorage, setNewsStorage } from "../../utils/searchStorage";
-import { CurrentUserContext } from "../../../../../Sprint_18/web_project_api_full/frontend/src/contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { Route, Routes } from "react-router-dom";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { SavedNews } from "../Main/components/News/SavedNews";
