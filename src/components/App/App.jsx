@@ -115,7 +115,11 @@ function App() {
   function handleLogout() {
     setIsLoggedIn(false);
     setSavedNews([]);
-    setUserData();
+    setUserData({
+      username: "",
+      password: "",
+      isSaved: [],
+    });
   }
 
   return (
