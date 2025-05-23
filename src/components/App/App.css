@@ -1,2 +1,14 @@
 @import url("../../vendor/normalize.css");
 @import url("../../vendor/fonts.css");
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  line-height: 1.33;
+  overflow: auto;
+  scroll-behavior: smooth;
+  color: #1a1b22;
+}

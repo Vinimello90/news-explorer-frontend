@@ -1,0 +1,291 @@
+.card {
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+  height: 576px;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #fff;
+  font-size: 0;
+  opacity: 0;
+  transform: translatey(5%) scale(1);
+  box-shadow: 0px 0px 5px 2px #ffffff00;
+  transition: box-shadow ease 0.3s, opacity ease 0.3s, transform ease 0.3s;
+}
+
+.card_visible {
+  opacity: 1;
+  transform: translatey(0);
+}
+
+.card__keyword-label {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  background: #fff;
+  color: #1a1b22;
+  font-size: 14px;
+  max-width: 105px;
+  padding: 8px 15px;
+  border-radius: 8px;
+  margin: 0;
+  line-height: 1.715;
+  font-weight: 500;
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card__favorite-button {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  padding: 0;
+  cursor: pointer;
+  background-color: #fff;
+  font-weight: 500;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.card__favorite-button::before {
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  position: absolute;
+  border-radius: 10px;
+  padding: 0 10.84px;
+  font-size: 12px;
+  top: 0;
+  right: 45px;
+  width: fit-content;
+  height: 40px;
+  background-color: #fff;
+  color: #1a1b22;
+  content: "Faça login para salvar o artigo";
+  width: 162px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity ease-in 0.3s;
+}
+
+.card__favorite-button_active::before {
+  display: none;
+}
+
+.card__favorite-button_on_saved-news:before {
+  content: "Remover dos salvos";
+  text-wrap: nowrap;
+  width: fit-content;
+}
+
+.card__favorite-button::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: url("../../../../../../../../images/bookmark.svg") no-repeat
+    center / 14px 19px;
+  opacity: 0.4;
+  transition: opacity ease-in 0.3s;
+}
+
+.card__favorite-button_saved::after {
+  background-image: url("../../../../../../../../images/bookmark_active.svg");
+  opacity: 1;
+}
+
+.card__favorite-button_on_saved-news:after {
+  background-image: url("../../../../../../../../images/remove-icon.svg");
+  background-size: 18px 19px;
+}
+
+.card__link {
+  color: #1a1b22;
+  text-decoration: none;
+}
+
+.card__image {
+  display: block;
+  width: 100%;
+  height: 272px;
+  object-fit: cover;
+}
+
+.card__content {
+  padding: 20px 24px 24px;
+}
+
+.card__date {
+  font-size: 18px;
+  height: 24px;
+  font-family: "Source Sans 3", sans-serif;
+  color: #b6bcbf;
+  margin: 0;
+}
+
+.card__news-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-family: "Roboto Slab", serif;
+  font-weight: 400;
+  height: 90px;
+  margin: 12px 0 8px;
+  font-size: 26px;
+  line-height: 1.15385;
+}
+
+.card__news-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0 0 18px;
+  height: 88px;
+  font-size: 16px;
+  line-height: 1.375;
+}
+
+.card__news-source {
+  font-family: "Roboto Slab", serif;
+  text-transform: uppercase;
+  text-wrap: nowrap;
+  line-height: 1.25;
+  font-size: 16px;
+  font-weight: 700;
+  color: #b6bcbf;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 1024px) {
+  .card {
+    height: 420px;
+  }
+
+  .card__image {
+    height: 150px;
+  }
+
+  .card__keyword-label {
+    top: 8px;
+    left: 8px;
+    padding: 8px 13px;
+  }
+
+  .card__favorite-button {
+    top: 8px;
+    right: 8px;
+  }
+
+  .card__favorite-button::before {
+    width: 117px;
+    height: 40px;
+    padding: 0 8px;
+  }
+
+  .card__content {
+    padding: 14px 16px 16px;
+  }
+
+  .card__news-title {
+    height: 96px;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    font-size: 18px;
+    margin: 14px 0 7px;
+    line-height: inherit;
+  }
+
+  .card__news-text {
+    height: 66px;
+    margin: 0 0 13px;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .card {
+    min-width: 288px;
+    height: 440px;
+  }
+
+  .card__image {
+    height: 196px;
+  }
+
+  .card__keyword-label {
+    top: 16px;
+    left: 16px;
+    padding: 8px 13px;
+  }
+
+  .card__favorite-button {
+    top: 16px;
+    right: 16px;
+  }
+
+  .card__favorite-button::before {
+    width: fit-content;
+    text-wrap: nowrap;
+    height: 40px;
+    padding: 0 8px;
+  }
+
+  .card__content {
+    padding: 16px;
+  }
+
+  .card__news-title {
+    height: 48px;
+    font-size: 22px;
+    line-height: 1.09;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    margin: 10px 0 14px;
+  }
+
+  .card__news-text {
+    margin: 0 0 30px;
+  }
+}
+
+@media (hover: hover) {
+  .card:hover {
+    transform: scale(1.005);
+    box-shadow: 0px 0px 5px 2px #0000003a;
+  }
+
+  .card__favorite-button:hover::before {
+    opacity: 1;
+  }
+
+  .card__favorite-button:hover::after {
+    opacity: 1;
+  }
+}
+
+@media (pointer: coarse) {
+  .card__favorite-button:hover::before {
+    opacity: 1;
+  }
+
+  .card__favorite-button:active {
+    opacity: 1;
+  }
+
+  .card__favorite-button_on_saved-news:before {
+    display: none;
+  }
+}
