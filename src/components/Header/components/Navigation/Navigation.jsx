@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { NavBar } from "./components/NavBar";
 
-export function Navigation({ isSavedNews, isPopupOpen, onOpenPopup }) {
+export function Navigation({ isSavedNews, popup, onOpenPopup }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 544);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -28,7 +28,7 @@ export function Navigation({ isSavedNews, isPopupOpen, onOpenPopup }) {
         <div
           className={`navigation${
             isSavedNews && !isMenuOpen ? " navigation_light" : ""
-          }${isPopupOpen && isMobile ? " navigation_hidden" : ""}`}
+          }${popup && isMobile ? " navigation_hidden" : ""}`}
         >
           <div
             className={`navigation__container${
@@ -82,7 +82,7 @@ export function Navigation({ isSavedNews, isPopupOpen, onOpenPopup }) {
       }
       {isMobile && (
         <NavBar
-          isPopupOpen={isPopupOpen}
+          popup={popup}
           onOpenPopup={onOpenPopup}
           onCloseMenu={closeMenu}
           isMenuOpen={isMenuOpen}

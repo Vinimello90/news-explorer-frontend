@@ -11,6 +11,7 @@ import { Route, Routes } from "react-router-dom";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { SavedNews } from "../Main/components/News/SavedNews";
 import { mainApi } from "../../utils/MainApi";
+import { authErrorHandler } from "../../utils/authErrorHandler";
 
 function App() {
   const [userData, setUserData] = useState({
@@ -23,7 +24,7 @@ function App() {
   const [savedKeywords, setSavedKeywords] = useState([]);
   const [newsData, setNewsData] = useState({ articles: "", keyword: "" });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [popup, setPopup] = useState("");
   const [isSearching, setIsSearching] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [isLocalData, setIsLocalData] = useState(false); // Desativa o scroll automatico para a seção news seao renderizar os cards.
@@ -39,11 +40,11 @@ function App() {
   }, []);
 
   function openPopup() {
-    setIsPopupOpen(true);
+    setPopup("signin");
   }
 
   function closePopup() {
-    setIsPopupOpen(false);
+    setPopup("");
   }
 
   // garante que o scroll automatico funcione corretamente
@@ -108,16 +109,20 @@ function App() {
       return Promise.reject({ message: "Nome de usuário ou senha inválida!" });
     } else {
       setIsLoggedIn(true);
-      setIsPopupOpen(false);
+      setPopup(false);
     }
   }
 
   /// Lógica vai ser refatorada ao finalizar o backend
-  async function handleSignUp(user) {
+  async function handleSignUp(user, onError) {
     try {
       await mainApi.register(user);
+      setPopup("success");
     } catch (err) {
-      console.log(err);
+      const error = authErrorHandler(err);
+      onError({
+        submit: error.message,
+      });
     }
   }
 
@@ -143,10 +148,16 @@ function App() {
       <div className="page">
         <Header
           onSearchRequest={SearchRequest}
-          isPopupOpen={isPopupOpen}
+          popup={popup}
           onOpenPopup={openPopup}
         />
-        {isPopupOpen && <PopupWithForm onClosePopup={closePopup} />}
+        {popup && (
+          <PopupWithForm
+            setPopup={setPopup}
+            popup={popup}
+            onClosePopup={closePopup}
+          />
+        )}
         <Routes>
           <Route
             path="/"

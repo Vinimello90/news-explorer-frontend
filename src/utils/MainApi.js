@@ -6,7 +6,7 @@ class MainApi {
   }
 
   _checkResponse(res) {
-    return res.ok ? res.json(res) : Promise.reject(`Error:${res.status}`);
+    return res.ok ? res.json(res) : Promise.reject({ statusCode: res.status });
   }
 
   register(user) {
