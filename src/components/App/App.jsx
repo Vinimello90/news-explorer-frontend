@@ -10,6 +10,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { Route, Routes } from "react-router-dom";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { SavedNews } from "../Main/components/News/SavedNews";
+import { mainApi } from "../../utils/MainApi";
 
 function App() {
   const [userData, setUserData] = useState({
@@ -112,13 +113,12 @@ function App() {
   }
 
   /// Lógica vai ser refatorada ao finalizar o backend
-  function handleSignUp(user) {
-    setUserData((prevUserData) => ({
-      ...prevUserData,
-      username: user.username,
-      password: user.password,
-      email: user.email,
-    }));
+  async function handleSignUp(user) {
+    try {
+      await mainApi.register(user);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   // Lógica vai ser refatorada ao finalizar o backend

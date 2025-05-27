@@ -10,7 +10,7 @@ class MainApi {
   }
 
   register(user) {
-    return fecth(`${this._baseUrl}/signup`, {
+    return fetch(`${this._baseUrl}/signup`, {
       method: "POST",
       headers: {
         Accept: "aplication/json",
@@ -21,7 +21,7 @@ class MainApi {
   }
 
   authorize(user) {
-    return fecth(`${this._baseUrl}/signin`, {
+    return fetch(`${this._baseUrl}/signin`, {
       method: "POST",
       headers: {
         Accept: "aplication/json",
@@ -32,7 +32,7 @@ class MainApi {
   }
 
   getCurrentUser() {
-    return fecth(`${this._baseUrl}/signin`, {
+    return fetch(`${this._baseUrl}/signin`, {
       method: "GET",
       headers: {
         Accept: "aplication/json",
@@ -42,7 +42,7 @@ class MainApi {
   }
 
   getArticles() {
-    return fecth(`${this._baseUrl}/articles`, {
+    return fetch(`${this._baseUrl}/articles`, {
       method: "GET",
       headers: {
         Accept: "aplication/json",
@@ -52,7 +52,7 @@ class MainApi {
   }
 
   createArticle(article) {
-    return fecth(`${this._baseUrl}/articles`, {
+    return fetch(`${this._baseUrl}/articles`, {
       method: "POST",
       headers: {
         Accept: "aplication/json",
@@ -64,7 +64,7 @@ class MainApi {
   }
 
   removeArticle(articleId) {
-    return fecth(`${this._baseUrl}/articles/${articleId}`, {
+    return fetch(`${this._baseUrl}/articles/${articleId}`, {
       method: "DELETE",
       headers: {
         Accept: "aplication/json",
