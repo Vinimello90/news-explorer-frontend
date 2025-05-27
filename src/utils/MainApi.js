@@ -36,7 +36,6 @@ class MainApi {
       method: "GET",
       headers: {
         Accept: "aplication/json",
-        "Content-type": "application/json",
         Authorization: `Bearer ${getToken()}`,
       },
     }).then(this._checkResponse);
