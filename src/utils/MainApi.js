@@ -39,7 +39,6 @@ class MainApi {
         "Content-type": "application/json",
         Authorization: `Bearer ${getToken()}`,
       },
-      body: JSON.stringify(user),
     }).then(this._checkResponse);
   }
 
