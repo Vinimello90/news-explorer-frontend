@@ -13,7 +13,7 @@ export function authErrorHandler(err) {
 
   if (statusCode === CONFLICT_ERROR) {
     return {
-      message: "E-mail já está cadastrado!",
+      message: "Erro ao criar conta! E-mail já cadastrado.",
     };
   }
 }

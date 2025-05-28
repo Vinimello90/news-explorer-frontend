@@ -156,8 +156,10 @@
   transition: background-color linear 0.3s;
 }
 
-.popup__button_submit {
-  -webkit-tap-highlight-color: transparent;
+.popup__submit_processing:disabled {
+  background-color: #2f71e5;
+  border-radius: 100px;
+  color: #fff;
 }
 
 .popup__signup-text {
@@ -174,6 +176,24 @@
   color: #2f71e5;
   line-height: 1.1;
   transition: color linear 0.3s;
+}
+
+.popup__spinner {
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #75c8ff;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  animation: spin 0.6s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .popup__button_goto-signin {
@@ -228,6 +248,12 @@
   .popup__button:disabled:hover {
     background-color: #d1d2d6;
     color: #b6bcbf;
+  }
+
+  .popup__submit_processing:disabled:hover {
+    background-color: #2f71e5;
+    border-radius: 100px;
+    color: #fff;
   }
 
   .popup__close_button:hover {

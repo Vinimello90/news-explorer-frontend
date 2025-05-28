@@ -5,7 +5,7 @@ import { SignUp } from "./components/SignUp/SignUp";
 import FormValidator from "../../../../utils/FormValidator";
 import { CurrentUserContext } from "../../../../contexts/CurrentUserContext";
 
-export function PopupWithForm({ setPopup, popup, onClosePopup }) {
+export function PopupWithForm({ isProcessing, setPopup, popup, onClosePopup }) {
   const [isOpen, setIsOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState();
   const [buttonDisabled, setbuttonDisabled] = useState(true);
@@ -101,6 +101,7 @@ export function PopupWithForm({ setPopup, popup, onClosePopup }) {
 
         {popup === "signin" && (
           <SignIn
+            isProcessing={isProcessing}
             formValidator={formValidator}
             buttonDisabled={buttonDisabled}
             errorMsg={errorMsg}
@@ -110,6 +111,7 @@ export function PopupWithForm({ setPopup, popup, onClosePopup }) {
 
         {popup === "signup" && (
           <SignUp
+            isProcessing={isProcessing}
             formValidator={formValidator}
             buttonDisabled={buttonDisabled}
             errorMsg={errorMsg}

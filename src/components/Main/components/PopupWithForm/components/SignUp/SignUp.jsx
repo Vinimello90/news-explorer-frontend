@@ -1,7 +1,8 @@
 import { useState } from "react";
 
 export function SignUp(props) {
-  const { formValidator, buttonDisabled, errorMsg, onSubmit } = props;
+  const { isProcessing, formValidator, buttonDisabled, errorMsg, onSubmit } =
+    props;
 
   const [inputValues, setInputValues] = useState({
     email: "",
@@ -111,10 +112,18 @@ export function SignUp(props) {
         </span>
         <button
           type="submit"
-          className="popup__button popup__button_submit"
-          disabled={buttonDisabled}
+          className={`popup__button popup__button_submit${
+            isProcessing ? " popup__submit_processing" : ""
+          }`}
+          disabled={buttonDisabled || isProcessing}
         >
-          Inscrever-se
+          {!isProcessing ? (
+            "Inscrever-se"
+          ) : (
+            <>
+              Registrando...<span className="popup__spinner"></span>
+            </>
+          )}
         </button>
       </fieldset>
     </form>

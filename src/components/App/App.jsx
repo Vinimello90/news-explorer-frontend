@@ -26,6 +26,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [popup, setPopup] = useState("");
   const [isSearching, setIsSearching] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [isLocalData, setIsLocalData] = useState(false); // Desativa o scroll automatico para a seção news seao renderizar os cards.
   const [isFreshSearch, setIsFreshSearch] = useState(false); // Desativa o scroll automatico para a seção news ao retornar de outra rota.
@@ -102,6 +103,21 @@ function App() {
     }));
   }
 
+  async function handleSignUp(user, onError) {
+    try {
+      setIsProcessing(true);
+      await mainApi.register(user);
+      setPopup("success");
+    } catch (err) {
+      const error = authErrorHandler(err);
+      onError({
+        submit: error.message,
+      });
+    } finally {
+      setIsProcessing(false);
+    }
+  }
+
   // Lógica vai ser refatorada ao finalizar o backend
   async function handleSignIn(user) {
     console.log(userData);
@@ -110,19 +126,6 @@ function App() {
     } else {
       setIsLoggedIn(true);
       setPopup(false);
-    }
-  }
-
-  /// Lógica vai ser refatorada ao finalizar o backend
-  async function handleSignUp(user, onError) {
-    try {
-      await mainApi.register(user);
-      setPopup("success");
-    } catch (err) {
-      const error = authErrorHandler(err);
-      onError({
-        submit: error.message,
-      });
     }
   }
 
@@ -153,6 +156,7 @@ function App() {
         />
         {popup && (
           <PopupWithForm
+            isProcessing={isProcessing}
             setPopup={setPopup}
             popup={popup}
             onClosePopup={closePopup}
