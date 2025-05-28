@@ -121,7 +121,7 @@
 }
 
 .popup__form-error_input {
-  height: 28px;
+  min-height: 28px;
   margin-top: 3px;
 }
 
