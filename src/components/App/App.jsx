@@ -12,14 +12,10 @@ import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { SavedNews } from "../Main/components/News/SavedNews";
 import { mainApi } from "../../utils/MainApi";
 import { authErrorHandler } from "../../utils/authErrorHandler";
+import { getToken, removeToken, setToken } from "../../utils/token";
 
 function App() {
-  const [userData, setUserData] = useState({
-    username: "",
-    password: "",
-    email: "",
-    isSaved: [],
-  });
+  const [userData, setUserData] = useState();
   const [savedNews, setSavedNews] = useState([]);
   const [savedKeywords, setSavedKeywords] = useState([]);
   const [newsData, setNewsData] = useState({ articles: "", keyword: "" });
@@ -30,6 +26,21 @@ function App() {
   const [showResults, setShowResults] = useState(false);
   const [isLocalData, setIsLocalData] = useState(false); // Desativa o scroll automatico para a seção news seao renderizar os cards.
   const [isFreshSearch, setIsFreshSearch] = useState(false); // Desativa o scroll automatico para a seção news ao retornar de outra rota.
+
+  async function initializeSession() {
+    try {
+      const currentUser = await mainApi.getCurrentUser();
+      setUserData(currentUser);
+      setIsLoggedIn(true);
+    } catch (err) {}
+  }
+
+  useEffect(() => {
+    const jwt = getToken();
+    if (jwt) {
+      initializeSession();
+    }
+  }, []);
 
   useEffect(() => {
     const latestResults = JSON.parse(getNewsStorage());
@@ -73,10 +84,6 @@ function App() {
   //Lógica vai ser refatorada ao finalizar o backend
   function handleSaveArticle(articleData) {
     setSavedNews((prevState) => [articleData, ...prevState]);
-    setUserData((prev) => ({
-      ...prev,
-      isSaved: [...prev.isSaved, articleData.article.url],
-    }));
     if (!savedKeywords.includes(articleData.keyword)) {
       setSavedKeywords((prevState) => [...prevState, articleData.keyword]);
     }
@@ -97,10 +104,6 @@ function App() {
         prevKeywords.filter((currentKeyword) => currentKeyword !== keyword)
       );
     }
-    setUserData((prevUserData) => ({
-      ...prevUserData,
-      isSaved: prevUserData.isSaved.filter((savedURL) => savedURL !== url),
-    }));
   }
 
   async function handleSignUp(user, onError) {
@@ -119,19 +122,30 @@ function App() {
   }
 
   // Lógica vai ser refatorada ao finalizar o backend
-  async function handleSignIn(user) {
-    console.log(userData);
-    if (user.email !== userData.email || user.password !== userData.password) {
-      return Promise.reject({ message: "Nome de usuário ou senha inválida!" });
-    } else {
-      setIsLoggedIn(true);
-      setPopup(false);
+  async function handleSignIn(user, onError) {
+    try {
+      setIsProcessing(true);
+      const { token } = await mainApi.authorize(user);
+      if (token) {
+        setToken(token);
+        initializeSession();
+      }
+      closePopup();
+    } catch (err) {
+      const error = authErrorHandler(err);
+      onError({
+        submit: error.message,
+      });
+    } finally {
+      setIsProcessing(false);
     }
   }
 
   // Lógica vai ser refatorada ao finalizar o backend
   function handleLogout() {
     setIsLoggedIn(false);
+    setUserData();
+    removeToken();
   }
 
   return (

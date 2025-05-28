@@ -32,7 +32,7 @@ class MainApi {
   }
 
   getCurrentUser() {
-    return fetch(`${this._baseUrl}/signin`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: {
         Accept: "aplication/json",

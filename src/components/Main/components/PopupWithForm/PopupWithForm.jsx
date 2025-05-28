@@ -75,12 +75,8 @@ export function PopupWithForm({ isProcessing, setPopup, popup, onClosePopup }) {
     onSignUp(user, onError);
   }
 
-  async function handleSignInSubmit(user, onError) {
-    try {
-      await onSignIn(user);
-    } catch (err) {
-      setErrorMsg({ submit: err.message });
-    }
+  function handleSignInSubmit(user) {
+    onSignIn(user, onError);
   }
 
   return (

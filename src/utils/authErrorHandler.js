@@ -16,4 +16,10 @@ export function authErrorHandler(err) {
       message: "Erro ao criar conta! E-mail já cadastrado.",
     };
   }
+
+  if (statusCode === UNAUTHORIZED_ERROR) {
+    return {
+      message: "E-mail ou senha inválida, verifique e tente novamente!",
+    };
+  }
 }
