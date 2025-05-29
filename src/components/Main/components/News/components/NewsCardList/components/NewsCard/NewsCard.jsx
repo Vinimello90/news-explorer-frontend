@@ -18,16 +18,13 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
   }, []);
 
   useEffect(() => {
-    if (isLoggedIn) {
-      setIsCardSaved(savedNews.some((savedNew) => savedNew.url === url));
-      return;
-    }
-    setIsCardSaved(false); // remove o icone do bookmark ativo sem apagar os dados temporarios
-  }, [isLoggedIn, savedNews, article]);
+    setIsCardSaved(savedNews.some((savedNew) => savedNew.url === url));
+  }, [isLoggedIn]);
 
   function handleRemoveButton() {
     const savedArticle = savedNews.find((article) => article.url === url);
     onRemoveArticle(savedArticle);
+    setIsCardSaved(false);
   }
 
   function handleSaveButton() {
@@ -41,6 +38,7 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
       publishedAt,
     };
     onSaveArticle(newsArticle);
+    setIsCardSaved(true);
   }
 
   return (

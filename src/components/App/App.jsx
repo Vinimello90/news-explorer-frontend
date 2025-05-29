@@ -140,6 +140,7 @@ function App() {
 
   function handleLogout() {
     setIsLoggedIn(false);
+    setSavedNews([]);
     setUserData();
     removeToken();
   }

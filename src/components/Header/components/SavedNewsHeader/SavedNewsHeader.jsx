@@ -11,10 +11,9 @@ export function SavedNewsHeader() {
       acc[keyword] = (acc[keyword] || 0) + 1;
       return acc;
     }, {});
-    const sortedKeywords = Array.from(new Set(keywords)).sort(
+    return Array.from(new Set(keywords)).sort(
       (a, b) => keywordsByCount[b] - keywordsByCount[a]
     );
-    return sortedKeywords;
   }, [savedNews]);
 
   const totalKeywords = savedKeywords.length;
