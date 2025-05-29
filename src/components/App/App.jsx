@@ -82,10 +82,13 @@ function App() {
   }
 
   //Lógica vai ser refatorada ao finalizar o backend
-  function handleSaveArticle(articleData) {
-    setSavedNews((prevState) => [articleData, ...prevState]);
-    if (!savedKeywords.includes(articleData.keyword)) {
-      setSavedKeywords((prevState) => [...prevState, articleData.keyword]);
+  async function handleSaveArticle(articleData) {
+    try {
+      console.log(articleData);
+      const article = await mainApi.createArticle(articleData);
+      setSavedNews((prevState) => [article, ...prevState]);
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -121,7 +124,6 @@ function App() {
     }
   }
 
-  // Lógica vai ser refatorada ao finalizar o backend
   async function handleSignIn(user, onError) {
     try {
       setIsProcessing(true);
@@ -141,7 +143,6 @@ function App() {
     }
   }
 
-  // Lógica vai ser refatorada ao finalizar o backend
   function handleLogout() {
     setIsLoggedIn(false);
     setUserData();

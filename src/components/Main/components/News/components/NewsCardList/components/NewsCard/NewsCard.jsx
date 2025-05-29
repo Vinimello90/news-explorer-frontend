@@ -31,7 +31,16 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
   }
 
   function handleSaveButton() {
-    onSaveArticle({ article, keyword });
+    const newsArticle = {
+      title,
+      description,
+      keyword,
+      source: source.name,
+      url,
+      urlToImage,
+      publishedAt,
+    };
+    onSaveArticle(newsArticle);
     setIsCardSaved(true);
   }
 
