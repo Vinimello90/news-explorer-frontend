@@ -19,7 +19,7 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
 
   useEffect(() => {
     if (isLoggedIn) {
-      setIsCardSaved(userData.isSaved.includes(article.url));
+      // setIsCardSaved(userData.isSaved.includes(article.url));
       return;
     }
     setIsCardSaved(false); // remove o icone do bookmark ativo sem apagar os dados temporarios

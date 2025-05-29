@@ -4,7 +4,7 @@ import { Navigation } from "./components/Navigation/Navigation";
 import { SavedNewsHeader } from "./components/SavedNewsHeader/SavedNewsHeader";
 import { SearchForm } from "./components/SearchForm/SearchForm";
 
-export function Header({ onSearchRequest, isPopupOpen, onOpenPopup }) {
+export function Header({ onSearchRequest, popup, onOpenPopup }) {
   const location = useLocation();
   const isSavedNews = location.pathname === "/saved-news";
 
@@ -13,7 +13,7 @@ export function Header({ onSearchRequest, isPopupOpen, onOpenPopup }) {
       <header className="header__container">
         <Navigation
           isSavedNews={isSavedNews}
-          isPopupOpen={isPopupOpen}
+          popup={popup}
           onOpenPopup={onOpenPopup}
         />
         {!isSavedNews && <SearchForm onSearchRequest={onSearchRequest} />}

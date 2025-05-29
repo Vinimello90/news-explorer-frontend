@@ -1,6 +1,12 @@
 import { useState } from "react";
 
-export function SignIn({ formValidator, buttonDisabled, errorMsg, onSubmit }) {
+export function SignIn({
+  isProcessing,
+  formValidator,
+  buttonDisabled,
+  errorMsg,
+  onSubmit,
+}) {
   const [inputValues, setInputValues] = useState({
     email: "",
     password: "",
@@ -79,10 +85,18 @@ export function SignIn({ formValidator, buttonDisabled, errorMsg, onSubmit }) {
         </span>
         <button
           type="submit"
-          className="popup__button popup__button_submit"
-          disabled={buttonDisabled}
+          className={`popup__button popup__button_submit${
+            isProcessing ? " popup__submit_processing" : ""
+          }`}
+          disabled={buttonDisabled || isProcessing}
         >
-          Entrar
+          {!isProcessing ? (
+            "Entrar"
+          ) : (
+            <>
+              Entrando...<span className="popup__spinner"></span>
+            </>
+          )}
         </button>
       </fieldset>
     </form>

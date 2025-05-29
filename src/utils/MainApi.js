@@ -6,11 +6,11 @@ class MainApi {
   }
 
   _checkResponse(res) {
-    return res.ok ? res.json(res) : Promise.reject(`Error:${res.status}`);
+    return res.ok ? res.json(res) : Promise.reject({ statusCode: res.status });
   }
 
   register(user) {
-    return fecth(`${this._baseUrl}/signup`, {
+    return fetch(`${this._baseUrl}/signup`, {
       method: "POST",
       headers: {
         Accept: "aplication/json",
@@ -21,7 +21,7 @@ class MainApi {
   }
 
   authorize(user) {
-    return fecth(`${this._baseUrl}/signin`, {
+    return fetch(`${this._baseUrl}/signin`, {
       method: "POST",
       headers: {
         Accept: "aplication/json",
@@ -32,18 +32,17 @@ class MainApi {
   }
 
   getCurrentUser() {
-    return fecth(`${this._baseUrl}/signin`, {
+    return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: {
         Accept: "aplication/json",
-        "Content-type": "application/json",
         Authorization: `Bearer ${getToken()}`,
       },
     }).then(this._checkResponse);
   }
 
   getArticles() {
-    return fecth(`${this._baseUrl}/articles`, {
+    return fetch(`${this._baseUrl}/articles`, {
       method: "GET",
       headers: {
         Accept: "aplication/json",
@@ -53,7 +52,7 @@ class MainApi {
   }
 
   createArticle(article) {
-    return fecth(`${this._baseUrl}/articles`, {
+    return fetch(`${this._baseUrl}/articles`, {
       method: "POST",
       headers: {
         Accept: "aplication/json",
@@ -65,7 +64,7 @@ class MainApi {
   }
 
   removeArticle(articleId) {
-    return fecth(`${this._baseUrl}/articles/${articleId}`, {
+    return fetch(`${this._baseUrl}/articles/${articleId}`, {
       method: "DELETE",
       headers: {
         Accept: "aplication/json",
