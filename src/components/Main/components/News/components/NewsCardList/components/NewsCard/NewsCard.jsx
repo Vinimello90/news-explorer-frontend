@@ -26,7 +26,8 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
   }, [isLoggedIn, savedNews, article]);
 
   function handleRemoveButton() {
-    onRemoveArticle(url);
+    const savedArticle = savedNews.find((article) => article.url === url);
+    onRemoveArticle(savedArticle);
   }
 
   function handleSaveButton() {

@@ -91,19 +91,14 @@ function App() {
   }
 
   // Lógica vai ser refatorada ao finalizar o backend
-  function handleRemoveArticle({ url, keyword }) {
-    const updatedArticles = savedNews.filter(
-      (currentArticle) => currentArticle.article.url !== url
+  async function handleRemoveArticle({ url, _id }) {
+    await mainApi.removeArticle(_id);
+    setSavedNews((prevSavedNews) =>
+      prevSavedNews.filter((savedNews) => savedNews.url !== url)
     );
-    setSavedNews(updatedArticles);
-    const keywordExists = updatedArticles.some((article) =>
-      article.keyword.includes(keyword)
-    );
-    // Verifica se a palavra-chave existe ainda antes de remover
-    if (!keywordExists) {
-      setSavedKeywords((prevKeywords) =>
-        prevKeywords.filter((currentKeyword) => currentKeyword !== keyword)
-      );
+    try {
+    } catch (err) {
+      console.log(err);
     }
   }
 
