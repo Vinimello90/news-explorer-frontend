@@ -17,7 +17,6 @@ import { getToken, removeToken, setToken } from "../../utils/token";
 function App() {
   const [userData, setUserData] = useState();
   const [savedNews, setSavedNews] = useState([]);
-  const [savedKeywords, setSavedKeywords] = useState([]);
   const [newsData, setNewsData] = useState({ articles: "", keyword: "" });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [popup, setPopup] = useState("");
@@ -155,7 +154,6 @@ function App() {
         onSaveArticle: handleSaveArticle,
         onRemoveArticle: handleRemoveArticle,
         savedNews,
-        savedKeywords,
         isLoggedIn,
       }}
     >
