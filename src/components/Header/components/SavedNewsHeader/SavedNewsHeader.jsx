@@ -35,7 +35,7 @@ export function SavedNewsHeader() {
             totalKeywords > 3
               ? savedKeywords.slice(0, 2).join(", ")
               : savedKeywords.slice(0, 3).join(", ")
-          } ${totalKeywords > 3 ? ` e outra ${totalKeywords - 2}` : ""}`}
+          } ${totalKeywords > 3 ? ` e outras ${totalKeywords - 2}` : ""}`}
 
         {totalKeywords === 0 &&
           "Salve artigos para ver as palavras-chave listadas aqui."}
