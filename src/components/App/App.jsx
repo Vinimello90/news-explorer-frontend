@@ -31,6 +31,7 @@ function App() {
     try {
       const currentUser = await mainApi.getCurrentUser();
       const articles = await mainApi.getArticles();
+      articles.reverse();
       setUserData(currentUser);
       setSavedNews(articles);
       setIsLoggedIn(true);
