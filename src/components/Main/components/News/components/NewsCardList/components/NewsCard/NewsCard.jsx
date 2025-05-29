@@ -1,13 +1,13 @@
 import "./NewsCard.css";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import imageUnavailable from "../../../../../../../../images/no-image.jpg";
+import unavailableImage from "../../../../../../../../images/no-image.jpg";
 import { CurrentUserContext } from "../../../../../../../../contexts/CurrentUserContext";
 
 export function NewsCard({ isOnSavedNews, article, keyword }) {
   const { urlToImage, title, description, url, publishedAt, source } = article;
 
-  const { onRemoveArticle, isLoggedIn, onSaveArticle, userData } =
+  const { onRemoveArticle, isLoggedIn, onSaveArticle, savedNews } =
     useContext(CurrentUserContext);
 
   const [showAnimation, setShowAnimation] = useState(false);
@@ -18,20 +18,26 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
   }, []);
 
   useEffect(() => {
-    if (isLoggedIn) {
-      // setIsCardSaved(userData.isSaved.includes(article.url));
-      return;
-    }
-    setIsCardSaved(false); // remove o icone do bookmark ativo sem apagar os dados temporarios
-  }, [isLoggedIn, userData, article]);
+    setIsCardSaved(savedNews.some((savedNew) => savedNew.url === url));
+  }, [isLoggedIn]);
 
   function handleRemoveButton() {
-    onRemoveArticle({ url, keyword });
+    const savedArticle = savedNews.find((article) => article.url === url);
+    onRemoveArticle(savedArticle);
     setIsCardSaved(false);
   }
 
   function handleSaveButton() {
-    onSaveArticle({ article, keyword });
+    const newsArticle = {
+      title,
+      description,
+      keyword,
+      source: source.name,
+      url,
+      urlToImage,
+      publishedAt,
+    };
+    onSaveArticle(newsArticle);
     setIsCardSaved(true);
   }
 
@@ -50,11 +56,11 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
       <Link className="card__link" to={url} target="_blank">
         {isOnSavedNews && <p className="card__keyword-label">{keyword}</p>}
         <img
-          src={urlToImage ? urlToImage : imageUnavailable}
+          src={urlToImage ? urlToImage : unavailableImage}
           alt={`imagem do artigo ${title ? title : "Notícia relacionada"}`}
           className="card__image"
           onError={(evt) => {
-            evt.target.src = { imageUnavailable };
+            evt.target.src = { unavailableImage };
           }}
         />
         <div className="card__content">

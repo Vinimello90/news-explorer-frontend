@@ -1,9 +1,20 @@
 import { CurrentUserContext } from "../../../../contexts/CurrentUserContext";
 import "./SavedNewsHeader.css";
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 
 export function SavedNewsHeader() {
-  const { userData, savedNews, savedKeywords } = useContext(CurrentUserContext);
+  const { userData, savedNews } = useContext(CurrentUserContext);
+
+  const savedKeywords = useMemo(() => {
+    const keywords = savedNews.map((news) => news.keyword);
+    const keywordsByCount = keywords.reduce((acc, keyword) => {
+      acc[keyword] = (acc[keyword] || 0) + 1;
+      return acc;
+    }, {});
+    return Array.from(new Set(keywords)).sort(
+      (a, b) => keywordsByCount[b] - keywordsByCount[a]
+    );
+  }, [savedNews]);
 
   const totalKeywords = savedKeywords.length;
 
@@ -19,16 +30,14 @@ export function SavedNewsHeader() {
 
       <p className="saved-news-header__keywords">
         {totalKeywords > 0 &&
-          `Por palavras-chave: ${savedKeywords.slice(0, 2).join(", ")}${
-            totalKeywords > 2
-              ? ` e ${totalKeywords - 2} outra${
-                  totalKeywords - 2 === 1 ? "" : "s"
-                }`
-              : ""
-          }`}
+          `Por palavras-chave: ${
+            totalKeywords > 3
+              ? savedKeywords.slice(0, 2).join(", ")
+              : savedKeywords.slice(0, 3).join(", ")
+          } ${totalKeywords > 3 ? ` e outras ${totalKeywords - 2}` : ""}`}
 
         {totalKeywords === 0 &&
-          "Salve artigos para ver suas palavras-chave aqui"}
+          "Salve artigos para ver as palavras-chave listadas aqui."}
       </p>
     </section>
   );

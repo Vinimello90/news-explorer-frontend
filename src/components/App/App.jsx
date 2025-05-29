@@ -17,7 +17,6 @@ import { getToken, removeToken, setToken } from "../../utils/token";
 function App() {
   const [userData, setUserData] = useState();
   const [savedNews, setSavedNews] = useState([]);
-  const [savedKeywords, setSavedKeywords] = useState([]);
   const [newsData, setNewsData] = useState({ articles: "", keyword: "" });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [popup, setPopup] = useState("");
@@ -30,7 +29,10 @@ function App() {
   async function initializeSession() {
     try {
       const currentUser = await mainApi.getCurrentUser();
+      const articles = await mainApi.getArticles();
+      articles.reverse();
       setUserData(currentUser);
+      setSavedNews(articles);
       setIsLoggedIn(true);
     } catch (err) {}
   }
@@ -81,28 +83,24 @@ function App() {
     }
   }
 
-  //Lógica vai ser refatorada ao finalizar o backend
-  function handleSaveArticle(articleData) {
-    setSavedNews((prevState) => [articleData, ...prevState]);
-    if (!savedKeywords.includes(articleData.keyword)) {
-      setSavedKeywords((prevState) => [...prevState, articleData.keyword]);
+  async function handleSaveArticle(articleData) {
+    try {
+      const article = await mainApi.createArticle(articleData);
+      setSavedNews((prevState) => [article, ...prevState]);
+    } catch (err) {
+      console.log(err);
     }
   }
 
   // Lógica vai ser refatorada ao finalizar o backend
-  function handleRemoveArticle({ url, keyword }) {
-    const updatedArticles = savedNews.filter(
-      (currentArticle) => currentArticle.article.url !== url
+  async function handleRemoveArticle({ url, _id }) {
+    await mainApi.removeArticle(_id);
+    setSavedNews((prevSavedNews) =>
+      prevSavedNews.filter((savedNews) => savedNews.url !== url)
     );
-    setSavedNews(updatedArticles);
-    const keywordExists = updatedArticles.some((article) =>
-      article.keyword.includes(keyword)
-    );
-    // Verifica se a palavra-chave existe ainda antes de remover
-    if (!keywordExists) {
-      setSavedKeywords((prevKeywords) =>
-        prevKeywords.filter((currentKeyword) => currentKeyword !== keyword)
-      );
+    try {
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -121,7 +119,6 @@ function App() {
     }
   }
 
-  // Lógica vai ser refatorada ao finalizar o backend
   async function handleSignIn(user, onError) {
     try {
       setIsProcessing(true);
@@ -141,9 +138,9 @@ function App() {
     }
   }
 
-  // Lógica vai ser refatorada ao finalizar o backend
   function handleLogout() {
     setIsLoggedIn(false);
+    setSavedNews([]);
     setUserData();
     removeToken();
   }
@@ -158,7 +155,6 @@ function App() {
         onSaveArticle: handleSaveArticle,
         onRemoveArticle: handleRemoveArticle,
         savedNews,
-        savedKeywords,
         isLoggedIn,
       }}
     >
