@@ -69,8 +69,8 @@ export function NewsCardList({ newsData }) {
           .map((news) => {
             return (
               <NewsCard
-                key={!isOnSavedNews ? news.url : news.article.url}
-                article={!isOnSavedNews ? news : news.article}
+                key={news.url}
+                article={news}
                 keyword={!isOnSavedNews ? keyword : news.keyword}
                 isOnSavedNews={isOnSavedNews}
               />

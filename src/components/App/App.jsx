@@ -81,10 +81,8 @@ function App() {
     }
   }
 
-  //Lógica vai ser refatorada ao finalizar o backend
   async function handleSaveArticle(articleData) {
     try {
-      console.log(articleData);
       const article = await mainApi.createArticle(articleData);
       setSavedNews((prevState) => [article, ...prevState]);
     } catch (err) {
