@@ -30,7 +30,9 @@ function App() {
   async function initializeSession() {
     try {
       const currentUser = await mainApi.getCurrentUser();
+      const articles = await mainApi.getArticles();
       setUserData(currentUser);
+      setSavedNews(articles);
       setIsLoggedIn(true);
     } catch (err) {}
   }
