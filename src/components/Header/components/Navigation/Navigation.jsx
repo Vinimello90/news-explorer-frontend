@@ -4,19 +4,18 @@ import { useEffect, useState } from "react";
 import { NavBar } from "./components/NavBar";
 
 export function Navigation({ isSavedNews, popup, onOpenPopup }) {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 544);
+  const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     function handleResize() {
       setIsMobile(window.innerWidth <= 544);
-      if (isMenuOpen && window.innerWidth > 544) {
-        setIsMenuOpen(false);
-      }
+      setIsMenuOpen((prev) => (window.innerWidth > 544 ? false : prev));
     }
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [isMenuOpen]);
+  }, []);
 
   function closeMenu() {
     setIsMenuOpen(false);
