@@ -1,12 +1,15 @@
 import { useState } from "react";
 
-export function SignIn({
-  isProcessing,
-  formValidator,
-  buttonDisabled,
-  errorMsg,
-  onSubmit,
-}) {
+export function SignIn(props) {
+  const {
+    formRef,
+    isProcessing,
+    formValidator,
+    buttonDisabled,
+    errorMsg,
+    onSubmit,
+  } = props;
+
   const [inputValues, setInputValues] = useState({
     email: "",
     password: "",
@@ -14,8 +17,8 @@ export function SignIn({
 
   function handleInputChange(evt) {
     const inputElement = evt.target;
-    formValidator.validateInput(inputElement);
-    formValidator.validateForm();
+    formValidator.current.validateInput(inputElement);
+    formValidator.current.validateForm();
     setInputValues((prev) => ({
       ...prev,
       [inputElement.id]: inputElement.value,
@@ -28,7 +31,12 @@ export function SignIn({
   }
 
   return (
-    <form onSubmit={handleSubmitButton} name="signin" className="popup__form">
+    <form
+      ref={formRef}
+      onSubmit={handleSubmitButton}
+      name="signin"
+      className="popup__form"
+    >
       <fieldset className="popup__fieldset">
         <label className="popup__field">
           E-mail

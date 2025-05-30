@@ -20,6 +20,7 @@ function App() {
   const [newsData, setNewsData] = useState({ articles: "", keyword: "" });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [popup, setPopup] = useState("");
+  const [isAuthChecked, setIsAuthChecked] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [showResults, setShowResults] = useState(false);
@@ -34,14 +35,20 @@ function App() {
       setUserData(currentUser);
       setSavedNews(articles);
       setIsLoggedIn(true);
-    } catch (err) {}
+    } catch (err) {
+      handleLogout();
+    } finally {
+      setIsAuthChecked(true);
+    }
   }
 
   useEffect(() => {
     const jwt = getToken();
     if (jwt) {
       initializeSession();
+      return;
     }
+    setIsAuthChecked(true);
   }, []);
 
   useEffect(() => {
@@ -143,6 +150,14 @@ function App() {
     setSavedNews([]);
     setUserData();
     removeToken();
+  }
+
+  if (!isAuthChecked) {
+    return (
+      <div className="page">
+        <div className="page__preloader"></div>
+      </div>
+    );
   }
 
   return (
