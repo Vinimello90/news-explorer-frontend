@@ -34,7 +34,7 @@ export function Navigation({ isSavedNews, popup, onOpenPopup }) {
               isSavedNews ? " navigation__container_light" : ""
             }`}
           >
-            <Link to="/" className="navigation__link">
+            <Link to="/" className="navigation__link" replace>
               <h1
                 className={`navigation__logo${
                   isSavedNews && isMenuOpen ? " navigation__logo_dark" : ""

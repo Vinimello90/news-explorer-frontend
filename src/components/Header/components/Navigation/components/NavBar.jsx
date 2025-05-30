@@ -64,6 +64,7 @@ export function NavBar(props) {
             onClick={handleCloseMenu}
             to="/"
             className={({ isActive }) => getLinkClass(isActive)}
+            replace
           >
             Início
           </NavLink>
@@ -75,6 +76,7 @@ export function NavBar(props) {
               onClick={handleCloseMenu}
               to="/saved-news"
               className={({ isActive }) => getLinkClass(isActive)}
+              replace
             >
               Artigos salvos
             </NavLink>
