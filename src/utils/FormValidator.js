@@ -1,9 +1,13 @@
 // A classe FormValidator é responsável por válidar o formulário.
 export default class FormValidator {
-  constructor({ classObj, handleFormErrorState, handleFormButtonState }) {
-    this._classObj = classObj;
-    this._formElements = document.querySelectorAll(classObj.formSelector);
-    this._formList = Array.from(this._formElements);
+  constructor({
+    formElement,
+    inputSelector,
+    handleFormErrorState,
+    handleFormButtonState,
+  }) {
+    this._inputSelector = inputSelector;
+    this._formElement = formElement;
     this._handleFormErrorState = handleFormErrorState;
     this._handleFormButtonState = handleFormButtonState;
   }
@@ -94,17 +98,11 @@ export default class FormValidator {
 
   // Válida o formulário.
   validateForm = () => {
-    this._formList.forEach((formElement) => {
-      const fieldsetList = Array.from(
-        formElement.querySelectorAll(this._classObj.fieldsetSelector)
-      );
-      fieldsetList.forEach((fieldset) => {
-        const inputList = Array.from(
-          fieldset.querySelectorAll(this._classObj.inputSelector)
-        );
-        const hasInvalidInput = this._hasInvalidInput(inputList);
-        this._toggleButtonState(hasInvalidInput);
-      });
-    });
+    console.log(this._formElement);
+    const inputList = Array.from(
+      this._formElement.querySelectorAll(this._inputSelector)
+    );
+    const hasInvalidInput = this._hasInvalidInput(inputList);
+    this._toggleButtonState(hasInvalidInput);
   };
 }

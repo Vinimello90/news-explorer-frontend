@@ -13,6 +13,7 @@ export function PopupWithForm({ isProcessing, setPopup, popup, onClosePopup }) {
   const { onSignUp, onSignIn } = useContext(CurrentUserContext);
 
   const formValidator = useRef();
+  const formRef = useRef();
 
   // Atualiza o estado da mensagem de erro de forma dinamica de acordo com o nome do input.
   const handleFormErrorState = useCallback(({ name, errorMessage }) => {
@@ -29,11 +30,8 @@ export function PopupWithForm({ isProcessing, setPopup, popup, onClosePopup }) {
 
   useEffect(() => {
     formValidator.current = new FormValidator({
-      classObj: {
-        formSelector: ".popup__form",
-        fieldsetSelector: ".popup__fieldset",
-        inputSelector: ".popup__input",
-      },
+      formElement: formRef.current,
+      inputSelector: ".popup__input",
       handleFormErrorState,
       handleFormButtonState,
     });
@@ -101,6 +99,7 @@ export function PopupWithForm({ isProcessing, setPopup, popup, onClosePopup }) {
 
         {popup === "signin" && (
           <SignIn
+            formRef={formRef}
             isProcessing={isProcessing}
             formValidator={formValidator}
             buttonDisabled={buttonDisabled}
@@ -111,6 +110,7 @@ export function PopupWithForm({ isProcessing, setPopup, popup, onClosePopup }) {
 
         {popup === "signup" && (
           <SignUp
+            formRef={formRef}
             isProcessing={isProcessing}
             formValidator={formValidator}
             buttonDisabled={buttonDisabled}
