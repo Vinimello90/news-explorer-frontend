@@ -1,12 +1,9 @@
 import { useState } from "react";
 
-export function SignIn({
-  isProcessing,
-  formValidator,
-  buttonDisabled,
-  errorMsg,
-  onSubmit,
-}) {
+export function SignIn(props) {
+  const { isProcessing, formValidator, buttonDisabled, errorMsg, onSubmit } =
+    props;
+
   const [inputValues, setInputValues] = useState({
     email: "",
     password: "",
@@ -14,8 +11,8 @@ export function SignIn({
 
   function handleInputChange(evt) {
     const inputElement = evt.target;
-    formValidator.validateInput(inputElement);
-    formValidator.validateForm();
+    formValidator.current.validateInput(inputElement);
+    formValidator.current.validateForm();
     setInputValues((prev) => ({
       ...prev,
       [inputElement.id]: inputElement.value,

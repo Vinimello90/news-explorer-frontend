@@ -12,8 +12,8 @@ export function SignUp(props) {
 
   function handleInputChange(evt) {
     const inputElement = evt.target;
-    formValidator.validateInput(inputElement);
-    formValidator.validateForm();
+    formValidator.current.validateInput(inputElement);
+    formValidator.current.validateForm();
     setInputValues((prev) => ({
       ...prev,
       [inputElement.id]: inputElement.value,

@@ -1,5 +1,5 @@
 import "./PopupWithForm.css";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { SignIn } from "./components/SignIn/SignIn";
 import { SignUp } from "./components/SignUp/SignUp";
 import FormValidator from "../../../../utils/FormValidator";
@@ -9,31 +9,35 @@ export function PopupWithForm({ isProcessing, setPopup, popup, onClosePopup }) {
   const [isOpen, setIsOpen] = useState(false);
   const [errorMsg, setErrorMsg] = useState();
   const [buttonDisabled, setbuttonDisabled] = useState(true);
-  const [formValidator, setFormValidator] = useState();
 
   const { onSignUp, onSignIn } = useContext(CurrentUserContext);
 
+  const formValidator = useRef();
+
+  // Atualiza o estado da mensagem de erro de forma dinamica de acordo com o nome do input.
+  const handleFormErrorState = useCallback(({ name, errorMessage }) => {
+    setErrorMsg((prev) => ({
+      ...prev,
+      [name]: errorMessage,
+    }));
+  }, []);
+
+  // Atualiza o estado do botão habiltando/desabilitando de acordo com a validação do formulário.
+  const handleFormButtonState = useCallback((isDisabled) => {
+    setbuttonDisabled(isDisabled);
+  }, []);
+
   useEffect(() => {
-    const formValidator = new FormValidator({
+    formValidator.current = new FormValidator({
       classObj: {
         formSelector: ".popup__form",
         fieldsetSelector: ".popup__fieldset",
         inputSelector: ".popup__input",
       },
-      handleFormErrorState: ({ name, errorMessage }) => {
-        // Atualiza o estado da mensagem de erro de forma dinamica de acordo com o nome do input.
-        setErrorMsg((prev) => ({
-          ...prev,
-          [name]: errorMessage,
-        }));
-      },
-      // Atualiza o estado do botão habiltando/desabilitando de acordo com a validação do formulário.
-      handleFormButtonState: (isDisabled) => {
-        setbuttonDisabled(isDisabled);
-      },
+      handleFormErrorState,
+      handleFormButtonState,
     });
-    setFormValidator(formValidator);
-    formValidator.validateForm();
+    formValidator.current.validateForm();
   }, [popup]);
 
   useEffect(() => {
