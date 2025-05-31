@@ -23,7 +23,7 @@ function App() {
   const [isAuthChecked, setIsAuthChecked] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [showResults, setShowResults] = useState(false);
+  const [showResults, setShowResults] = useState(false); // Para iniciar a animação dos botões de submit.
   const [isLocalData, setIsLocalData] = useState(false); // Desativa o scroll automatico para a seção news seao renderizar os cards.
   const [isFreshSearch, setIsFreshSearch] = useState(false); // Desativa o scroll automatico para a seção news ao retornar de outra rota.
 
@@ -93,7 +93,7 @@ function App() {
 
   async function SearchRequest(keyword) {
     try {
-      setNewsData({ articles: "", keyword: "" }); // desmonta os dados para fazer o scroll automatico assim que montar novamente
+      setNewsData({ articles: "", keyword: "" }); // desmontar os cards e faz o scroll automatico assim que montar novamente
       setIsSearching(true);
       setShowResults(true);
       setIsFreshSearch(true);
