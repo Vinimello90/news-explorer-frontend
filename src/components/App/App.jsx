@@ -7,7 +7,7 @@ import { getNews } from "../../utils/thirdPartyApi";
 import { PopupWithForm } from "../Main/components/PopupWithForm/PopupWithForm";
 import { getNewsStorage, setNewsStorage } from "../../utils/searchStorage";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 import { SavedNews } from "../Main/components/News/SavedNews";
 import { mainApi } from "../../utils/MainApi";
@@ -46,9 +46,24 @@ function App() {
     const jwt = getToken();
     if (jwt) {
       initializeSession();
-      return;
+    } else {
+      setIsAuthChecked(true);
     }
-    setIsAuthChecked(true);
+    // Previne a pagina salvada no bfcache voltar logada caso o usuário tenha feito o logout
+    function handleBFCache(evt) {
+      if (evt.persisted) {
+        setIsAuthChecked(false);
+        const refreshedJWT = getToken();
+        if (!refreshedJWT) {
+          window.location.reload();
+          return;
+        }
+        setIsAuthChecked(true);
+      }
+    }
+
+    window.addEventListener("pageshow", handleBFCache);
+    return () => window.removeEventListener("pageshow", handleBFCache);
   }, []);
 
   useEffect(() => {
@@ -209,6 +224,7 @@ function App() {
               </ProtectedRoute>
             }
           ></Route>
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         <Footer />
       </div>

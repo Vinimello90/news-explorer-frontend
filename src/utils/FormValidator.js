@@ -98,7 +98,6 @@ export default class FormValidator {
 
   // Válida o formulário.
   validateForm = () => {
-    console.log(this._formElement);
     const inputList = Array.from(
       this._formElement.querySelectorAll(this._inputSelector)
     );
