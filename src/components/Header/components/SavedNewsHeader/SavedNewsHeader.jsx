@@ -6,7 +6,9 @@ export function SavedNewsHeader() {
   const { userData, savedNews } = useContext(CurrentUserContext);
 
   const savedKeywords = useMemo(() => {
-    const keywords = savedNews.map((news) => news.keyword);
+    const keywords = savedNews.map(
+      (news) => news.keyword.slice(0, 1).toUpperCase() + news.keyword.slice(1)
+    );
     const keywordsByCount = keywords.reduce((acc, keyword) => {
       acc[keyword] = (acc[keyword] || 0) + 1;
       return acc;
