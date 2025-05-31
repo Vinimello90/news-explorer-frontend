@@ -1,8 +1,10 @@
 import "./SearchForm.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export function SearchForm({ onSearchRequest }) {
   const [inputValue, setInputValue] = useState("");
+
+  const inputRef = useRef();
 
   function handleInputChange(evt) {
     setInputValue(evt.target.value);
@@ -12,6 +14,7 @@ export function SearchForm({ onSearchRequest }) {
     evt.preventDefault();
     onSearchRequest(inputValue.trim());
     setInputValue("");
+    inputRef.current.blur();
   }
 
   return (
@@ -29,6 +32,7 @@ export function SearchForm({ onSearchRequest }) {
         <fieldset className="search__fieldset">
           <label className="search__form-field">
             <input
+              ref={inputRef}
               name="search"
               id="search"
               onChange={handleInputChange}
