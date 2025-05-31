@@ -28,7 +28,8 @@ export function SignUp(props) {
 
   function handleSubmitButton(evt) {
     evt.preventDefault();
-    onSubmit(inputValues);
+    const { email, password, username } = inputValues;
+    onSubmit({ email, password, username: username.trim() });
   }
 
   return (

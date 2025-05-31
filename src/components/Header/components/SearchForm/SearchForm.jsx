@@ -10,9 +10,7 @@ export function SearchForm({ onSearchRequest }) {
 
   function handleSearchSubmit(evt) {
     evt.preventDefault();
-    const captalizedInputValue =
-      inputValue.slice(0, 1).toUpperCase() + inputValue.slice(1);
-    onSearchRequest(captalizedInputValue);
+    onSearchRequest(inputValue.trim());
     setInputValue("");
   }
 
