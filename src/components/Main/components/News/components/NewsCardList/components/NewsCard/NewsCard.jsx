@@ -11,22 +11,16 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
     useContext(CurrentUserContext);
 
   const [showAnimation, setShowAnimation] = useState(false);
-  const [isCardSaved, setIsCardSaved] = useState(false);
+
+  const isCardSaved = savedNews.some((savedNew) => savedNew.url === url);
 
   useEffect(() => {
     setShowAnimation(true);
   }, []);
 
-  useEffect(() => {
-    // Verifica se a new já está salva somente na montagem
-    setIsCardSaved(savedNews.some((savedNew) => savedNew.url === url));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggedIn]);
-
   function handleRemoveButton() {
     const savedArticle = savedNews.find((article) => article.url === url);
     onRemoveArticle(savedArticle);
-    setIsCardSaved(false);
   }
 
   function handleSaveButton() {
@@ -40,7 +34,6 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
       publishedAt,
     };
     onSaveArticle(newsArticle);
-    setIsCardSaved(true);
   }
 
   return (
