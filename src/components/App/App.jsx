@@ -134,6 +134,7 @@ function App() {
       await mainApi.register(user);
       setPopup("success");
     } catch (err) {
+      console.log(err);
       const error = authErrorHandler(err);
       onError({
         submit: error.message,

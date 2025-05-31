@@ -29,13 +29,15 @@ export function PopupWithForm({ isProcessing, setPopup, popup, onClosePopup }) {
   }, []);
 
   useEffect(() => {
-    formValidator.current = new FormValidator({
-      formElement: formRef.current,
-      inputSelector: ".popup__input",
-      handleFormErrorState,
-      handleFormButtonState,
-    });
-    formValidator.current.validateForm();
+    if (popup !== "success") {
+      formValidator.current = new FormValidator({
+        formElement: formRef.current,
+        inputSelector: ".popup__input",
+        handleFormErrorState,
+        handleFormButtonState,
+      });
+      formValidator.current.validateForm();
+    }
   }, [handleFormErrorState, handleFormButtonState, popup]);
 
   useEffect(() => {
