@@ -44,7 +44,7 @@
   color: #fff;
 }
 
-@media screen and (max-width: 544px) {
+@media screen and (max-width: 600px) {
   .navigation {
     padding: 16px;
   }

@@ -9,8 +9,8 @@ export function Navigation({ isSavedNews, popup, onOpenPopup }) {
 
   useEffect(() => {
     function handleResize() {
-      setIsMobile(window.innerWidth <= 544);
-      setIsMenuOpen((prev) => (window.innerWidth > 544 ? false : prev));
+      setIsMobile(window.innerWidth <= 600);
+      setIsMenuOpen((prev) => (window.innerWidth > 600 ? false : prev));
     }
     handleResize();
     window.addEventListener("resize", handleResize);

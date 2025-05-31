@@ -102,7 +102,7 @@ export function SignUp(props) {
             value={inputValues.username}
             spellCheck={false}
             minLength={2}
-            maxLength={10}
+            maxLength={30}
             autoComplete="new-username"
             required
           />
