@@ -77,7 +77,7 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
             {title ? title : "Notícia relacionada"}
           </h3>
           <p className="card__news-text">{description}</p>
-          <p className="card__news-source">{source.name}</p>
+          <p className="card__news-source">{source.name || source}</p>
         </div>
       </Link>
     </li>
