@@ -36,7 +36,10 @@ function App() {
       setSavedNews(articles);
       setIsLoggedIn(true);
     } catch (err) {
-      handleLogout();
+      if (err.status === 401) {
+        removeToken();
+        setIsLoggedIn(false);
+      }
     } finally {
       setIsAuthChecked(true);
     }
@@ -114,13 +117,12 @@ function App() {
     }
   }
 
-  // Lógica vai ser refatorada ao finalizar o backend
   async function handleRemoveArticle({ url, _id }) {
-    await mainApi.removeArticle(_id);
-    setSavedNews((prevSavedNews) =>
-      prevSavedNews.filter((savedNews) => savedNews.url !== url)
-    );
     try {
+      await mainApi.removeArticle(_id);
+      setSavedNews((prevSavedNews) =>
+        prevSavedNews.filter((savedNews) => savedNews.url !== url)
+      );
     } catch (err) {
       console.log(err);
     }

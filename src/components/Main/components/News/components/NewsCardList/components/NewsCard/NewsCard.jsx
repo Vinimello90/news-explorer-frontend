@@ -18,7 +18,9 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
   }, []);
 
   useEffect(() => {
+    // Verifica se a new já está salva somente na montagem
     setIsCardSaved(savedNews.some((savedNew) => savedNew.url === url));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoggedIn]);
 
   function handleRemoveButton() {

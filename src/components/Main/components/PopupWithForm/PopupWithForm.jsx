@@ -36,7 +36,7 @@ export function PopupWithForm({ isProcessing, setPopup, popup, onClosePopup }) {
       handleFormButtonState,
     });
     formValidator.current.validateForm();
-  }, [popup]);
+  }, [handleFormErrorState, handleFormButtonState, popup]);
 
   useEffect(() => {
     setIsOpen(true);
