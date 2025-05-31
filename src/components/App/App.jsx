@@ -22,9 +22,9 @@ function App() {
   const [popup, setPopup] = useState("");
   const [isAuthChecked, setIsAuthChecked] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [showResults, setShowResults] = useState(false); // Para iniciar a animação dos botões de submit.
-  const [isLocalData, setIsLocalData] = useState(false); // Desativa o scroll automatico para a seção news seao renderizar os cards.
+  const [isProcessing, setIsProcessing] = useState(false); // iniciar a animação dos botões de submit.
+  const [showResults, setShowResults] = useState(false);
+  const [isLocalData, setIsLocalData] = useState(false); // Desativa o scroll automatico se os dados dos cards são do localStorage.
   const [isFreshSearch, setIsFreshSearch] = useState(false); // Desativa o scroll automatico para a seção news ao retornar de outra rota.
 
   async function initializeSession() {
@@ -86,14 +86,14 @@ function App() {
     setPopup("");
   }
 
-  // garante que o scroll automatico funcione corretamente
+  // garante que o scroll automatico para os resultados funcione corretamente retornando o fetch.
   async function fetchNews(keyword) {
     return await getNews(keyword);
   }
 
   async function SearchRequest(keyword) {
     try {
-      setNewsData({ articles: "", keyword: "" }); // desmontar os cards e faz o scroll automatico assim que montar novamente
+      setNewsData({ articles: "", keyword: "" }); // desmonta os cards para fazer o scroll automatico quando montar os novos cards da busca.
       setIsSearching(true);
       setShowResults(true);
       setIsFreshSearch(true);
@@ -216,6 +216,7 @@ function App() {
                 newsData={newsData}
                 isFreshSearch={isFreshSearch}
                 setIsFreshSearch={setIsFreshSearch}
+                setPopup={setPopup}
               />
             }
           ></Route>

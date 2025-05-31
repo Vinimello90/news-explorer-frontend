@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import unavailableImage from "../../../../../../../../images/no-image.jpg";
 import { CurrentUserContext } from "../../../../../../../../contexts/CurrentUserContext";
 
-export function NewsCard({ isOnSavedNews, article, keyword }) {
+export function NewsCard({ setPopup, isOnSavedNews, article, keyword }) {
   const { urlToImage, title, description, url, publishedAt, source } = article;
 
   const { onRemoveArticle, isLoggedIn, onSaveArticle, savedNews } =
@@ -18,12 +18,12 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
     setShowAnimation(true);
   }, []);
 
-  function handleRemoveButton() {
+  function handleRemoveArticle() {
     const savedArticle = savedNews.find((article) => article.url === url);
     onRemoveArticle(savedArticle);
   }
 
-  function handleSaveButton() {
+  function handleSaveArticle() {
     const newsArticle = {
       title,
       description,
@@ -36,17 +36,28 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
     onSaveArticle(newsArticle);
   }
 
+  function handleFavoriteButtonClick() {
+    if (!isLoggedIn) {
+      setPopup("signin");
+      return;
+    }
+    if (!isCardSaved) {
+      handleSaveArticle();
+    } else {
+      handleRemoveArticle();
+    }
+  }
+
   return (
     <li className={`card${showAnimation ? " card_visible" : ""} `}>
       <button
-        onClick={!isCardSaved ? handleSaveButton : handleRemoveButton}
+        onClick={handleFavoriteButtonClick}
         type="button"
         className={`card__favorite-button${
           isCardSaved && !isOnSavedNews ? " card__favorite-button_saved" : ""
         }${isOnSavedNews ? " card__favorite-button_on_saved-news" : ""}${
           isLoggedIn && !isOnSavedNews ? " card__favorite-button_active" : ""
         }`}
-        disabled={!isLoggedIn}
       ></button>
       <Link className="card__link" to={url} target="_blank">
         {isOnSavedNews && <p className="card__keyword-label">{keyword}</p>}
