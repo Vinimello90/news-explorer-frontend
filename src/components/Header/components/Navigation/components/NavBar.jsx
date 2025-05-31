@@ -37,6 +37,9 @@ export function NavBar(props) {
 
   function handleLogout() {
     onLogout();
+    if (isMobile) {
+      handleCloseMenu();
+    }
   }
 
   const getLinkClass = (isActive) =>
