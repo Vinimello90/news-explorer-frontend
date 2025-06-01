@@ -1,4 +1,7 @@
-export function PopupSuccess({ han }) {
+export function PopupSuccess({ onOpenPopup }) {
+  function handleGoToSignIn() {
+    onOpenPopup({ type: "signin" });
+  }
   return (
     <>
       <h2 className="popup__title">Cadastro concluído com sucesso!</h2>

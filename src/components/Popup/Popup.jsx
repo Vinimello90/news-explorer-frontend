@@ -1,8 +1,9 @@
-import "./PopupWithForm.css";
-import { useContext, useState } from "react";
+import "./Popup.css";
+import { useContext, useState, useEffect } from "react";
 import { PopupContext } from "../../contexts/PopupContext";
+import { PopupManager } from "./PopupManager/PopupManager";
 
-export function PopupWithForm() {
+export function Popup() {
   const [isOpen, setIsOpen] = useState(false);
 
   const { onClosePopup } = useContext(PopupContext);
@@ -38,6 +39,7 @@ export function PopupWithForm() {
           onClick={handleClosePopup}
           className="popup__button popup__close_button"
         ></button>
+        <PopupManager />
       </div>
     </div>
   );

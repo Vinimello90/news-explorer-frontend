@@ -4,17 +4,15 @@ import { NavLink } from "react-router-dom";
 import logoutIconDark from "../../../../../images/logout_dark.svg";
 import logoutIconLight from "../../../../../images/logout_light.svg";
 import { CurrentUserContext } from "../../../../../contexts/CurrentUserContext";
-import { PopupContext } from "../../../../../contexts/PopupContext";
 
 export function NavBar(props) {
   const {
+    onOpenPopup,
     isSavedNews = false,
     onCloseMenu,
     isMenuOpen,
     isMobile = false,
   } = props;
-
-  const { onOpenPopup } = useContext(PopupContext);
 
   const { isLoggedIn, userData, onLogout } = useContext(CurrentUserContext);
 
@@ -31,7 +29,7 @@ export function NavBar(props) {
   }
 
   function handleOpenPopup() {
-    onOpenPopup();
+    onOpenPopup({ type: "signin" });
     if (isMobile) {
       handleCloseMenu();
     }

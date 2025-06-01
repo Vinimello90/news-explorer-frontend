@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
-import { CurrentUserContext } from "../../../../../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../../../../../../contexts/CurrentUserContext";
 
 export function SignIn(props) {
-  const { formRef, isProcessing, formValidator, buttonDisabled, errorMsg } =
-    props;
+  const { formRef, formValidator, buttonDisabled, errorMsg, onError } = props;
 
   const { onSignIn } = useContext(CurrentUserContext);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const [inputValues, setInputValues] = useState({
     email: "",
@@ -22,13 +22,12 @@ export function SignIn(props) {
     }));
   }
 
-  function onError(error) {
-    setErrorMsg(error);
-  }
-
   function handleSubmitButton(evt) {
     evt.preventDefault();
-    onSignIn(inputValues, onError);
+    setIsProcessing(true);
+    onSignIn(inputValues, onError).finally(() => {
+      setIsProcessing(false);
+    });
   }
 
   return (

@@ -1,8 +1,10 @@
 import "./PopupWithForm.css";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { SignIn } from "./components/SignIn/SignIn";
 import { SignUp } from "./components/SignUp/SignUp";
+import FormValidator from "../../../../../utils/FormValidator";
 
-export function PopupWithForm() {
+export function PopupWithForm({ popup, onOpenPopup }) {
   const [errorMsg, setErrorMsg] = useState();
   const [buttonDisabled, setbuttonDisabled] = useState(true);
 
@@ -33,12 +35,12 @@ export function PopupWithForm() {
   }, [handleFormErrorState, handleFormButtonState, popup]);
 
   function handleGoToSignIn() {
-    setPopup("signin");
+    onOpenPopup({ type: "signin" });
     setErrorMsg("");
   }
 
   function handleGoToSignUp() {
-    setPopup("signup");
+    onOpenPopup({ type: "signup" });
     setErrorMsg("");
   }
 
@@ -50,21 +52,19 @@ export function PopupWithForm() {
       {popup === "signin" && (
         <SignIn
           formRef={formRef}
-          isProcessing={isProcessing}
           formValidator={formValidator}
           buttonDisabled={buttonDisabled}
           errorMsg={errorMsg}
-          onSubmit={handleSignInSubmit}
+          onError={handleFormErrorState}
         />
       )}
       {popup === "signup" && (
         <SignUp
           formRef={formRef}
-          isProcessing={isProcessing}
           formValidator={formValidator}
           buttonDisabled={buttonDisabled}
           errorMsg={errorMsg}
-          onSubmit={handleSignUpSubmit}
+          onError={handleFormErrorState}
         />
       )}
 

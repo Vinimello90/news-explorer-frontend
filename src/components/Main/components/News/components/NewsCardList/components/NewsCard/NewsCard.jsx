@@ -13,7 +13,7 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
 
   const [showAnimation, setShowAnimation] = useState(false);
 
-  const { setPopup } = useContext(PopupContext);
+  const { onOpenPopup } = useContext(PopupContext);
 
   const isCardSaved = savedNews.some((savedNew) => savedNew.url === url);
 
@@ -23,7 +23,7 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
 
   function handleRemoveArticle() {
     const savedArticle = savedNews.find((article) => article.url === url);
-    setPopup({
+    onOpenPopup({
       type: "confirmation",
       savedArticle,
     });
@@ -44,7 +44,7 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
 
   function handleFavoriteButtonClick() {
     if (!isLoggedIn) {
-      setPopup("signin");
+      onOpenPopup({ type: "signin" });
       return;
     }
     if (!isCardSaved) {

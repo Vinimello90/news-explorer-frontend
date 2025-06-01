@@ -8,7 +8,7 @@ export function Navigation({ isSavedNews }) {
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const { popup } = useContext(PopupContext);
+  const { popup, onOpenPopup } = useContext(PopupContext);
 
   useEffect(() => {
     function handleResize() {
@@ -73,13 +73,18 @@ export function Navigation({ isSavedNews }) {
               </button>
             )}
             {!isMobile && (
-              <NavBar isSavedNews={isSavedNews} isMenuOpen={isMenuOpen} />
+              <NavBar
+                onOpenPopup={onOpenPopup}
+                isSavedNews={isSavedNews}
+                isMenuOpen={isMenuOpen}
+              />
             )}
           </div>
         </div>
       }
       {isMobile && (
         <NavBar
+          onOpenPopup={onOpenPopup}
           onCloseMenu={closeMenu}
           isMenuOpen={isMenuOpen}
           isMobile={isMobile}

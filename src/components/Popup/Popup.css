@@ -45,7 +45,7 @@
   top: -46px;
   padding: 0;
   background-color: transparent;
-  background: url("../../../../images/close.svg") no-repeat center;
+  background: url("../../images/close.svg") no-repeat center;
   transition: opacity linear 0.3s;
 }
 
