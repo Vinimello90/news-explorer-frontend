@@ -13,6 +13,8 @@ import { SavedNews } from "../Main/components/News/SavedNews";
 import { mainApi } from "../../utils/MainApi";
 import { authErrorHandler } from "../../utils/authErrorHandler";
 import { getToken, removeToken, setToken } from "../../utils/token";
+import { PopupContext } from "../../contexts/PopupContext";
+import Popup from "../../../../../Sprint_18/web_project_api_full/frontend/src/components/Main/components/Popup/Popup";
 
 function App() {
   const [userData, setUserData] = useState();
@@ -22,7 +24,6 @@ function App() {
   const [popup, setPopup] = useState("");
   const [isAuthChecked, setIsAuthChecked] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false); // iniciar a animação dos botões de submit.
   const [showResults, setShowResults] = useState(false);
   const [isLocalData, setIsLocalData] = useState(false); // Desativa o scroll automatico se os dados dos cards são do localStorage.
   const [isFreshSearch, setIsFreshSearch] = useState(false); // Desativa o scroll automatico para a seção news ao retornar de outra rota.
@@ -179,60 +180,57 @@ function App() {
   }
 
   return (
-    <CurrentUserContext
+    <PopupContext
       value={{
-        userData,
-        onSignIn: handleSignIn,
-        onSignUp: handleSignUp,
-        onLogout: handleLogout,
-        onSaveArticle: handleSaveArticle,
-        onRemoveArticle: handleRemoveArticle,
-        savedNews,
-        isLoggedIn,
+        popup,
+        setPopup,
+        onOpenPopup: { openPopup },
+        onClosePopup: { closePopup },
       }}
     >
-      <div className="page">
-        <Header
-          onSearchRequest={SearchRequest}
-          popup={popup}
-          onOpenPopup={openPopup}
-        />
-        {popup && (
-          <PopupWithForm
-            isProcessing={isProcessing}
-            setPopup={setPopup}
-            popup={popup}
-            onClosePopup={closePopup}
-          />
-        )}
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Main
-                isLocalData={isLocalData}
-                isSearching={isSearching}
-                showResults={showResults}
-                newsData={newsData}
-                isFreshSearch={isFreshSearch}
-                setIsFreshSearch={setIsFreshSearch}
-                setPopup={setPopup}
-              />
-            }
-          ></Route>
-          <Route
-            path="/saved-news"
-            element={
-              <ProtectedRoute isLoggedIn={isLoggedIn}>
-                <SavedNews />
-              </ProtectedRoute>
-            }
-          ></Route>
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-        <Footer />
-      </div>
-    </CurrentUserContext>
+      <CurrentUserContext
+        value={{
+          userData,
+          onSignIn: handleSignIn,
+          onSignUp: handleSignUp,
+          onLogout: handleLogout,
+          onSaveArticle: handleSaveArticle,
+          onRemoveArticle: handleRemoveArticle,
+          savedNews,
+          isLoggedIn,
+        }}
+      >
+        <div className="page">
+          <Header onSearchRequest={SearchRequest} />
+          {popup && <Popup />}
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  isLocalData={isLocalData}
+                  isSearching={isSearching}
+                  showResults={showResults}
+                  newsData={newsData}
+                  isFreshSearch={isFreshSearch}
+                  setIsFreshSearch={setIsFreshSearch}
+                />
+              }
+            ></Route>
+            <Route
+              path="/saved-news"
+              element={
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <SavedNews />
+                </ProtectedRoute>
+              }
+            ></Route>
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+          <Footer />
+        </div>
+      </CurrentUserContext>
+    </PopupContext>
   );
 }
 

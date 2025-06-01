@@ -1,19 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { CurrentUserContext } from "../../../../../contexts/CurrentUserContext";
 
-export function SignUp(props) {
-  const {
-    formRef,
-    isProcessing,
-    formValidator,
-    buttonDisabled,
-    errorMsg,
-    onSubmit,
-  } = props;
+export function SignIn(props) {
+  const { formRef, isProcessing, formValidator, buttonDisabled, errorMsg } =
+    props;
+
+  const { onSignIn } = useContext(CurrentUserContext);
 
   const [inputValues, setInputValues] = useState({
     email: "",
     password: "",
-    username: "",
   });
 
   function handleInputChange(evt) {
@@ -26,17 +22,20 @@ export function SignUp(props) {
     }));
   }
 
+  function onError(error) {
+    setErrorMsg(error);
+  }
+
   function handleSubmitButton(evt) {
     evt.preventDefault();
-    const { email, password, username } = inputValues;
-    onSubmit({ email, password, username: username.trim() });
+    onSignIn(inputValues, onError);
   }
 
   return (
     <form
       ref={formRef}
       onSubmit={handleSubmitButton}
-      name="signup"
+      name="signin"
       className="popup__form"
     >
       <fieldset className="popup__fieldset">
@@ -51,10 +50,9 @@ export function SignUp(props) {
               errorMsg?.email ? " popup__input_error" : ""
             }`}
             placeholder="Insira e-mail"
-            value={inputValues.email}
+            value={inputValues?.email}
             spellCheck={false}
             required
-            autoComplete="new-email"
           />
           <span
             className={`popup__form-error popup__form-error_input${
@@ -75,10 +73,8 @@ export function SignUp(props) {
               errorMsg?.password ? " popup__input_error" : ""
             }`}
             placeholder="Insira a senha"
-            value={inputValues.password}
+            value={inputValues?.password}
             spellCheck={false}
-            minLength={8}
-            autoComplete="new-password"
             required
           />
           <span
@@ -87,32 +83,6 @@ export function SignUp(props) {
             }`}
           >
             {errorMsg?.password}
-          </span>
-        </label>
-        <label className="popup__field">
-          Nome de usuário
-          <input
-            onChange={handleInputChange}
-            type="text"
-            name="username"
-            id="username"
-            className={`popup__input${
-              errorMsg?.username ? " popup__input_error" : ""
-            }`}
-            placeholder="Insira um nome de usário"
-            value={inputValues.username}
-            spellCheck={false}
-            minLength={2}
-            maxLength={30}
-            autoComplete="new-username"
-            required
-          />
-          <span
-            className={`popup__form-error popup__form-error_input${
-              errorMsg?.username ? " popup__form-error_input_show" : ""
-            }`}
-          >
-            {errorMsg?.username}
           </span>
         </label>
         <span
@@ -130,10 +100,10 @@ export function SignUp(props) {
           disabled={buttonDisabled || isProcessing}
         >
           {!isProcessing ? (
-            "Inscrever-se"
+            "Entrar"
           ) : (
             <>
-              Registrando...<span className="popup__spinner"></span>
+              Entrando...<span className="popup__spinner"></span>
             </>
           )}
         </button>

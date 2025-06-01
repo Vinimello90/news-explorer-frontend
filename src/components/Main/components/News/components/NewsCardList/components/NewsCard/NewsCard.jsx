@@ -3,14 +3,17 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import unavailableImage from "../../../../../../../../images/no-image.jpg";
 import { CurrentUserContext } from "../../../../../../../../contexts/CurrentUserContext";
+import { PopupContext } from "../../../../../../../../contexts/PopupContext";
 
-export function NewsCard({ setPopup, isOnSavedNews, article, keyword }) {
+export function NewsCard({ isOnSavedNews, article, keyword }) {
   const { urlToImage, title, description, url, publishedAt, source } = article;
 
-  const { onRemoveArticle, isLoggedIn, onSaveArticle, savedNews } =
+  const { isLoggedIn, onSaveArticle, savedNews } =
     useContext(CurrentUserContext);
 
   const [showAnimation, setShowAnimation] = useState(false);
+
+  const { setPopup } = useContext(PopupContext);
 
   const isCardSaved = savedNews.some((savedNew) => savedNew.url === url);
 
@@ -20,7 +23,10 @@ export function NewsCard({ setPopup, isOnSavedNews, article, keyword }) {
 
   function handleRemoveArticle() {
     const savedArticle = savedNews.find((article) => article.url === url);
-    onRemoveArticle(savedArticle);
+    setPopup({
+      type: "confirmation",
+      savedArticle,
+    });
   }
 
   function handleSaveArticle() {

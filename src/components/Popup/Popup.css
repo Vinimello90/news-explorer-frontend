@@ -1,0 +1,112 @@
+.popup {
+  display: grid;
+  place-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: #00000080;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity linear 0.3s;
+}
+
+.popup_show {
+  opacity: 1;
+}
+
+.popup__container {
+  position: relative;
+  width: 430px;
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 34px 35px 28px;
+  box-sizing: border-box;
+}
+
+.popup__button {
+  border: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.popup__button:disabled {
+  background-color: #d1d2d6;
+  color: #b6bcbf;
+  cursor: default;
+}
+
+.popup__close_button {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  right: -46px;
+  top: -46px;
+  padding: 0;
+  background-color: transparent;
+  background: url("../../../../images/close.svg") no-repeat center;
+  transition: opacity linear 0.3s;
+}
+
+.popup__title {
+  font-weight: 900;
+  font-size: 24px;
+  margin: 0 0 22px;
+}
+
+.popup__goto-text {
+  display: block;
+  font-size: 14px;
+  width: fit-content;
+  margin: 16px auto 0;
+  line-height: 1.1;
+}
+
+.popup__button_goto {
+  padding: 0;
+  background-color: transparent;
+  color: #2f71e5;
+  line-height: 1.1;
+  transition: color linear 0.3s;
+}
+
+@media screen and (max-width: 544px) {
+  .popup__container {
+    align-self: flex-end;
+    height: calc(100vh - 56px);
+    width: 100vw;
+    border-radius: 16px 16px 0 0;
+    padding: 5vw;
+  }
+
+  .popup__close_button {
+    width: 24px;
+    height: 24px;
+    right: 16px;
+    top: -40px;
+    background-size: 13px 13px;
+  }
+
+  .popup__title {
+    margin: 0 0 17px;
+  }
+
+  .popup__field {
+    margin: 0 0 3px;
+  }
+}
+
+@media (hover: hover) {
+  .popup__button:disabled:hover {
+    background-color: #d1d2d6;
+    color: #b6bcbf;
+  }
+
+  .popup__close_button:hover {
+    opacity: 0.8;
+  }
+  .popup__button_goto:hover {
+    color: #4388ff;
+  }
+}
