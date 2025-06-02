@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { CurrentUserContext } from "../../../../../../contexts/CurrentUserContext";
 
-export function NewsCardList({ setPopup, newsData }) {
+export function NewsCardList({ newsData }) {
   const [cardsLimit, setCardsLimit] = useState(3);
 
   const { articles, keyword } = newsData;
@@ -69,7 +69,6 @@ export function NewsCardList({ setPopup, newsData }) {
           .map((news) => {
             return (
               <NewsCard
-                setPopup={setPopup}
                 key={news.url}
                 article={news}
                 keyword={!isOnSavedNews ? keyword : news.keyword}

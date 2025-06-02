@@ -3,7 +3,6 @@ import { News } from "./components/News/News";
 
 export function Main(props) {
   const {
-    setPopup,
     isFreshSearch,
     setIsFreshSearch,
     isLocalData,
@@ -21,7 +20,6 @@ export function Main(props) {
           newsData={newsData}
           isFreshSearch={isFreshSearch}
           setIsFreshSearch={setIsFreshSearch}
-          setPopup={setPopup}
         />
       )}
       <About />

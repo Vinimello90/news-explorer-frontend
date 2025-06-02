@@ -4,7 +4,6 @@ import { Main } from "../Main/Main";
 import { Footer } from "../Footer/Footer";
 import { useEffect, useState } from "react";
 import { getNews } from "../../utils/thirdPartyApi";
-import { PopupWithForm } from "../Main/components/PopupWithForm/PopupWithForm";
 import { getNewsStorage, setNewsStorage } from "../../utils/searchStorage";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { Navigate, Route, Routes } from "react-router-dom";
@@ -13,6 +12,8 @@ import { SavedNews } from "../Main/components/News/SavedNews";
 import { mainApi } from "../../utils/MainApi";
 import { authErrorHandler } from "../../utils/authErrorHandler";
 import { getToken, removeToken, setToken } from "../../utils/token";
+import { PopupContext } from "../../contexts/PopupContext";
+import { Popup } from "../Popup/Popup";
 
 function App() {
   const [userData, setUserData] = useState();
@@ -22,10 +23,9 @@ function App() {
   const [popup, setPopup] = useState("");
   const [isAuthChecked, setIsAuthChecked] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
-  const [isProcessing, setIsProcessing] = useState(false); // iniciar a animação dos botões de submit.
   const [showResults, setShowResults] = useState(false);
-  const [isLocalData, setIsLocalData] = useState(false); // Desativa o scroll automatico se os dados dos cards são do localStorage.
-  const [isFreshSearch, setIsFreshSearch] = useState(false); // Desativa o scroll automatico para a seção news ao retornar de outra rota.
+  const [isLocalData, setIsLocalData] = useState(false); // Previne o scroll automatico se os dados dos cards são do localStorage.
+  const [isFreshSearch, setIsFreshSearch] = useState(false); // Previne o scroll automatico para a seção news ao retornar de outra rota.
 
   async function initializeSession() {
     try {
@@ -70,6 +70,7 @@ function App() {
   }, []);
 
   useEffect(() => {
+    // Busca a ultima feita pesquisa salva no localStorage
     const latestResults = JSON.parse(getNewsStorage());
     if (latestResults?.articles.length > 0) {
       setNewsData(latestResults);
@@ -78,8 +79,8 @@ function App() {
     }
   }, []);
 
-  function openPopup() {
-    setPopup("signin");
+  function openPopup(popup) {
+    setPopup(popup);
   }
 
   function closePopup() {
@@ -123,6 +124,7 @@ function App() {
       setSavedNews((prevSavedNews) =>
         prevSavedNews.filter((savedNews) => savedNews.url !== url)
       );
+      closePopup();
     } catch (err) {
       console.log(err);
     }
@@ -130,23 +132,16 @@ function App() {
 
   async function handleSignUp(user, onError) {
     try {
-      setIsProcessing(true);
       await mainApi.register(user);
-      setPopup("success");
+      openPopup({ type: "success" });
     } catch (err) {
-      console.log(err);
       const error = authErrorHandler(err);
-      onError({
-        submit: error.message,
-      });
-    } finally {
-      setIsProcessing(false);
+      onError({ name: "submit", errorMessage: error.message });
     }
   }
 
   async function handleSignIn(user, onError) {
     try {
-      setIsProcessing(true);
       const { token } = await mainApi.authorize(user);
       if (token) {
         setToken(token);
@@ -155,11 +150,7 @@ function App() {
       closePopup();
     } catch (err) {
       const error = authErrorHandler(err);
-      onError({
-        submit: error.message,
-      });
-    } finally {
-      setIsProcessing(false);
+      onError({ name: "submit", errorMessage: error.message });
     }
   }
 
@@ -179,60 +170,56 @@ function App() {
   }
 
   return (
-    <CurrentUserContext
+    <PopupContext
       value={{
-        userData,
-        onSignIn: handleSignIn,
-        onSignUp: handleSignUp,
-        onLogout: handleLogout,
-        onSaveArticle: handleSaveArticle,
-        onRemoveArticle: handleRemoveArticle,
-        savedNews,
-        isLoggedIn,
+        popup,
+        onOpenPopup: openPopup,
+        onClosePopup: closePopup,
       }}
     >
-      <div className="page">
-        <Header
-          onSearchRequest={SearchRequest}
-          popup={popup}
-          onOpenPopup={openPopup}
-        />
-        {popup && (
-          <PopupWithForm
-            isProcessing={isProcessing}
-            setPopup={setPopup}
-            popup={popup}
-            onClosePopup={closePopup}
-          />
-        )}
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Main
-                isLocalData={isLocalData}
-                isSearching={isSearching}
-                showResults={showResults}
-                newsData={newsData}
-                isFreshSearch={isFreshSearch}
-                setIsFreshSearch={setIsFreshSearch}
-                setPopup={setPopup}
-              />
-            }
-          ></Route>
-          <Route
-            path="/saved-news"
-            element={
-              <ProtectedRoute isLoggedIn={isLoggedIn}>
-                <SavedNews />
-              </ProtectedRoute>
-            }
-          ></Route>
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-        <Footer />
-      </div>
-    </CurrentUserContext>
+      <CurrentUserContext
+        value={{
+          userData,
+          onSignIn: handleSignIn,
+          onSignUp: handleSignUp,
+          onLogout: handleLogout,
+          onSaveArticle: handleSaveArticle,
+          onRemoveArticle: handleRemoveArticle,
+          savedNews,
+          isLoggedIn,
+        }}
+      >
+        <div className="page">
+          <Header onSearchRequest={SearchRequest} />
+          {popup && <Popup />}
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  isLocalData={isLocalData}
+                  isSearching={isSearching}
+                  showResults={showResults}
+                  newsData={newsData}
+                  isFreshSearch={isFreshSearch}
+                  setIsFreshSearch={setIsFreshSearch}
+                />
+              }
+            ></Route>
+            <Route
+              path="/saved-news"
+              element={
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <SavedNews />
+                </ProtectedRoute>
+              }
+            ></Route>
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+          <Footer />
+        </div>
+      </CurrentUserContext>
+    </PopupContext>
   );
 }
 

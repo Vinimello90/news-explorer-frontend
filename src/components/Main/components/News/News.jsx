@@ -4,7 +4,6 @@ import { Preloader } from "../Preloader/Preloader";
 import { NewsCardList } from "./components/NewsCardList/NewsCardList";
 
 export function News({
-  setPopup,
   isFreshSearch,
   setIsFreshSearch,
   isLocalData,
@@ -25,9 +24,7 @@ export function News({
     <section ref={searchRef} className="news">
       <div className="news__container">
         {isSearching && <Preloader />}
-        {!isSearching && (
-          <NewsCardList setPopup={setPopup} newsData={newsData} />
-        )}
+        {!isSearching && <NewsCardList newsData={newsData} />}
       </div>
     </section>
   );

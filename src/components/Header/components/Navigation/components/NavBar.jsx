@@ -7,8 +7,8 @@ import { CurrentUserContext } from "../../../../../contexts/CurrentUserContext";
 
 export function NavBar(props) {
   const {
-    isSavedNews = false,
     onOpenPopup,
+    isSavedNews = false,
     onCloseMenu,
     isMenuOpen,
     isMobile = false,
@@ -29,7 +29,7 @@ export function NavBar(props) {
   }
 
   function handleOpenPopup() {
-    onOpenPopup();
+    onOpenPopup({ type: "signin" });
     if (isMobile) {
       handleCloseMenu();
     }

@@ -1,11 +1,14 @@
 import "./Navigation.css";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavBar } from "./components/NavBar";
+import { PopupContext } from "../../../../contexts/PopupContext";
 
-export function Navigation({ isSavedNews, popup, onOpenPopup }) {
+export function Navigation({ isSavedNews }) {
   const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const { popup, onOpenPopup } = useContext(PopupContext);
 
   useEffect(() => {
     function handleResize() {
@@ -71,9 +74,9 @@ export function Navigation({ isSavedNews, popup, onOpenPopup }) {
             )}
             {!isMobile && (
               <NavBar
+                onOpenPopup={onOpenPopup}
                 isSavedNews={isSavedNews}
                 isMenuOpen={isMenuOpen}
-                onOpenPopup={onOpenPopup}
               />
             )}
           </div>
@@ -81,7 +84,6 @@ export function Navigation({ isSavedNews, popup, onOpenPopup }) {
       }
       {isMobile && (
         <NavBar
-          popup={popup}
           onOpenPopup={onOpenPopup}
           onCloseMenu={closeMenu}
           isMenuOpen={isMenuOpen}
