@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { CurrentUserContext } from "../../../../../../../contexts/CurrentUserContext";
 
 export function SignUp(props) {
-  const { formValidator, buttonDisabled, errorMsg, onSubmit } = props;
+  const { formRef, formValidator, buttonDisabled, errorMsg, onError } = props;
+
+  const { onSignUp } = useContext(CurrentUserContext);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const [inputValues, setInputValues] = useState({
     email: "",
@@ -11,8 +15,8 @@ export function SignUp(props) {
 
   function handleInputChange(evt) {
     const inputElement = evt.target;
-    formValidator.validateInput(inputElement);
-    formValidator.validateForm();
+    formValidator.current.validateInput(inputElement);
+    formValidator.current.validateForm();
     setInputValues((prev) => ({
       ...prev,
       [inputElement.id]: inputElement.value,
@@ -21,11 +25,21 @@ export function SignUp(props) {
 
   function handleSubmitButton(evt) {
     evt.preventDefault();
-    onSubmit(inputValues);
+    setIsProcessing(true);
+    const { email, password, username } = inputValues;
+    const user = { email, password, username: username.trim() };
+    onSignUp(user, onError).finally(() => {
+      setIsProcessing(false);
+    });
   }
 
   return (
-    <form onSubmit={handleSubmitButton} name="signup" className="popup__form">
+    <form
+      ref={formRef}
+      onSubmit={handleSubmitButton}
+      name="signup"
+      className="popup__form"
+    >
       <fieldset className="popup__fieldset">
         <label className="popup__field">
           E-mail
@@ -90,7 +104,7 @@ export function SignUp(props) {
             value={inputValues.username}
             spellCheck={false}
             minLength={2}
-            maxLength={10}
+            maxLength={30}
             autoComplete="new-username"
             required
           />
@@ -111,10 +125,18 @@ export function SignUp(props) {
         </span>
         <button
           type="submit"
-          className="popup__button popup__button_submit"
-          disabled={buttonDisabled}
+          className={`popup__button popup__button_submit${
+            isProcessing ? " popup__submit_processing" : ""
+          }`}
+          disabled={buttonDisabled || isProcessing}
         >
-          Inscrever-se
+          {!isProcessing ? (
+            "Inscrever-se"
+          ) : (
+            <>
+              Registrando...<span className="popup__spinner"></span>
+            </>
+          )}
         </button>
       </fieldset>
     </form>

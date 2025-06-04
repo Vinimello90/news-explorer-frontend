@@ -7,8 +7,8 @@ import { CurrentUserContext } from "../../../../../contexts/CurrentUserContext";
 
 export function NavBar(props) {
   const {
-    isSavedNews = false,
     onOpenPopup,
+    isSavedNews = false,
     onCloseMenu,
     isMenuOpen,
     isMobile = false,
@@ -29,7 +29,7 @@ export function NavBar(props) {
   }
 
   function handleOpenPopup() {
-    onOpenPopup();
+    onOpenPopup({ type: "signin" });
     if (isMobile) {
       handleCloseMenu();
     }
@@ -37,6 +37,9 @@ export function NavBar(props) {
 
   function handleLogout() {
     onLogout();
+    if (isMobile) {
+      handleCloseMenu();
+    }
   }
 
   const getLinkClass = (isActive) =>
@@ -64,6 +67,7 @@ export function NavBar(props) {
             onClick={handleCloseMenu}
             to="/"
             className={({ isActive }) => getLinkClass(isActive)}
+            replace
           >
             Início
           </NavLink>
@@ -75,6 +79,7 @@ export function NavBar(props) {
               onClick={handleCloseMenu}
               to="/saved-news"
               className={({ isActive }) => getLinkClass(isActive)}
+              replace
             >
               Artigos salvos
             </NavLink>
@@ -86,7 +91,13 @@ export function NavBar(props) {
             onClick={!isLoggedIn ? handleOpenPopup : handleLogout}
             className={buttonClass}
           >
-            {!isLoggedIn ? "Entre" : userData.username}
+            {!isLoggedIn ? (
+              "Entre"
+            ) : (
+              <p className="navbar__username">
+                {userData.username.split(" ")[0]}
+              </p>
+            )}
             {isLoggedIn && (
               <img
                 src={isSavedNews ? logoutIconLight : logoutIconDark}

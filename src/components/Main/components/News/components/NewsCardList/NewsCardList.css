@@ -27,6 +27,7 @@
   margin: 64px auto 0;
   cursor: pointer;
   transition: background-color linear 0.3s;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .news__button:hover {

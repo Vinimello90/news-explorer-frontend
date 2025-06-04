@@ -1,60 +1,78 @@
 import "./NewsCard.css";
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import imageUnavailable from "../../../../../../../../images/no-image.jpg";
+import unavailableImage from "../../../../../../../../images/no-image.jpg";
 import { CurrentUserContext } from "../../../../../../../../contexts/CurrentUserContext";
+import { PopupContext } from "../../../../../../../../contexts/PopupContext";
 
 export function NewsCard({ isOnSavedNews, article, keyword }) {
   const { urlToImage, title, description, url, publishedAt, source } = article;
 
-  const { onRemoveArticle, isLoggedIn, onSaveArticle, userData } =
+  const { isLoggedIn, onSaveArticle, savedNews } =
     useContext(CurrentUserContext);
 
   const [showAnimation, setShowAnimation] = useState(false);
-  const [isCardSaved, setIsCardSaved] = useState(false);
+
+  const { onOpenPopup } = useContext(PopupContext);
+
+  const isCardSaved = savedNews.some((savedNew) => savedNew.url === url);
 
   useEffect(() => {
     setShowAnimation(true);
   }, []);
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      setIsCardSaved(userData.isSaved.includes(article.url));
-      return;
-    }
-    setIsCardSaved(false); // remove o icone do bookmark ativo sem apagar os dados temporarios
-  }, [isLoggedIn, userData, article]);
-
-  function handleRemoveButton() {
-    onRemoveArticle({ url, keyword });
-    setIsCardSaved(false);
+  function handleRemoveArticle() {
+    const savedArticle = savedNews.find((article) => article.url === url);
+    onOpenPopup({
+      type: "confirmation",
+      savedArticle,
+    });
   }
 
-  function handleSaveButton() {
-    onSaveArticle({ article, keyword });
-    setIsCardSaved(true);
+  function handleSaveArticle() {
+    const newsArticle = {
+      title,
+      description,
+      keyword,
+      source: source.name,
+      url,
+      urlToImage,
+      publishedAt,
+    };
+    onSaveArticle(newsArticle);
+  }
+
+  function handleFavoriteButtonClick() {
+    if (!isLoggedIn) {
+      onOpenPopup({ type: "signin" });
+      return;
+    }
+    if (!isCardSaved) {
+      handleSaveArticle();
+    } else {
+      handleRemoveArticle();
+    }
   }
 
   return (
     <li className={`card${showAnimation ? " card_visible" : ""} `}>
       <button
-        onClick={!isCardSaved ? handleSaveButton : handleRemoveButton}
+        onClick={handleFavoriteButtonClick}
         type="button"
         className={`card__favorite-button${
           isCardSaved && !isOnSavedNews ? " card__favorite-button_saved" : ""
         }${isOnSavedNews ? " card__favorite-button_on_saved-news" : ""}${
           isLoggedIn && !isOnSavedNews ? " card__favorite-button_active" : ""
         }`}
-        disabled={!isLoggedIn}
       ></button>
       <Link className="card__link" to={url} target="_blank">
         {isOnSavedNews && <p className="card__keyword-label">{keyword}</p>}
         <img
-          src={urlToImage ? urlToImage : imageUnavailable}
+          src={urlToImage ? urlToImage : unavailableImage}
           alt={`imagem do artigo ${title ? title : "Notícia relacionada"}`}
           className="card__image"
           onError={(evt) => {
-            evt.target.src = { imageUnavailable };
+            evt.target.src = { unavailableImage };
           }}
         />
         <div className="card__content">
@@ -69,7 +87,7 @@ export function NewsCard({ isOnSavedNews, article, keyword }) {
             {title ? title : "Notícia relacionada"}
           </h3>
           <p className="card__news-text">{description}</p>
-          <p className="card__news-source">{source.name}</p>
+          <p className="card__news-source">{source.name || source}</p>
         </div>
       </Link>
     </li>

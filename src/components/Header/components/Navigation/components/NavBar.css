@@ -58,6 +58,15 @@
   width: fit-content;
 }
 
+.navbar__username {
+  margin: 0;
+  padding: 0;
+  max-width: 17.47vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+}
+
 .navbar__logout-icon {
   width: 17.41px;
   height: 16px;
@@ -65,34 +74,32 @@
 }
 
 @media screen and (max-width: 1024px) {
-  @media screen and (max-width: 1024px) {
-    .navbar__menu {
-      gap: 16px;
-    }
+  .navbar__menu {
+    gap: 16px;
+  }
 
-    .navbar__link {
-      font-size: 16px;
-      -webkit-tap-highlight-color: transparent;
-    }
+  .navbar__link {
+    font-size: 16px;
+    -webkit-tap-highlight-color: transparent;
+  }
 
-    .navbar__link_active:after {
-      bottom: -21px;
-    }
+  .navbar__link_active:after {
+    bottom: -21px;
+  }
 
-    .navbar__button {
-      width: 152px;
-      height: 40px;
-      -webkit-tap-highlight-color: transparent;
-    }
+  .navbar__button {
+    width: 152px;
+    height: 40px;
+    -webkit-tap-highlight-color: transparent;
+  }
 
-    .navbar__button_logout {
-      width: fit-content;
-      font-size: 16px;
-    }
+  .navbar__button_logout {
+    width: fit-content;
+    font-size: 16px;
   }
 }
 
-@media screen and (max-width: 544px) {
+@media screen and (max-width: 600px) {
   .navbar_mb {
     position: fixed;
     top: 0;
@@ -143,6 +150,14 @@
     height: 55.61px;
     border: #fff 1px solid;
     color: #fff;
+  }
+
+  .navbar__username {
+    margin: 0;
+    padding: 0;
+    max-width: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 

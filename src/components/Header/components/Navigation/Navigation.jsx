@@ -1,22 +1,24 @@
 import "./Navigation.css";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavBar } from "./components/NavBar";
+import { PopupContext } from "../../../../contexts/PopupContext";
 
-export function Navigation({ isSavedNews, isPopupOpen, onOpenPopup }) {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 544);
+export function Navigation({ isSavedNews }) {
+  const [isMobile, setIsMobile] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const { popup, onOpenPopup } = useContext(PopupContext);
 
   useEffect(() => {
     function handleResize() {
-      setIsMobile(window.innerWidth <= 544);
-      if (isMenuOpen && window.innerWidth > 544) {
-        setIsMenuOpen(false);
-      }
+      setIsMobile(window.innerWidth <= 600);
+      setIsMenuOpen((prev) => (window.innerWidth > 600 ? false : prev));
     }
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [isMenuOpen]);
+  }, []);
 
   function closeMenu() {
     setIsMenuOpen(false);
@@ -28,14 +30,14 @@ export function Navigation({ isSavedNews, isPopupOpen, onOpenPopup }) {
         <div
           className={`navigation${
             isSavedNews && !isMenuOpen ? " navigation_light" : ""
-          }${isPopupOpen && isMobile ? " navigation_hidden" : ""}`}
+          }${popup && isMobile ? " navigation_hidden" : ""}`}
         >
           <div
             className={`navigation__container${
               isSavedNews ? " navigation__container_light" : ""
             }`}
           >
-            <Link to="/" className="navigation__link">
+            <Link to="/" className="navigation__link" replace>
               <h1
                 className={`navigation__logo${
                   isSavedNews && isMenuOpen ? " navigation__logo_dark" : ""
@@ -72,9 +74,9 @@ export function Navigation({ isSavedNews, isPopupOpen, onOpenPopup }) {
             )}
             {!isMobile && (
               <NavBar
+                onOpenPopup={onOpenPopup}
                 isSavedNews={isSavedNews}
                 isMenuOpen={isMenuOpen}
-                onOpenPopup={onOpenPopup}
               />
             )}
           </div>
@@ -82,7 +84,6 @@ export function Navigation({ isSavedNews, isPopupOpen, onOpenPopup }) {
       }
       {isMobile && (
         <NavBar
-          isPopupOpen={isPopupOpen}
           onOpenPopup={onOpenPopup}
           onCloseMenu={closeMenu}
           isMenuOpen={isMenuOpen}

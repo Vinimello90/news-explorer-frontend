@@ -1,6 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { CurrentUserContext } from "../../../../../../../contexts/CurrentUserContext";
 
-export function SignIn({ formValidator, buttonDisabled, errorMsg, onSubmit }) {
+export function SignIn(props) {
+  const { formRef, formValidator, buttonDisabled, errorMsg, onError } = props;
+
+  const { onSignIn } = useContext(CurrentUserContext);
+  const [isProcessing, setIsProcessing] = useState(false);
+
   const [inputValues, setInputValues] = useState({
     email: "",
     password: "",
@@ -8,8 +14,8 @@ export function SignIn({ formValidator, buttonDisabled, errorMsg, onSubmit }) {
 
   function handleInputChange(evt) {
     const inputElement = evt.target;
-    formValidator.validateInput(inputElement);
-    formValidator.validateForm();
+    formValidator.current.validateInput(inputElement);
+    formValidator.current.validateForm();
     setInputValues((prev) => ({
       ...prev,
       [inputElement.id]: inputElement.value,
@@ -18,11 +24,19 @@ export function SignIn({ formValidator, buttonDisabled, errorMsg, onSubmit }) {
 
   function handleSubmitButton(evt) {
     evt.preventDefault();
-    onSubmit(inputValues);
+    setIsProcessing(true);
+    onSignIn(inputValues, onError).finally(() => {
+      setIsProcessing(false);
+    });
   }
 
   return (
-    <form onSubmit={handleSubmitButton} name="signin" className="popup__form">
+    <form
+      ref={formRef}
+      onSubmit={handleSubmitButton}
+      name="signin"
+      className="popup__form"
+    >
       <fieldset className="popup__fieldset">
         <label className="popup__field">
           E-mail
@@ -79,10 +93,18 @@ export function SignIn({ formValidator, buttonDisabled, errorMsg, onSubmit }) {
         </span>
         <button
           type="submit"
-          className="popup__button popup__button_submit"
-          disabled={buttonDisabled}
+          className={`popup__button popup__button_submit${
+            isProcessing ? " popup__submit_processing" : ""
+          }`}
+          disabled={buttonDisabled || isProcessing}
         >
-          Entrar
+          {!isProcessing ? (
+            "Entrar"
+          ) : (
+            <>
+              Entrando...<span className="popup__spinner"></span>
+            </>
+          )}
         </button>
       </fieldset>
     </form>
