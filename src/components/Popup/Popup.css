@@ -55,6 +55,30 @@
   margin: 0 0 22px;
 }
 
+.popup__passkey-title {
+  font-size: 18px;
+  margin: 0 0 10px;
+}
+
+.popup__passkey-description {
+  font-size: 16px;
+  margin: 0 0 22px;
+}
+
+.popup__button_passkey {
+  display: block;
+  padding: 0;
+  background-color: #2f71e5;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  color: white;
+  width: 360px;
+  height: 64px;
+  margin: 0 auto;
+  border-radius: 100px;
+  transition: color linear 0.3s;
+}
+
 .popup__goto-text {
   display: block;
   font-size: 14px;

@@ -20,7 +20,7 @@ function App() {
   const [savedNews, setSavedNews] = useState([]);
   const [newsData, setNewsData] = useState({ articles: "", keyword: "" });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [popup, setPopup] = useState("");
+  const [popup, setPopup] = useState({ type: "registerPasskey" });
   const [isAuthChecked, setIsAuthChecked] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [showResults, setShowResults] = useState(false);
