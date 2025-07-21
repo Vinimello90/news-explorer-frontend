@@ -12,6 +12,7 @@ class MainApi {
   register(user) {
     return fetch(`${this._baseUrl}/signup`, {
       method: "POST",
+      credentials: "include",
       headers: {
         Accept: "aplication/json",
         "Content-type": "application/json",
@@ -34,6 +35,7 @@ class MainApi {
   getCurrentUser() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
+      credentials: "include",
       headers: {
         Accept: "aplication/json",
         Authorization: `Bearer ${getToken()}`,
@@ -75,5 +77,5 @@ class MainApi {
 }
 
 export const mainApi = new MainApi({
-  baseUrl: "https://api.newsexplorer.protechadvanced.com",
+  baseUrl: "http://localhost:3001",
 });

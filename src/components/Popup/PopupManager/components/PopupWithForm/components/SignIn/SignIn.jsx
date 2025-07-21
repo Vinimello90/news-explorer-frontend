@@ -94,7 +94,7 @@ export function SignIn(props) {
         <button
           type="submit"
           className={`popup__button popup__button_submit${
-            isProcessing ? " popup__submit_processing" : ""
+            isProcessing ? " popup__button_processing" : ""
           }`}
           disabled={buttonDisabled || isProcessing}
         >

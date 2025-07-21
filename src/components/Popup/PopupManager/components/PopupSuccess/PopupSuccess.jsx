@@ -1,9 +1,28 @@
+import { useContext, useState } from "react";
+import { CurrentUserContext } from "../../../../../contexts/CurrentUserContext";
+
 export function PopupSuccess({ onOpenPopup }) {
-  function handlePasskeyRegister() {}
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+
+  const { onPasskeyRegister } = useContext(CurrentUserContext);
 
   function handleGoToSignIn() {
     onOpenPopup({ type: "signin" });
   }
+
+  function setLoadingState(loading) {
+    setIsProcessing(loading);
+    setButtonDisabled(loading);
+  }
+
+  function handleRegisterButton() {
+    setLoadingState(true);
+    onPasskeyRegister().finally(() => {
+      setLoadingState(false);
+    });
+  }
+
   return (
     <>
       <h2 className="popup__title">Cadastro concluído com sucesso!</h2>
@@ -13,11 +32,18 @@ export function PopupSuccess({ onOpenPopup }) {
         senha.
       </p>
       <button
-        onClick={handlePasskeyRegister}
+        onClick={handleRegisterButton}
         type="button"
         className="popup__button popup__button_passkey"
+        disabled={buttonDisabled}
       >
-        Registrar Passkey
+        {!isProcessing ? (
+          "Registrar Passkey"
+        ) : (
+          <>
+            Registrando...<span className="popup__spinner"></span>
+          </>
+        )}
       </button>
       <p className="popup__goto-text">
         ou{" "}

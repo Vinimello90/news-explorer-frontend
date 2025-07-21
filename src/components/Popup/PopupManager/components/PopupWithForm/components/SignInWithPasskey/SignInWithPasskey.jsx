@@ -1,15 +1,16 @@
 import { useContext, useState } from "react";
 import { CurrentUserContext } from "../../../../../../../contexts/CurrentUserContext";
+import { startAuthentication } from "@simplewebauthn/browser";
+import { passkey } from "../../../../../../../utils/Passkey";
 
 export function SignInWithPasskey(props) {
   const { formRef, formValidator, buttonDisabled, errorMsg, onError } = props;
 
-  const { onSignIn } = useContext(CurrentUserContext);
+  const { onPasskeySignIn } = useContext(CurrentUserContext);
   const [isProcessing, setIsProcessing] = useState(false);
 
   const [inputValues, setInputValues] = useState({
     email: "",
-    password: "",
   });
 
   function handleInputChange(evt) {
@@ -22,12 +23,10 @@ export function SignInWithPasskey(props) {
     }));
   }
 
-  function handleSubmitButton(evt) {
+  async function handleSubmitButton(evt) {
     evt.preventDefault();
     setIsProcessing(true);
-    onSignIn(inputValues, onError).finally(() => {
-      setIsProcessing(false);
-    });
+    onPasskeySignIn(inputValues, onError).finally(() => setIsProcessing(false));
   }
 
   return (

@@ -53,7 +53,9 @@ export function PopupWithForm({ popup, onOpenPopup }) {
   return (
     <>
       <h2 className="popup__title">
-        {popup === "signin" || "signinPasskey" ? "Entrar" : "Inscrever-se"}
+        {popup === "signin" && "Entrar"}
+        {popup === "signinPasskey" && "Entrar com Passkey"}
+        {popup === "signup" && "Inscrever-se"}
       </h2>
       {popup === "signin" && (
         <SignIn
@@ -82,25 +84,29 @@ export function PopupWithForm({ popup, onOpenPopup }) {
           onError={handleFormErrorState}
         />
       )}
-      {(popup === "signin" || "signinPasskey") && (
-        <button
-          onClick={
-            popup === "signin" ? handleGoToSignWithPasskey : handleGoToSignIn
-          }
-          type="button"
-          className="popup__button popup__button_goto"
-        >
-          {popup !== "signin" ? "Entrar com senha" : "Entrar com Passkey"}
-        </button>
-      )}
       <p className="popup__goto-text">
+        {(popup === "signin" || "signinPasskey") && (
+          <button
+            onClick={
+              popup !== "signinPasskey"
+                ? handleGoToSignWithPasskey
+                : handleGoToSignIn
+            }
+            type="button"
+            className="popup__button popup__button_goto"
+          >
+            {popup !== "signinPasskey"
+              ? "Entrar com Passkey"
+              : "Entrar com senha"}
+          </button>
+        )}{" "}
         ou{" "}
         <button
-          onClick={popup === "signin" ? handleGoToSignUp : handleGoToSignIn}
+          onClick={popup !== "signup" ? handleGoToSignUp : handleGoToSignIn}
           type="button"
           className="popup__button popup__button_goto"
         >
-          {popup === "signin" ? "Inscrever-se" : "Entrar"}
+          {popup !== "signup" ? "Inscrever-se" : "Entrar com senha"}
         </button>
       </p>
     </>

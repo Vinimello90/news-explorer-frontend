@@ -14,13 +14,14 @@ import { authErrorHandler } from "../../utils/authErrorHandler";
 import { getToken, removeToken, setToken } from "../../utils/token";
 import { PopupContext } from "../../contexts/PopupContext";
 import { Popup } from "../Popup/Popup";
+import { passkey } from "../../utils/Passkey";
 
 function App() {
   const [userData, setUserData] = useState();
   const [savedNews, setSavedNews] = useState([]);
   const [newsData, setNewsData] = useState({ articles: "", keyword: "" });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [popup, setPopup] = useState({ type: "registerPasskey" });
+  const [popup, setPopup] = useState();
   const [isAuthChecked, setIsAuthChecked] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [showResults, setShowResults] = useState(false);
@@ -29,13 +30,17 @@ function App() {
 
   async function initializeSession() {
     try {
-      const currentUser = await mainApi.getCurrentUser();
+      const { user, hasPasskey } = await mainApi.getCurrentUser();
       const articles = await mainApi.getArticles();
       articles.reverse();
-      setUserData(currentUser);
+      setUserData(user);
       setSavedNews(articles);
       setIsLoggedIn(true);
+      if (!hasPasskey) {
+        openPopup({ type: "registerPasskey" });
+      }
     } catch (err) {
+      console.log(err);
       if (err.status === 401) {
         removeToken();
         setIsLoggedIn(false);
@@ -130,6 +135,33 @@ function App() {
     }
   }
 
+  async function handlePasskeyRegister() {
+    try {
+      await passkey.register();
+      if (!isLoggedIn) {
+        openPopup({ type: "signinPasskey" });
+      }
+    } catch (err) {
+      authErrorHandler(err);
+    }
+  }
+
+  async function handlePasskeySignIn(user, onError) {
+    try {
+      const { token } = await passkey.signIn(user);
+      console.log(token);
+      if (token) {
+        setToken(token);
+        initializeSession();
+        closePopup();
+      }
+    } catch (err) {
+      err.message = "Não foi possível autorizar a passkey.";
+      const error = authErrorHandler(err);
+      onError({ name: "submit", errorMessage: error.message });
+    }
+  }
+
   async function handleSignUp(user, onError) {
     try {
       await mainApi.register(user);
@@ -180,6 +212,8 @@ function App() {
       <CurrentUserContext
         value={{
           userData,
+          onPasskeySignIn: handlePasskeySignIn,
+          onPasskeyRegister: handlePasskeyRegister,
           onSignIn: handleSignIn,
           onSignUp: handleSignUp,
           onLogout: handleLogout,

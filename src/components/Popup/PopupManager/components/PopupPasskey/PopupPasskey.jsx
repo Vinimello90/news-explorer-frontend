@@ -1,55 +1,46 @@
-import { startRegistration } from "@simplewebauthn/browser";
+import { useContext, useState } from "react";
+import { CurrentUserContext } from "../../../../../contexts/CurrentUserContext";
 
-export function PopupPasskey({ onOpenPopup }) {
-  async function handlePasskeyRegister() {
-    const resp = await fetch("/generate-registration-options");
-    const optionsJSON = await resp.json();
-    let attResp;
-    try {
-      attResp = await startRegistration({ optionsJSON });
-    } catch (err) {
-      if (err.name === "InvalidStateError") {
-        elemError.innerText =
-          "Error: Authenticator was probably already registered by user";
-      } else {
-        elemError.innerText = err;
-      }
-      throw err;
-    }
-    const verificationResp = await fetch("/verify-registration", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(attResp),
+export function PopupPasskey() {
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+
+  const { onPasskeyRegister } = useContext(CurrentUserContext);
+
+  function setLoadingState(loading) {
+    setIsProcessing(loading);
+    setButtonDisabled(loading);
+  }
+
+  function handleRegisterButton() {
+    setLoadingState(true);
+    onPasskeyRegister().finally(() => {
+      setLoadingState(false);
     });
-
-    const verificationJSON = await verificationResp.json();
-
-    if (verificationJSON && verificationJSON.verified) {
-      console.log("Success!");
-    } else {
-      console.log(
-        `Oh no, something went wrong! Response: ${JSON.stringify(
-          verificationJSON
-        )}`
-      );
-    }
   }
 
   return (
     <>
-      <h2 class="popup__title">Deseja ativar o Passkey?</h2>
-      <p class="popup__passkey-description">
+      <h2 className="popup__title">Deseja ativar o Passkey?</h2>
+      <p className="popup__passkey-description">
         Com o Passkey, você pode fazer login com segurança, sem precisar de
         senha.
       </p>
       <button
-        onClick={handlePasskeyRegister}
+        onClick={handleRegisterButton}
         type="button"
-        className="popup__button popup__button_passkey"
+        className={`popup__button popup__button_passkey${
+          isProcessing ? " popup__button_processing" : ""
+        }`}
+        disabled={buttonDisabled}
       >
-        Registrar Passkey
+        {!isProcessing ? (
+          "Registrar Passkey"
+        ) : (
+          <>
+            Registrando...<span className="popup__spinner"></span>
+          </>
+        )}
       </button>
     </>
   );
