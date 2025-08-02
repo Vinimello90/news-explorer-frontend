@@ -66,5 +66,5 @@ class Passkey {
 }
 
 export const passkey = new Passkey({
-  baseUrl: "api.newsexplorer.protechadvanced.com",
+  baseUrl: "https://api.newsexplorer.protechadvanced.com",
 });

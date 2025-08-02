@@ -1,11 +1,13 @@
 import { useContext, useState } from "react";
 import { CurrentUserContext } from "../../../../../contexts/CurrentUserContext";
+import { PopupContext } from "../../../../../contexts/PopupContext";
 
 export function PopupPasskey() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const { onPasskeyRegister } = useContext(CurrentUserContext);
+  const { onClosePopup } = useContext(PopupContext);
 
   function setLoadingState(loading) {
     setIsProcessing(loading);
@@ -16,6 +18,7 @@ export function PopupPasskey() {
     setLoadingState(true);
     onPasskeyRegister().finally(() => {
       setLoadingState(false);
+      onClosePopup();
     });
   }
 
