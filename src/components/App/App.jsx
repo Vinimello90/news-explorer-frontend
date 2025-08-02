@@ -149,14 +149,13 @@ function App() {
   async function handlePasskeySignIn(user, onError) {
     try {
       const { token } = await passkey.signIn(user);
-      console.log(token);
       if (token) {
         setToken(token);
         initializeSession();
         closePopup();
       }
     } catch (err) {
-      err.message = "Não foi possível autorizar a passkey.";
+      err.message = "E-mail ou Passkey inválido.";
       const error = authErrorHandler(err);
       onError({ name: "submit", errorMessage: error.message });
     }

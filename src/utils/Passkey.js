@@ -1,4 +1,3 @@
-import { getToken } from "./token";
 import {
   startAuthentication,
   startRegistration,
@@ -14,7 +13,7 @@ class Passkey {
   }
 
   _verifyRegistration(res) {
-    return fetch("http://localhost:3001/passkeys/register/verify", {
+    return fetch(`${this._baseUrl}/passkeys/register/verify`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -25,7 +24,7 @@ class Passkey {
   }
 
   _verifyAuthentication(res) {
-    return fetch("http://localhost:3001/passkeys/authentication/verify", {
+    return fetch(`${this._baseUrl}/passkeys/authentication/verify`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -36,14 +35,14 @@ class Passkey {
   }
 
   _getRegistrationOption() {
-    return fetch("http://localhost:3001/passkeys/register/options", {
+    return fetch(`${this._baseUrl}/passkeys/register/options`, {
       method: "POST",
       credentials: "include",
     }).then((res) => this._checkResponse(res));
   }
 
   _getAuthenticationOption(email) {
-    return fetch("http://localhost:3001/passkeys/authentication/options", {
+    return fetch(`${this._baseUrl}/passkeys/authentication/options`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -67,5 +66,5 @@ class Passkey {
 }
 
 export const passkey = new Passkey({
-  baseUrl: "http://localhost:3001",
+  baseUrl: "api.newsexplorer.protechadvanced.com",
 });
