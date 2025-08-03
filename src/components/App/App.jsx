@@ -2,7 +2,7 @@ import "./App.css";
 import { Header } from "../Header/Header";
 import { Main } from "../Main/Main";
 import { Footer } from "../Footer/Footer";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getNews } from "../../utils/thirdPartyApi";
 import { getNewsStorage, setNewsStorage } from "../../utils/searchStorage";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -17,7 +17,7 @@ import { Popup } from "../Popup/Popup";
 import { passkey } from "../../utils/Passkey";
 
 function App() {
-  const [userData, setUserData] = useState("");
+  const [userData, setUserData] = useState();
   const [savedNews, setSavedNews] = useState([]);
   const [newsData, setNewsData] = useState({ articles: "", keyword: "" });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -28,7 +28,7 @@ function App() {
   const [isLocalData, setIsLocalData] = useState(false); // Previne o scroll automatico se os dados dos cards são do localStorage.
   const [isFreshSearch, setIsFreshSearch] = useState(false); // Previne o scroll automatico para a seção news ao retornar de outra rota.
 
-  async function initializeSession() {
+  const initializeSession = useCallback(async () => {
     try {
       const { user, hasPasskey } = await mainApi.getCurrentUser();
       const articles = await mainApi.getArticles();
@@ -48,7 +48,7 @@ function App() {
     } finally {
       setIsAuthChecked(true);
     }
-  }
+  }, []);
 
   useEffect(() => {
     const jwt = getToken();
@@ -72,7 +72,7 @@ function App() {
 
     window.addEventListener("pageshow", handleBFCache);
     return () => window.removeEventListener("pageshow", handleBFCache);
-  }, []);
+  }, [initializeSession]);
 
   useEffect(() => {
     // Busca a ultima feita pesquisa salva no localStorage

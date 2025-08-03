@@ -1,7 +1,5 @@
 import { useContext, useState } from "react";
 import { CurrentUserContext } from "../../../../../../../contexts/CurrentUserContext";
-import { startAuthentication } from "@simplewebauthn/browser";
-import { passkey } from "../../../../../../../utils/Passkey";
 
 export function SignInWithPasskey(props) {
   const { formRef, formValidator, buttonDisabled, errorMsg, onError } = props;
