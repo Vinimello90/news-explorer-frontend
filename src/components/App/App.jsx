@@ -2,7 +2,7 @@ import "./App.css";
 import { Header } from "../Header/Header";
 import { Main } from "../Main/Main";
 import { Footer } from "../Footer/Footer";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getNews } from "../../utils/thirdPartyApi";
 import { getNewsStorage, setNewsStorage } from "../../utils/searchStorage";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -14,6 +14,7 @@ import { authErrorHandler } from "../../utils/authErrorHandler";
 import { getToken, removeToken, setToken } from "../../utils/token";
 import { PopupContext } from "../../contexts/PopupContext";
 import { Popup } from "../Popup/Popup";
+import { passkey } from "../../utils/Passkey";
 
 function App() {
   const [userData, setUserData] = useState();
@@ -27,15 +28,19 @@ function App() {
   const [isLocalData, setIsLocalData] = useState(false); // Previne o scroll automatico se os dados dos cards são do localStorage.
   const [isFreshSearch, setIsFreshSearch] = useState(false); // Previne o scroll automatico para a seção news ao retornar de outra rota.
 
-  async function initializeSession() {
+  const initializeSession = useCallback(async () => {
     try {
-      const currentUser = await mainApi.getCurrentUser();
+      const { user, hasPasskey } = await mainApi.getCurrentUser();
       const articles = await mainApi.getArticles();
       articles.reverse();
-      setUserData(currentUser);
+      setUserData(user);
       setSavedNews(articles);
       setIsLoggedIn(true);
+      if (!hasPasskey) {
+        openPopup({ type: "registerPasskey" });
+      }
     } catch (err) {
+      console.log(err);
       if (err.status === 401) {
         removeToken();
         setIsLoggedIn(false);
@@ -43,7 +48,7 @@ function App() {
     } finally {
       setIsAuthChecked(true);
     }
-  }
+  }, []);
 
   useEffect(() => {
     const jwt = getToken();
@@ -67,7 +72,7 @@ function App() {
 
     window.addEventListener("pageshow", handleBFCache);
     return () => window.removeEventListener("pageshow", handleBFCache);
-  }, []);
+  }, [initializeSession]);
 
   useEffect(() => {
     // Busca a ultima feita pesquisa salva no localStorage
@@ -130,6 +135,32 @@ function App() {
     }
   }
 
+  async function handlePasskeyRegister() {
+    try {
+      await passkey.register();
+      if (!isLoggedIn) {
+        openPopup({ type: "signinPasskey" });
+      }
+    } catch (err) {
+      authErrorHandler(err);
+    }
+  }
+
+  async function handlePasskeySignIn(user, onError) {
+    try {
+      const { token } = await passkey.signIn(user);
+      if (token) {
+        setToken(token);
+        initializeSession();
+        closePopup();
+      }
+    } catch (err) {
+      err.message = "E-mail ou Passkey inválido.";
+      const error = authErrorHandler(err);
+      onError({ name: "submit", errorMessage: error.message });
+    }
+  }
+
   async function handleSignUp(user, onError) {
     try {
       await mainApi.register(user);
@@ -180,6 +211,8 @@ function App() {
       <CurrentUserContext
         value={{
           userData,
+          onPasskeySignIn: handlePasskeySignIn,
+          onPasskeyRegister: handlePasskeyRegister,
           onSignIn: handleSignIn,
           onSignUp: handleSignUp,
           onLogout: handleLogout,

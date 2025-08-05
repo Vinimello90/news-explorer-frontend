@@ -6,6 +6,10 @@ const BAD_REQUEST = 400;
 export function authErrorHandler(err) {
   const { statusCode = 500 } = err;
 
+  if (err.message) {
+    return { message: err.message };
+  }
+
   if (statusCode === INTERNAL_SERVER_ERROR) {
     return {
       message: "Ocorreu um erro no servidor, tente novamente mais tarde!",

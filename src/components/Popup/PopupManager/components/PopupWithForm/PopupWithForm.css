@@ -99,12 +99,6 @@
   transition: background-color linear 0.3s;
 }
 
-.popup__submit_processing:disabled {
-  background-color: #2f71e5;
-  border-radius: 100px;
-  color: #fff;
-}
-
 .popup__spinner {
   border: 2px solid #f3f3f3;
   border-top: 2px solid #75c8ff;
@@ -142,12 +136,6 @@
 
   .popup__button_submit:active {
     background-color: #2a65cc;
-  }
-
-  .popup__submit_processing:disabled:hover {
-    background-color: #2f71e5;
-    border-radius: 100px;
-    color: #fff;
   }
 }
 

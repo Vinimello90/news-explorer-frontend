@@ -1,15 +1,14 @@
 import { useContext, useState } from "react";
 import { CurrentUserContext } from "../../../../../../../contexts/CurrentUserContext";
 
-export function SignIn(props) {
+export function SignInWithPasskey(props) {
   const { formRef, formValidator, buttonDisabled, errorMsg, onError } = props;
 
-  const { onSignIn } = useContext(CurrentUserContext);
+  const { onPasskeySignIn } = useContext(CurrentUserContext);
   const [isProcessing, setIsProcessing] = useState(false);
 
   const [inputValues, setInputValues] = useState({
     email: "",
-    password: "",
   });
 
   function handleInputChange(evt) {
@@ -22,12 +21,10 @@ export function SignIn(props) {
     }));
   }
 
-  function handleSubmitButton(evt) {
+  async function handleSubmitButton(evt) {
     evt.preventDefault();
     setIsProcessing(true);
-    onSignIn(inputValues, onError).finally(() => {
-      setIsProcessing(false);
-    });
+    onPasskeySignIn(inputValues, onError).finally(() => setIsProcessing(false));
   }
 
   return (
@@ -61,29 +58,6 @@ export function SignIn(props) {
             {errorMsg?.email}
           </span>
         </label>
-        <label className="popup__field">
-          Senha
-          <input
-            onChange={handleInputChange}
-            type="password"
-            name="password"
-            id="password"
-            className={`popup__input${
-              errorMsg?.password ? " popup__input_error" : ""
-            }`}
-            placeholder="Insira a senha"
-            value={inputValues?.password}
-            spellCheck={false}
-            required
-          />
-          <span
-            className={`popup__form-error popup__form-error_input${
-              errorMsg?.password ? " popup__form-error_input_show" : ""
-            }`}
-          >
-            {errorMsg?.password}
-          </span>
-        </label>
         <span
           className={`popup__form-error popup__form-error_submit${
             errorMsg?.submit ? " popup__form-error_submit_show" : ""
@@ -94,7 +68,7 @@ export function SignIn(props) {
         <button
           type="submit"
           className={`popup__button popup__button_submit${
-            isProcessing ? " popup__button_processing" : ""
+            isProcessing ? " popup__submit_processing" : ""
           }`}
           disabled={buttonDisabled || isProcessing}
         >

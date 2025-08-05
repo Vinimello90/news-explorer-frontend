@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { SignIn } from "./components/SignIn/SignIn";
 import { SignUp } from "./components/SignUp/SignUp";
 import FormValidator from "../../../../../utils/FormValidator";
+import { SignInWithPasskey } from "./components/SignInWithPasskey/SignInWithPasskey";
 
 export function PopupWithForm({ popup, onOpenPopup }) {
   const [errorMsg, setErrorMsg] = useState();
@@ -39,6 +40,11 @@ export function PopupWithForm({ popup, onOpenPopup }) {
     setErrorMsg("");
   }
 
+  function handleGoToSignWithPasskey() {
+    onOpenPopup({ type: "signinPasskey" });
+    setErrorMsg("");
+  }
+
   function handleGoToSignUp() {
     onOpenPopup({ type: "signup" });
     setErrorMsg("");
@@ -47,10 +53,21 @@ export function PopupWithForm({ popup, onOpenPopup }) {
   return (
     <>
       <h2 className="popup__title">
-        {popup === "signin" ? "Entrar" : "Inscrever-se"}
+        {popup === "signin" && "Entrar"}
+        {popup === "signinPasskey" && "Entrar com Passkey"}
+        {popup === "signup" && "Inscrever-se"}
       </h2>
       {popup === "signin" && (
         <SignIn
+          formRef={formRef}
+          formValidator={formValidator}
+          buttonDisabled={buttonDisabled}
+          errorMsg={errorMsg}
+          onError={handleFormErrorState}
+        />
+      )}
+      {popup === "signinPasskey" && (
+        <SignInWithPasskey
           formRef={formRef}
           formValidator={formValidator}
           buttonDisabled={buttonDisabled}
@@ -67,15 +84,27 @@ export function PopupWithForm({ popup, onOpenPopup }) {
           onError={handleFormErrorState}
         />
       )}
-
       <p className="popup__goto-text">
-        ou{" "}
         <button
-          onClick={popup === "signin" ? handleGoToSignUp : handleGoToSignIn}
+          onClick={
+            popup !== "signinPasskey"
+              ? handleGoToSignWithPasskey
+              : handleGoToSignIn
+          }
           type="button"
           className="popup__button popup__button_goto"
         >
-          {popup === "signin" ? "Inscrever-se" : "Entrar"}
+          {popup !== "signinPasskey"
+            ? "Entrar com Passkey"
+            : "Entrar com senha"}
+        </button>{" "}
+        ou{" "}
+        <button
+          onClick={popup !== "signup" ? handleGoToSignUp : handleGoToSignIn}
+          type="button"
+          className="popup__button popup__button_goto"
+        >
+          {popup !== "signup" ? "Inscrever-se" : "Entrar com senha"}
         </button>
       </p>
     </>
