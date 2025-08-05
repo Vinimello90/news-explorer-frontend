@@ -1,6 +1,8 @@
 # NewsExplorer
 
-O projeto **NewsExplorer** foi um aplicativo web que desenvolvi para permitir que usuários pesquisassem notícias sobre qualquer tema e salvassem os artigos de interesse em suas contas. Criei um layout responsivo que se adaptava a diferentes tamanhos de tela por meio de **unidades de medida relativas** e **media queries**, ajustando o design conforme os pontos de interrupção para garantir uma aparência consistente. Desenvolvi o projeto utilizando **React**, estruturando-o em componentes **JSX (JavaScript XML)**, com uma **API** de terceiros fornecendo as notícias, e uma **API** própria desenvolvida no backend para persistir os dados do usuário.
+O projeto **NewsExplorer** foi um aplicativo web que desenvolvi para permitir que usuários pesquisassem notícias sobre qualquer tema e salvassem os artigos de interesse em suas contas. Criei um layout responsivo que se adaptava a diferentes tamanhos de tela por meio de **unidades de medida relativas** e **media queries**, ajustando o design conforme os pontos de interrupção para garantir uma aparência consistente.
+
+Desenvolvi o projeto utilizando **React**, estruturando-o em componentes **JSX (JavaScript XML)**, com uma **API** de terceiros fornecendo as notícias, e uma **API** própria desenvolvida no backend para persistir os dados do usuário. Implementei também autenticação com **SimpleWebAuthn**, permitindo login e registro com **biometria** ou **chaves de segurança**, reforçando a segurança e melhorando a experiência do usuário.
 
 **Confira o projeto em funcionamento clicando [aqui](https://newsexplorer.protechadvanced.com/).**
 
@@ -19,6 +21,7 @@ O projeto **NewsExplorer** foi um aplicativo web que desenvolvi para permitir qu
 - Media queries
 - React JS
 - API
+- SimpleWebAuthn
 
 ## Descrição das Tecnologias e Técnicas Utilizadas
 
@@ -103,5 +106,9 @@ Desenvolvi um módulo para consumir a **NewsAPI**, que retorna artigos com base 
 #### MainApi
 
 Desenvolvi uma classe para consumir uma **API** própria, utilizando o método `fetch()` para realizar requisições **GET**, **POST** e **DELETE**. A classe permite realizar o **registro** e a **autenticação** de usuários, além de adicionar e remover artigos salvos pelos usuários.
+
+#### SimpleWebAuthn
+
+Implementei o módulo **SimpleWebAuthn** no front-end para realizar autenticação sem senha com **biometria** ou **chaves de segurança** usando WebAuthn. Utilizei os métodos `startAuthentication()` e `startRegistration()` para iniciar os fluxos de **login** e **registro** com autenticação forte baseada em hardware. A integração foi feita com suporte à **API de credenciais do navegador**, garantindo maior segurança.
 
 **Para mais informações do desenvolvimento do backend acesse clicando [aqui](https://github.com/Vinimello90/news-explorer-backend#readme).**
